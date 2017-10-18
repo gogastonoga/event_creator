@@ -1,0 +1,341 @@
+<h1>Formularz</h1>
+
+<mat-progress-bar [value]="progressBar"></mat-progress-bar>
+<div style="background-color: #DADADA; margin-bottom: 30px;">
+  <form [formGroup]="eventForm" (ngSubmit)="createEvent()" validate>
+    <div class="form-panel active" id="first" style="height: auto; background-color: #DADADA;">
+      Krok <b>1/7</b>: Wybierz rodzaj wydarzenia
+      <div class="form-group" style="height: auto; background-color: #DADADA;">
+
+
+        <div class="col-sm-4" *ngFor="let ev of content?.formDto.events">
+          <span class="tile title" style="margin-top: 20px;"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b><a>{{ev.translation}}</a></b></span>
+          <p *ngIf="ev.translation == 'Szkolenia z własnymi trenerami'">
+            <mat-form-field color="primary">
+              <input type="number" min="0" matInput placeholder="Ile sal potrzebujesz?"  name="details">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="primary">
+              <input type="number" min="0" matInput placeholder="Na ilu uczestników jednoczenie?" name="details">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+          </p>
+          <p>{{ev.description}}</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="form-panel" style="height: auto">
+      <div class="form-group">
+        Krok <b>2/7</b>: Podaj liczbę noclegów<br />
+        <mat-form-field color="primary" style="padding-top: 10px;">
+          <input matInput type="number" min="0" max="1000" placeholder="Liczba noclegów" formControlName="nights">
+          <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field>
+        <p>{{content?.formDto.accommodationDescription}}</p>
+      </div>
+    </div>
+
+
+    <div class="form-panel" style="height: auto">
+      <div class="form-group">
+        Krok <b>3/7</b>: Podaj datę wydarzenia<br />
+        <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px; height: 272px;"><br /> Podaj konkretną datę wydarzenia:<br />
+          <mat-form-field class="example-full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Wybierz datę" formControlName="eventTime">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker touchUi="true" #picker></mat-datepicker>
+          </mat-form-field>
+        </div> 
+
+        <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;"><br /> Okreś orientacyjny termin wydarzenia:
+          <mat-form-field>
+            <mat-select matInput placeholder="Sezon..." ng-hide="!date" formControlName="seasonId">
+              <mat-option *ngFor="let seas of content?.formDto.seasons" [value]="seas.globalId" (click)="addSeason(seas)">{{seas.description}}</mat-option>
+            </mat-select>
+          </mat-form-field><br /> Zakres tygodnia:<br />
+          <mat-form-field>
+            <mat-select placeholder="Dni tygodnia.." formControlName="kindOfDays">
+              <mat-option value="WORKING_DAY" (click)="addDays('Dni robocze')">Dni robocze</mat-option>
+              <mat-option value="WEEKEND" (click)="addDays('Weekend')">Weekend</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <p>{{content?.formDto.dateFormDescription}}</p>
+
+      </div>
+    </div>
+
+    <div class="form-panel" style="height: auto">
+        <div class="form-group">
+            Krok <b>4/7</b>: Określ ilość uczestników:<br /><br />
+            <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;">
+              <label>
+              <img src="{{peop.imageUrl}}"><br />
+              <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><label> {{peop.bounds}}</label>
+              <!-- <mat-radio-button ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)">{{peop.bounds}}</mat-radio-button> -->
+              </label>
+            </div>
+            <p>{{content?.formDto.participantsDescription}}</p>
+          </div>
+        </div>
+     
+      <!-- <div class="form-group">
+        Krok <b>4/7</b>: Podaj ilość uczestników<br /> Ilość uczestników<br />
+        <div class="form-group">
+          <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;"><img src="{{peop.imageUrl}}"><br />
+            <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl
+              (click)="addBound(peop)">{{peop.bounds}}
+              <!-- <mat-radio-button ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)">{{peop.bounds}}</mat-radio-button> -->
+          <!-- </div>
+
+        </div>
+      </div>
+    </div> --> 
+
+    <div class="form-panel" style="height: auto">
+      <div class="form-group">
+          Krok <b>5/7</b>: Określ wydatki<br />
+        Budżet:<br />
+        <mat-slider formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
+          style="width: 30%;" (input)="onInputChange($event)"></mat-slider>
+        <br /><br /> Maksymalny budżet organizowanego wydarzenia:
+        <mat-form-field color="primary">
+          <input matInput type="number" min="0" max="10000" formControlName="maxCost" [value]="slider.value" style="text-align: center;">
+        </mat-form-field> złotych.
+
+        <p>{{content?.formDto.budgetDescription}}</p>
+      </div>
+    </div>
+
+    <div class="form-panel" id="last" style="height: auto">
+      <div class="form-group">
+          Krok <b>6/7</b>: Kontakt<br />
+        <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;">
+          <b>Uwagi:</b><br />
+          <mat-form-field color="primary" style="width: 50%;">
+            <textarea matInput placeholder="Twoje uwagi" style="height: 123px;" formControlName="additionalRequirements"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div formGroupName="organizer">
+          <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;">
+            <b>Dane kontaktowe:</b><br />
+            <mat-form-field color="primary" style="padding-top: 10px;">
+              <input matInput placeholder="Imię:" formControlName="name">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="primary" style="padding-top: 10px;">
+              <input matInput placeholder="Nazwisko:" formControlName="surname">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+
+            <mat-form-field type="email" pattern="[^ @]*@[^ @]*" color="primary" style="padding-top: 10px;">
+              <input matInput placeholder="E-mail:" formControlName="mail">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="primary" style="padding-top: 10px;">
+              <input matInput placeholder="Telefon:" formControlName="phoneNumber">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        
+        
+        
+      </div>
+      <p>{{content?.formDto.additionalDescription}}</p>
+    </div>
+
+    <div class="form-panel" id="last2" style="height: auto">
+        Krok <b>7/7</b>: Podsumowanie<br />
+      <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px; height: 450px; padding-top: 30px;">
+        <b>Organizator:</b><br />
+        <mat-form-field color="primary"><input matInput readonly placeholder="Imię:"> {{eventForm.value.organizer.name}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Nazwisko:"> {{eventForm.value.organizer.surname}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Numer telefonu:"> {{eventForm.value.organizer.phoneNumber}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Adres e-mail:"> {{eventForm.value.organizer.mail}}</mat-form-field>
+
+        <mat-form-field color="primary" style="width: 50%;">
+          <textarea matInput readonly placeholder="Twoje uwagi" style="height: 124px;">{{eventForm.value.additionalRequirements}}</textarea>
+        </mat-form-field>
+
+      </div>
+
+
+      <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px; height: 450px; padding-top: 30px;">
+        <b>Wybrane typy wydarzenia:</b><br />
+        <ul *ngFor="let event of contentEventArray" style="text-align: left;"><li>{{event}}</li></ul>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Data wydarzenia:"> {{summing.date}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Sezon:"> {{summing.season}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Zakres tygodnia:"> {{summing.days}}</mat-form-field>
+        <mat-form-field color="primary"><input matInput readonly placeholder="Ilość uczestników:"> {{summing.bounds}}</mat-form-field>
+      </div>
+
+      <p class="dark-primary-color" [hidden]="eventForm.valid">Nie wypełniłeś wszystkich niezbędnych pól formularza. </p>
+      <button mat-raised-button class="accent-color" [disabled]="!eventForm.valid">Submit</button><br />
+
+    </div>
+
+
+  </form>
+
+  <!-- heroForm value: {{ eventForm.value | json}} -->
+</div>
+<button mat-raised-button class="accent-color" (click)="previous()" [hidden]="isFirst()">Previous</button>
+<button mat-raised-button class="accent-color" (click)="next()" [hidden]="isLast()">Next</button>
+<button mat-raised-button class="accent-color next" (click)="[next(), addDate()]" [hidden]="!isLast()">Podsumowanie</button>
+
+
+<!-- <h1>Formularz</h1>
+
+<form (ngSubmit)="createEvent()" #itemForm="ngForm">
+    <div formGroupName="eventForm">
+<div style="background-color: #DADADA; margin-bottom: 30px;">
+
+  <div class="form-panel active" style="height: auto;">
+    Krok <b>1/7</b>: Wybierz rodzaj wydarzenia
+    <div class="row">
+    
+<div class="form-group">
+      <div class="col-sm-4" *ngFor="let ev of content?.formDto.events">
+          <span class="tile title" style="margin-top: 20px;"><mat-checkbox value="ev.name" class="form-control" formControlName="eventTypeIds"></mat-checkbox> <b>{{ev.translation}}</b></span>
+          <p *ngIf="ev.name == 'TRAINING'"> <mat-form-field color="primary">
+              <input matInput placeholder="Ile sal potrzebujesz?" [(ngModel)]="event.details" name="details">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+  
+            <mat-form-field color="primary">
+              <input matInput placeholder="Na ilu uczestników jednoczenie?" [(ngModel)]="event.details" name="details">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field></p>
+          <p>{{ev.description}}</p>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="form-group">
+  <div class="form-panel" style="height: auto;">
+    Krok <b>2/7</b>: Podaj liczbę noclegów<br />
+    <mat-form-field color="primary" style="padding-top: 10px;">
+      <input matInput placeholder="Liczba noclegów" class="form-control" formControlName="nights">
+      <mat-error>To pole jest wymagane</mat-error>
+    </mat-form-field>
+<p>{{content?.formDto.accommodationDescription}}</p>
+  </div>
+</div>
+  <div class="form-panel" style="height: auto">
+
+    <mat-form-field class="example-full-width">
+
+      <input matInput [matDatepicker]="picker" placeholder="Wybierz datę" [(ngModel)]="event.date" required name="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker touchUi="true" #picker></mat-datepicker>
+    </mat-form-field><br /> Sezon:
+    <br />
+    <mat-form-field>
+      <mat-select placeholder="Sezon..." ng-hide="!date">
+        <mat-option value="option">Letni</mat-option>
+        <mat-option value="option">Zimowy</mat-option>
+        <mat-option value="option">Poza sezonem</mat-option>
+      </mat-select>
+    </mat-form-field><br /> Zakres tygodnia:<br />
+    <mat-form-field>
+      <mat-select placeholder="Dni tygodnia..">
+        <mat-option value="option">Dni robocze</mat-option>
+        <mat-option value="option">Weekend</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <p>{{content?.formDto.dateFormDescription}}</p>
+  </div>
+  <div class="form-panel" style="height: auto;">
+    Ilość uczestników<br />
+
+   
+                  <div class="form-group">
+                  <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;"><img src="{{peop.imageUrl}}"><br /> 
+                    <mat-radio-button ng-control="options" class="form-control" formControlName="eventSizeId" [value]="peop.globalId" [ngModel]="event?.size"  ngDefaultControl>{{peop.bounds}}</mat-radio-button> </div>
+
+    </div>
+  </div>
+
+
+  <div class="form-panel" style="height: auto">
+      <div class="form-group">
+    Budżet:<br />
+    <mat-slider class="form-control" formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
+      style="width: 30%;" (input)="onInputChange($event)"></mat-slider>
+    <br /><br />
+    Maksymalny budżet organizowanego wydarzenia:
+    <mat-form-field color="primary">
+    <input matInput class="form-control" formControlName="maxCost" [value]="slider.value" style="text-align: center;">
+  </mat-form-field> złotych.
+   
+    <p>{{content?.formDto.budgetDescription}}</p>
+  </div>
+</div>
+
+
+
+  <div class="form-panel" style="height: auto"><br />
+    <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;">
+      Uwagi:<br />
+      <mat-form-field color="primary" style="width: 50%;">
+        <textarea matInput placeholder="Twoje uwagi" style="height: 124px;" [ngModel]="event.additionalRequirements" name="additionalRequirements"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div formGroupName="organizer">
+    <div class="col-lg-6" style="background-color: #DADADA; padding-bottom: 20px; margin-bottom: 10px;">
+      Dane kontaktowe:<br />
+      <mat-form-field color="primary" style="padding-top: 10px;">
+          <input matInput placeholder="Imię:" class="form-control" formControlName="name">
+          <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field>
+
+        <mat-form-field color="primary" style="padding-top: 10px;">
+            <input matInput placeholder="Nazwisko:" class="form-control" formControlName="surname">
+            <mat-error>To pole jest wymagane</mat-error>
+          </mat-form-field>
+
+          <mat-form-field color="primary" style="padding-top: 10px;">
+              <input matInput placeholder="E-mail:" class="form-control" formControlName="email">
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field>
+
+            <mat-form-field color="primary" style="padding-top: 10px;">
+                <input type="number" matInput placeholder="Telefon:" class="form-control" formControlName="phoneNumber">
+                <mat-error>To pole jest wymagane</mat-error>
+              </mat-form-field>
+    </div>
+  </div>
+
+    <p>{{content?.formDto.additionalDescription}}</p>
+    <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">Submit</button><br />
+  </div>
+  
+  
+</div>
+</div>
+</form>
+<button mat-raised-button class="accent-color" (click)="previous()">Previous</button>
+<button mat-raised-button class="accent-color" (click)="next()">Next</button>
+
+
+
+
+<!-- <form [formGroup]="form" (submit)="submit(form.value)">
+    <div *ngFor="let skill of content?.formDto.events; let i=index">
+      <input type="checkbox" [formControl]="skill">sdsad
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  
+  {{ form.value | json }}  -->
+

@@ -1,0 +1,34 @@
+<h1>Wolimierz Application</h1>
+ <p style="background-color: #DADADA;"><br />
+
+ {{content?.mainPage.description}}
+ <br />
+ </p>
+ <button routerLink="/form" routerLinkActive="active" mat-raised-button class="accent-color">START</button>
+
+ <button (click)="showEditDialog = !showEditDialog; success = false; warning = false; info = false; danger = false;" type="button"
+ mat-raised-button class="accent-color"><span class="glyphicon glyphicon-plus-sign"></span> Edytuj
+</button>
+<app-add-dialog [(visible)]="showEditDialog">
+  <div class="modal-header">
+    <h3 class="modal-title">Edytuj pole</h3>
+  </div>
+  <div class="modal-body">
+
+        <form (ngSubmit)="editHomepage()" #itemForm="ngForm">
+                <mat-form-field color="primary" style="padding-top: 10px;">
+                        <input matInput [ngModel]="content?.mainPage.description" name="description">
+                      </mat-form-field>
+                <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">Submit</button>
+        </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="add(userId.value, itemId.value, reservationDate.value)" type="button" class="btn btn-outline btn-success"
+      routerLink="/blank" routerLinkActive="active"><span
+class="glyphicon glyphicon-ok-sign"></span> Ok
+</button>
+    <button (click)="disableModal()" type="button" class="btn btn-outline btn-warning"><span
+class="glyphicon glyphicon-remove-sign"></span> Anuluj
+</button>
+  </div>
+</app-add-dialog>

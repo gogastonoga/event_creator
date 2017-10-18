@@ -1,0 +1,36 @@
+.form-panel:not(.active) {
+    display:none;
+}
+
+ p {
+    background-color: white;
+    font-size: 11px;
+    padding: 10px;
+}
+
+
+strong {
+	font-weight: 600;
+}
+
+.tile {  
+  width: 100%;
+  height: auto;
+	display: inline-block;
+	box-sizing: border-box;
+	background: #00A39F;		
+    padding: 20px;
+} 
+
+.tile a {
+    color: black;
+}
+  .title {
+		margin-top: 0px;
+	}
+  
+    img {
+        height: 200px;
+        width: 200px;
+      }   
+  
