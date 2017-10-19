@@ -99,7 +99,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers(HttpMethod.POST, "/wolimierz/events")
                 .and().ignoring()
-                .antMatchers(HttpMethod.GET, "/wolimierz/content", "/wolimierz/health", "/wolimierz/mappings")
+                .antMatchers(HttpMethod.GET, "/wolimierz/content", "/wolimierz/health", "/wolimierz/mappings", "/wolimierz/media**")
                 .and().ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**");
     }

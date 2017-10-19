@@ -3,6 +3,7 @@ package com.capgemini.wolimierz.controller;
 import com.capgemini.wolimierz.cost.CostSettingsDto;
 import com.capgemini.wolimierz.cost.service.CostSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,11 +19,13 @@ public class CostSettingController {
         this.costSettingService = costSettingService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public CostSettingsDto getCostSettings() {
         return costSettingService.getCostSettings();
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(method = RequestMethod.PUT)
     public CostSettingsDto updateCostSettings(CostSettingsDto costSettingsDto) {
         return costSettingService.updateCostSettings(costSettingsDto);

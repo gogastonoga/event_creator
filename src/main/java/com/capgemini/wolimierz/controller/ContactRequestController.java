@@ -3,6 +3,7 @@ package com.capgemini.wolimierz.controller;
 import com.capgemini.wolimierz.contactrequest.ContactRequestDto;
 import com.capgemini.wolimierz.contactrequest.service.ContactRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,21 +20,25 @@ public class ContactRequestController {
         this.contactRequestService = contactRequestService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET, params = "id")
     public ContactRequestDto find(@RequestParam(name = "id") UUID id) {
         return contactRequestService.find(id);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET)
     public List<ContactRequestDto> findAll() {
         return contactRequestService.findAll(false);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET, params = "read=false")
     public List<ContactRequestDto> findAllNotRead() {
         return contactRequestService.findAll(true);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET, params = "action=count_pending")
     public long countPending() {
         return contactRequestService.countPending();

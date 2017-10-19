@@ -5,6 +5,7 @@ import com.capgemini.wolimierz.media.service.MediaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,12 +36,14 @@ public class MediaController {
         StreamUtils.copy(media.getData(), response.getOutputStream());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/image", method = RequestMethod.PUT, params = "parent=home_page")
     public String uploadHomePageImage(@RequestParam(name = "image") MultipartFile media) throws IOException {
         return mediaService.updateHomePageSettings(media, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/image", method = RequestMethod.PUT, params = "parent=event_size")
     public String uploadEventSizeImage(@RequestParam(name = "image") MultipartFile media,
@@ -49,6 +52,7 @@ public class MediaController {
         return mediaService.updateEventSizeImage(media, parentId, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/video", method = RequestMethod.POST)
     public String uploadHomePageVideo(@RequestParam(name = "video") MultipartFile media) throws IOException {

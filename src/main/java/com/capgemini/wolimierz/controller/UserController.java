@@ -4,6 +4,7 @@ import com.capgemini.wolimierz.userregistry.UserCreateDto;
 import com.capgemini.wolimierz.userregistry.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(path = "/wolimierz/users")
@@ -18,6 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@RequestBody UserCreateDto userCreateDto) {

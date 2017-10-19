@@ -32,7 +32,7 @@ public class EventController {
         return new OfferDto(eventService.createEvent(createEventDto));
     }
 
-    //  @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET)
     public List<OfferDto> getEvents() {
         return eventService.findEvents().stream()
@@ -40,6 +40,7 @@ public class EventController {
                 .collect(Collectors.toList());
     }
 
+    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET, params = "id")
     public OfferDto findEvent(@RequestParam(name = "id") UUID globalId) {
         Optional<Event> event = Optional.ofNullable(eventService.findEvent(globalId));
