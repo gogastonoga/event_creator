@@ -13,7 +13,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 @RequestMapping(path = "/content")
-public class ContentController extends BaseController{
+public class ContentController {
 
     private final ContentService contentService;
 

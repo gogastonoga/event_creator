@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequestMapping(path = "/media")
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
-public class MediaController extends BaseController{
+public class MediaController {
 
     private final MediaService mediaService;
 

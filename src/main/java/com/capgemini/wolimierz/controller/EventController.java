@@ -10,13 +10,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 @RequestMapping("/events")
-public class EventController extends BaseController{
+public class EventController {
 
     private final EventService eventService;
 
@@ -41,7 +42,7 @@ public class EventController extends BaseController{
 
     @RequestMapping(method = RequestMethod.GET, params = "id")
     public OfferDto findEvent(@RequestParam(name = "id") UUID globalId) {
-        Event event = eventService.findEvent(globalId);
-        return event == null ? null : new OfferDto(event);
+        Optional<Event> event = Optional.ofNullable(eventService.findEvent(globalId));
+        return new OfferDto(event.orElseThrow(() -> new IllegalArgumentException(String.format("Event with id: %s not found", globalId))));
     }
 }
