@@ -54,4 +54,9 @@ public class Media {
         this.data = data;
         globalId = UUID.randomUUID();
     }
+
+    public void updateFrom(String originalFilename, byte[] data) {
+        this.fileName = originalFilename;
+        this.data = data;
+    }
 }

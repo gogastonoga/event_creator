@@ -35,15 +35,27 @@ public class MediaServiceImpl implements MediaService {
     }
 
     @Override
-    public String updateHomePageSettings(MultipartFile image, MediaType type) throws IOException {
+    public String updateHomePageSettings(MultipartFile file, MediaType type) throws IOException {
         HomePageSettings homePageSettings = homePageSettingsRepository.findAll().get(0);
-        Media media = createMedia(image, type);
+        Media media;
         if (MediaType.IMAGE.equals(type)) {
-            media.setHomePageSettingsImage(homePageSettings);
-            homePageSettings.setImage(media);
+            if (homePageSettings.getImage() == null) {
+                media = createMedia(file, type);
+                media.setHomePageSettingsImage(homePageSettings);
+                homePageSettings.setImage(media);
+            } else {
+                homePageSettings.getImage().updateFrom(file.getOriginalFilename(), file.getBytes());
+                media = homePageSettings.getImage();
+            }
         } else {
-            media.setHomePageSettingsVideo(homePageSettings);
-            homePageSettings.setVideo(media);
+            if (homePageSettings.getVideo() == null) {
+                media = createMedia(file, type);
+                media.setHomePageSettingsVideo(homePageSettings);
+                homePageSettings.setVideo(media);
+            } else {
+                homePageSettings.getVideo().updateFrom(file.getOriginalFilename(), file.getBytes());
+                media = homePageSettings.getVideo();
+            }
         }
         return save(media);
     }
@@ -52,9 +64,15 @@ public class MediaServiceImpl implements MediaService {
     public String updateEventSizeImage(MultipartFile image, UUID parentId, MediaType type) throws IOException {
         EventSize eventSize = Optional.ofNullable(eventSizeRepository.findByGlobalId(parentId))
                 .orElseThrow(() -> new IllegalArgumentException(String.format("Event size for id: %s not found", parentId)));
-        Media media = createMedia(image, type);
-        media.setEventSizeImage(eventSize);
-        eventSize.setImage(media);
+        Media media;
+        if (eventSize.getImage() == null) {
+            media = createMedia(image, type);
+            media.setEventSizeImage(eventSize);
+            eventSize.setImage(media);
+        } else {
+            eventSize.getImage().updateFrom(image.getOriginalFilename(), image.getBytes());
+            media = eventSize.getImage();
+        }
         return save(media);
     }
 
