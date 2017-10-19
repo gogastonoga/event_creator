@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,35 +28,44 @@ public class Event {
     @Column(name = "EVENT_TIME")
     private LocalDateTime eventTime;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EVENT_TYPE_ID")
-    private List<EventType> types;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "EVENT_X_EVENT_TYPE", joinColumns =
+    @JoinColumn(name = "EVENT_ID", referencedColumnName = "ID"),
+            inverseJoinColumns =
+            @JoinColumn(name = "EVENT_TYPE_ID", referencedColumnName = "ID")
+    )
+    private List<EventType> types = new ArrayList<>();
 
     @Column(name = "ROOMS")
-    private int rooms;
+    private Integer rooms;
 
     @Column(name = "USERS_NUMBER")
-    private int usersNumber;
+    private Integer usersNumber;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "EVENT_SIZE_ID", referencedColumnName = "id")
     private EventSize size;
 
     @Column(name = "NIGHTS")
-    private int nights;
+    private Integer nights;
 
     @Column(name = "ADDITIONAL_REQUIREMENTS", length = 2048)
     private String additionalRequirements;
 
-    @Column(name = "MAX_COST")
-    private double maxCost;//TODO better name
+    @Column(name = "BUDGET")
+    private Double budget;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "KIND_OF_DAYS")
     private KindOfDays kindOfDays;
 
-    @Column(name = "SEASON_ID")
-    private UUID seasonId;
+    @ManyToOne
+    @JoinColumn(name = "SEASON_ID", referencedColumnName = "id")
+    private Season season;
 
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
+
+    @Column(name = "ESTIMATED_COST")
+    private Double estimatedCost;
 }

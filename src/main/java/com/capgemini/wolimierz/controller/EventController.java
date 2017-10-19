@@ -1,6 +1,7 @@
 package com.capgemini.wolimierz.controller;
 
 import com.capgemini.wolimierz.controller.dto.CreateEventDto;
+import com.capgemini.wolimierz.event.dto.OfferDto;
 import com.capgemini.wolimierz.event.service.EventService;
 import com.capgemini.wolimierz.event.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,11 @@ public class EventController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public Event createEvent(@RequestBody CreateEventDto createEventDto) {
-        return eventService.createEvent(createEventDto);
+    public OfferDto createEvent(@RequestBody CreateEventDto createEventDto) {
+        return new OfferDto(eventService.createEvent(createEventDto));
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+  //  @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public List<Event> getEvents() {
         return eventService.findEvents();

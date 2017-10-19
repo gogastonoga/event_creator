@@ -149,7 +149,7 @@ public class ContentServiceImpl implements ContentService {
                 }
         );
         return eventTypeRepository.save(eventTypesToUpdate).stream()
-                .map(eventType -> new EventTypeDto(eventType.getDescription(), eventType.getGlobalId()))
+                .map(eventType -> new EventTypeDto(eventType.getDescription(), eventType.getTranslation(), eventType.getGlobalId()))
                 .collect(Collectors.toList());
     }
 

@@ -16,9 +16,9 @@ import java.util.Arrays;
 
 import static com.capgemini.wolimierz.SecurityConfig.SIGNING_KEY;
 
-@Configuration
+/*@Configuration
 @EnableAuthorizationServer
-@EnableResourceServer
+@EnableResourceServer*/
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     static final String CLIEN_ID = "testjwtclientid";
     static final String GRANT_TYPE = "password";

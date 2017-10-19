@@ -29,9 +29,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
-@Configuration
-@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+//@Configuration
+/*@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)*/
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SIGNING_KEY = "MaYzkSjmkzPC57L";//TODO change to @Value
@@ -100,7 +100,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/events")
                 .and().ignoring()
                 .antMatchers(HttpMethod.GET, "/content", "/health", "/mappings")
-                .and().ignoring().antMatchers(HttpMethod.OPTIONS, "/events", "/oauth/token");
+                .and().ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
     @Bean

@@ -2,8 +2,10 @@ package com.capgemini.wolimierz.controller.dto;
 
 import com.capgemini.wolimierz.form.HomePageSettings;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class HomePageDto extends DescriptionDto {
 
     private String backgroundVideoUrl;

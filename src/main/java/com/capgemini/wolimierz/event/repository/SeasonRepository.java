@@ -9,5 +9,5 @@ import java.util.UUID;
 public interface SeasonRepository extends JpaRepository<Season, Long> {
     List<Season> findAllByGlobalIdIn(List<UUID> seasonsIds);
 
-    UUID findByGlobalId(UUID seasonId);
+    Season findByGlobalId(UUID seasonId);
 }

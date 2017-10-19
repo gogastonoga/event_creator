@@ -9,9 +9,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "EVENT_TYPES")
-@NoArgsConstructor
 public class EventType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

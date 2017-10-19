@@ -4,29 +4,17 @@ import com.capgemini.wolimierz.controller.dto.EventSizeDto;
 import com.capgemini.wolimierz.event.predefined.PredefinedSize;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+@Setter
 @Getter
 @Entity
 @Table(name = "EVENT_SIZES")
 @NoArgsConstructor
 public class EventSize {
-   /* *//**
-     * Event for 1-20 people
-     *//*
-    SMALL(1, 20),
-    *//**
-     * Event for 21-45 people
-     *//*
-    MEDIUM(21, 45),
-    */
-    /**
-     * Event for 45-100 people
-     *//*
-    LARGE(45, 100);*/
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
