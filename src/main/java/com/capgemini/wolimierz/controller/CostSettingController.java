@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RequestMapping(path = "/costsettings")
 @RestController
-public class CostSettingController {
+public class CostSettingController extends BaseController{
     private final CostSettingService costSettingService;
 
     @Autowired

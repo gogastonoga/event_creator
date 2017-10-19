@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 @RequestMapping("/events")
-public class EventController {
+public class EventController extends BaseController{
 
     private final EventService eventService;
 

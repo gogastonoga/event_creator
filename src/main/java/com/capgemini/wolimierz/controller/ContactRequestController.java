@@ -11,7 +11,7 @@ import java.util.UUID;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RequestMapping(path = "/contactrequests")
 @RestController
-public class ContactRequestController {
+public class ContactRequestController extends BaseController{
     private final ContactRequestService contactRequestService;
 
     @Autowired
