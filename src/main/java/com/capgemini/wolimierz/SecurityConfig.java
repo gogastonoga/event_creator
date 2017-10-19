@@ -101,7 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().ignoring()
                 .antMatchers(HttpMethod.GET, "/wolimierz/content", "/wolimierz/health", "/wolimierz/mappings")
                 .and().ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/wolimierz/**");
+                .antMatchers(HttpMethod.OPTIONS, "/**");
     }
 
     @Bean
