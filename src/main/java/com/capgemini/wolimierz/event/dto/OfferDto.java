@@ -39,7 +39,7 @@ public class OfferDto {
         this.kindOfDays = event.getKindOfDays();
         this.rooms = event.getRooms();
         this.usersNumber = event.getGuestsNumber();
-        this.eventSize = event.getSize() == null ? null : new EventSizeDto(event.getSize().getDescription(), event.getSize().getImageUrl(), event.getSize().getGlobalId());
+        this.eventSize = event.getSize() == null ? null : new EventSizeDto(event.getSize().getDescription(), event.getSize().getGlobalId(), event.getSize().getImage() == null ? null : event.getSize().getImage().getGlobalId());
         this.nights = event.getNights();
         this.additionalRequirements = event.getAdditionalRequirements();
         this.budget = event.getBudget();

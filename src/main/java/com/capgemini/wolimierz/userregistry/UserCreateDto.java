@@ -1,5 +1,6 @@
 package com.capgemini.wolimierz.userregistry;
 
+import com.capgemini.wolimierz.userregistry.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,4 +11,5 @@ public class UserCreateDto {
     private String surname;
     private String password;
     private String email;
+    private Role role;
 }

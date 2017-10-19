@@ -61,4 +61,9 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findAll();
     }
 
+    @Override
+    public Event findEvent(UUID globalId) {
+        return eventRepository.findByGlobalId(globalId);
+    }
+
 }

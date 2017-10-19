@@ -1,6 +1,7 @@
 package com.capgemini.wolimierz.userregistry.service;
 
 import com.capgemini.wolimierz.userregistry.UserCreateDto;
+import com.capgemini.wolimierz.userregistry.model.Role;
 import com.capgemini.wolimierz.userregistry.model.User;
 import com.capgemini.wolimierz.userregistry.repository.UserRepository;
 import net.bytebuddy.agent.builder.AgentBuilder;
@@ -28,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @PostConstruct
     public void init() {
         if (userRepository.findAll().isEmpty()) {
-            create(new UserCreateDto("Maciej", "Chrzan", "macchrz", "maciej.chrzan@capgemini.com"));
+            create(new UserCreateDto("Maciej", "Chrzan", "macchrz", "maciej.chrzan@capgemini.com", Role.ADMIN));
         }
     }
 

@@ -11,17 +11,17 @@ import java.util.UUID;
 public class SizeDto extends DescriptionDto {
     private UUID globalId;
     private String bounds;
-    private String imageUrl;
+    private UUID imageId;
 
-    public SizeDto(UUID globalId, int lowerBound, int higherBound, String description, String imageUrl) {
+    public SizeDto(UUID globalId, int lowerBound, int higherBound, String description, UUID imageId) {
         super(description);
         this.bounds = String.format("%d - %d", lowerBound, higherBound);
         this.globalId = globalId;
-        this.imageUrl = imageUrl;// + "http://icons.iconarchive.com/icons/fasticon/nature/256/Red-Flower-icon.png";
+        this.imageId = imageId;// + "http://icons.iconarchive.com/icons/fasticon/nature/256/Red-Flower-icon.png";
     }
 
     public static SizeDto from(EventSize size) {
         return new SizeDto(size.getGlobalId(), size.getLowerBound(), size.getHigherBound(), size.getDescription(),
-                size.getImageUrl());
+                size.getImage() == null ? null : size.getImage().getGlobalId());
     }
 }

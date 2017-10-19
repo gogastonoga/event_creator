@@ -7,6 +7,7 @@ import com.capgemini.wolimierz.controller.dto.HomePageDto;
 import com.capgemini.wolimierz.event.dto.SeasonDto;
 import com.capgemini.wolimierz.event.model.EventType;
 import com.capgemini.wolimierz.form.FormDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -22,4 +23,5 @@ public interface ContentService {
     List<EventTypeDto> updateEventTypes(List<EventTypeDto> eventTypes);
 
     List<EventSizeDto> updateEventSizes(List<EventSizeDto> eventSizes);
+
 }

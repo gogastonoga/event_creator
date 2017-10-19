@@ -1,6 +1,7 @@
 package com.capgemini.wolimierz.event.model;
 
 import com.capgemini.wolimierz.controller.dto.EventTypeDto;
+import com.capgemini.wolimierz.media.model.Media;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

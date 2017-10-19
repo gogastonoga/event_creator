@@ -1,5 +1,6 @@
 package com.capgemini.wolimierz.form;
 
+import com.capgemini.wolimierz.media.model.Media;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +23,10 @@ public class HomePageSettings {
     private String description;
 
     @Setter
-    @Column(name = "BACKOGRUND_IMAGE_URL")
-    private String backgroundImageUrl;
+    @OneToOne(mappedBy = "homePageSettingsImage")
+    private Media image;
 
     @Setter
-    @Column(name = "BACKGROUND_VIDEO_URL")
-    private String backgroundVideoUrl;
+    @OneToOne(mappedBy = "homePageSettingsVideo")
+    private Media video;
 }

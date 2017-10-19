@@ -19,6 +19,7 @@ public class SeasonDto extends DescriptionDto {
         this.from = from;
         this.to = to;
         this.globalId = globalId;
+        this.name = name;
     }
 
     public static SeasonDto from(Season season) {

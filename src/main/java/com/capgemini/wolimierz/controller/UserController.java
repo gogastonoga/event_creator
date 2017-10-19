@@ -1,9 +1,9 @@
 package com.capgemini.wolimierz.controller;
 
-import com.capgemini.wolimierz.controller.dto.LoggedUserDto;
-import com.capgemini.wolimierz.controller.dto.LoginRequestDto;
+import com.capgemini.wolimierz.userregistry.UserCreateDto;
 import com.capgemini.wolimierz.userregistry.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(path = "/users")
@@ -18,9 +18,9 @@ public class UserController {
         this.userService = userService;
     }
 
-   /* @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public LoggedUserDto login(@RequestBody LoginRequestDto loginRequestDto) {
-
-        return null;
-    }*/
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(method = RequestMethod.POST)
+    public void login(@RequestBody UserCreateDto userCreateDto) {
+        userService.create(userCreateDto);
+    }
 }

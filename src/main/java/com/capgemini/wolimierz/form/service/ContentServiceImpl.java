@@ -62,10 +62,7 @@ public class ContentServiceImpl implements ContentService {
             );
         }
         if (homePageSettingsRepository.findAll().isEmpty()) {
-            homePageSettingsRepository.save(new HomePageSettings(null,
-                    "Home page descirption",
-                    "",
-                    "")
+            homePageSettingsRepository.save(new HomePageSettings(null, "Home page descirption", null, null)
             );
         }
         if (seasonRepository.findAll().isEmpty()) {
@@ -104,8 +101,6 @@ public class ContentServiceImpl implements ContentService {
         HomePageSettings homePageSettings = homePageSettingsRepository.findAll().stream().findAny()
                 .orElseThrow(IllegalStateException::new);
         homePageSettings.setDescription(homePageDto.getDescription());
-        homePageSettings.setBackgroundImageUrl(homePageDto.getBackgroundImageUrl());
-        homePageSettings.setBackgroundVideoUrl(homePageDto.getBackgroundVideoUrl());
         return HomePageDto.from(homePageSettingsRepository.save(homePageSettings));
     }
 
@@ -166,8 +161,8 @@ public class ContentServiceImpl implements ContentService {
                 }
         );
         return eventSizeRepository.save(eventSizesToUpdate).stream()
-                .map(eventSize -> new EventSizeDto(eventSize.getDescription(), eventSize.getImageUrl(),
-                        eventSize.getGlobalId()))
+                .map(eventSize -> new EventSizeDto(eventSize.getDescription(),
+                        eventSize.getGlobalId(), eventSize.getImage() == null ? null : eventSize.getImage().getGlobalId()))
                 .collect(Collectors.toList());
     }
 }
