@@ -40,7 +40,7 @@ public class EventServiceImpl implements EventService {
                 createEventDto.getEventTime(),
                 eventTypeRepository.findAllByGlobalIdIn(createEventDto.getEventTypeIds()),
                 createEventDto.getRooms(),
-                createEventDto.getUsersNumber(),
+                createEventDto.getGuestsNumber(),
                 eventSizeRepository.findByGlobalId(createEventDto.getEventSizeId()),
                 createEventDto.getNights(),
                 createEventDto.getAdditionalRequirements(),
@@ -48,9 +48,9 @@ public class EventServiceImpl implements EventService {
                 createEventDto.getKindOfDays(),
                 seasonRepository.findByGlobalId(createEventDto.getSeasonId()),
                 UUID.randomUUID(),
-                costSettingService.getCostEstimation(createEventDto.getNights(),
+                costSettingService.calculateCost(createEventDto.getNights(),
                         createEventDto.getRooms(),
-                        createEventDto.getUsersNumber(),
+                        createEventDto.getGuestsNumber(),
                         createEventDto.getKindOfDays())
         );
         return eventRepository.save(event);

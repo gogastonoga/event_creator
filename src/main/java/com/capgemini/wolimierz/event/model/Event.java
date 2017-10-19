@@ -39,8 +39,8 @@ public class Event {
     @Column(name = "ROOMS")
     private Integer rooms;
 
-    @Column(name = "USERS_NUMBER")
-    private Integer usersNumber;
+    @Column(name = "GUESTS_NUMBER")
+    private Integer guestsNumber;
 
     @ManyToOne
     @JoinColumn(name = "EVENT_SIZE_ID", referencedColumnName = "id")

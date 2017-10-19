@@ -1,5 +1,6 @@
 package com.capgemini.wolimierz.cost.model;
 
+import com.capgemini.wolimierz.cost.CostSettingsDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,23 +13,26 @@ import java.util.UUID;
 @Table(name = "COST_SETTINGS")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CostSetting {
+public class CostSettings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "ACCOMMODATION_PRICE", nullable = false)
-    private Double accommodationPrice;
+    private double accommodationPrice;
 
     @Column(name = "MEAL_PRICE", nullable = false)
-    private Double mealPrice;
+    private double mealPrice;
 
     @Column(name = "TRAINING_PRICE", nullable = false)
-    private Double trainingPrice;
+    private double trainingPrice;
 
     @Column(name = "MARGIN")
     private double margin;
 
     @Column(name = "DISCOUNT")
     private double discount;
+
+    public void updateFrom(CostSettingsDto costSettingsDto) {
+    }
 }

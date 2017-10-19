@@ -10,11 +10,11 @@ public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime,
 
     @Override
     public String convertToDatabaseColumn(LocalDateTime attribute) {
-        return attribute.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return attribute == null ? null : attribute.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 
     @Override
     public LocalDateTime convertToEntityAttribute(String dbData) {
-        return LocalDateTime.parse(dbData, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return dbData == null ? null : LocalDateTime.parse(dbData, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
     }
 }

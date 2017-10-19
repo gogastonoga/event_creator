@@ -22,7 +22,7 @@ public class CreateEventDto {
     private UUID seasonId;
     private KindOfDays kindOfDays;
     private int rooms;
-    private int usersNumber;
+    private int guestsNumber;
     private UUID eventSizeId;
     private int nights;
     private String additionalRequirements;

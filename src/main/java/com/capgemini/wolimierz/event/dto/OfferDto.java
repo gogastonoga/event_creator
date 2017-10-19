@@ -38,7 +38,7 @@ public class OfferDto {
         this.season = event.getSeason() == null ? null : SeasonDto.from(event.getSeason());
         this.kindOfDays = event.getKindOfDays();
         this.rooms = event.getRooms();
-        this.usersNumber = event.getUsersNumber();
+        this.usersNumber = event.getGuestsNumber();
         this.eventSize = event.getSize() == null ? null : new EventSizeDto(event.getSize().getDescription(), event.getSize().getImageUrl(), event.getSize().getGlobalId());
         this.nights = event.getNights();
         this.additionalRequirements = event.getAdditionalRequirements();
