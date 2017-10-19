@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
-@RequestMapping(path = "/contactrequests")
+@RequestMapping(path = "/wolimierz/contactrequests")
 @RestController
 public class ContactRequestController {
     private final ContactRequestService contactRequestService;

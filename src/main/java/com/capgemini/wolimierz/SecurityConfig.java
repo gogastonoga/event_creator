@@ -29,9 +29,9 @@ import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
 
-//@Configuration
-/*@EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)*/
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 //@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SIGNING_KEY = "MaYzkSjmkzPC57L";//TODO change to @Value
@@ -78,13 +78,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();*/
         http
-                .cors().and()
+              //  .cors().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
                 .antMatchers("/actuator/**", "/api-docs/**").permitAll()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/wolimierz/**").authenticated()
                 .and()
                 .httpBasic()
                 .realmName(SECURITY_REALM)
@@ -97,11 +97,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers(HttpMethod.POST, "/events")
+                .antMatchers(HttpMethod.POST, "/wolimierz/events")
                 .and().ignoring()
-                .antMatchers(HttpMethod.GET, "/content", "/health", "/mappings")
+                .antMatchers(HttpMethod.GET, "/wolimierz/content", "/wolimierz/health", "/wolimierz/mappings")
                 .and().ignoring()
-                .antMatchers(HttpMethod.OPTIONS, "/**");
+                .antMatchers(HttpMethod.OPTIONS, "/wolimierz/**");
     }
 
     @Bean

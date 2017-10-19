@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-@RequestMapping(path = "/media")
+@RequestMapping(path = "/wolimierz/media")
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 public class MediaController {

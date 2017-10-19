@@ -12,7 +12,7 @@ import java.util.List;
 
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
-@RequestMapping(path = "/content")
+@RequestMapping(path = "/wolimierz/content")
 public class ContentController {
 
     private final ContentService contentService;

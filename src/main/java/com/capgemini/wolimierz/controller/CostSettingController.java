@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
-@RequestMapping(path = "/costsettings")
+@RequestMapping(path = "/wolimierz/costsettings")
 @RestController
 public class CostSettingController {
     private final CostSettingService costSettingService;
