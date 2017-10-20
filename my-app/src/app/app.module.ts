@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { CreateUserComponent } from './create_user/create_user.component';
 import { CreateUserService } from './create_user/create_user.service';
+import { ContactComponent } from './contact/contact.component';
 
 import { UserService } from './services/user.service';
 import { CostService } from './cost/cost.service';
@@ -47,7 +48,7 @@ export function authHttpServiceFactory(http: Http) {
 @NgModule({
   declarations: [
     AppComponent, StartComponent, FormComponent, EditDialogComponent, LoginComponent, AdminComponent,
-    UserComponent, CreateUserComponent
+    UserComponent, CreateUserComponent, ContactComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, MatAutocompleteModule, MatNativeDateModule, BrowserAnimationsModule, RouterModule,

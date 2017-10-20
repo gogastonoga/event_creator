@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { UserComponent } from './user/user.component';
+import { ContactComponent } from './contact/contact.component';
 import { CreateUserComponent } from './create_user/create_user.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'start', component: StartComponent },
   { path: 'form', component: FormComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'contact', component: ContactComponent },
   {
     path: 'admin',
     component: AdminComponent,
