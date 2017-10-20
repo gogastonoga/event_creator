@@ -13,7 +13,6 @@ public class HomePageDto extends DescriptionDto {
 
     private UUID backgroundVideoId;
     private UUID backgroundImageId;
-    @NotNull
     private String contactRequestFormat;
 
     public HomePageDto(String description, UUID backgroundImageId, UUID backgroundVideoId, String contactRequestFormat) {
