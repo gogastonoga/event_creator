@@ -27,13 +27,12 @@
             </div>
           </div>
         </div>
-
         <div class="container" style="background-color: white;">
             <mat-form-field [hideRequiredMarker]="true">
-              <input maxlength="40" #message4 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
+              <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
                 matInput>
               <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-              <mat-hint class="hint2" align="end">{{message4.value.length}} / 40</mat-hint>
+              <mat-hint class="hint2" align="end">{{message8.value.length}} / 110</mat-hint>
             </mat-form-field>
           </div>
       </div>
@@ -71,7 +70,7 @@
         </div>
         <div class="col-lg-6 backgr"><br /> Orientacyjny termin wydarzenia:<br />
           <mat-form-field>
-            <mat-select matInput placeholder="Sezon..." ng-hide="!date" formControlName="seasonId" [disabled]="isNotEmptyDate()" matTooltip="Letni: {{content?.formDto.seasons[0].from}} - {{content?.formDto.seasons[0].to}} Zimowy: {{content?.formDto.seasons[1].from}} - {{content?.formDto.seasons[1].to}}">
+            <mat-select matInput placeholder="Sezon..." ng-hide="!date" formControlName="seasonId" [disabled]="isNotEmptyDate()">
               <mat-option></mat-option>
               <mat-option *ngFor="let seas of content?.formDto.seasons" [value]="seas.globalId" (click)="addSeason(seas)">{{seas.description}}</mat-option>
             </mat-select>
@@ -240,14 +239,13 @@
       </div>
 
       <div class="container" style="background-color: #e6ffff;">
-    
               <mat-form-field [hideRequiredMarker]="true" *ngIf=(!eventForm.valid)>
-                <input maxlength="40" #message6 readonly class="text formDescription" value="Nie uzupełniłeś wszystkich niezbędnych pól formularza."
+                <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}"
                   matInput>
+                  <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+                  <mat-hint class="hint2" align="end">{{message7.value.length}} / 110</mat-hint>
               </mat-form-field>
           </div>
-   
-   
     </div>
   </form>
 
