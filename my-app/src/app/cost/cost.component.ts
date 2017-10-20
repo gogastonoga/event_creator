@@ -55,9 +55,9 @@ export class CostComponent implements OnInit {
       for (let i in this.costForm.value) {
           if (this.costForm.value[i] === ''){
               console.log(this.costForm.value[i]);
-              delete 
-console.log(i);
-          }
+            // delete 
+//console.log(i);
+         }
       }
     const formModel = this.costForm.value;
     this._costService.editCostSettings(formModel).subscribe(

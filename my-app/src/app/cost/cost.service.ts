@@ -23,8 +23,7 @@ export class CostService {
 
     editCostSettings(costSettings: Object) {
         console.log(costSettings);
-                return this.http.put(this._costSettingsURL, costSettings, {
-                });
+                return this.http.put(this._costSettingsURL, costSettings);
             }
 
     private handleError(error: any) {

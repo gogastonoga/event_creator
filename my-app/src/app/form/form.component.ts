@@ -6,6 +6,7 @@ import { EventService } from '../event/event.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Summing } from './summing';
+import { Form } from './form';
 
 @Component({
     selector: 'app-form',
@@ -17,7 +18,6 @@ export class FormComponent implements OnInit {
 
     @Input() event: Event;
     @Input() organizer: Organizer;
-    showEditDialog = false;
     content;
     costSettings;
     errorString: string;
@@ -29,6 +29,7 @@ export class FormComponent implements OnInit {
     summing: Summing = { season: '', bounds: '', days: '', date: '' };
     progressBar = 0;
     editForms: boolean = false;
+    form: Form;
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
         private datePipe: DatePipe, private _costService: CostService) {
@@ -122,14 +123,7 @@ export class FormComponent implements OnInit {
         this.event = new Event();
         this.getContent();
         this.getCostSettings();
-    }
-
-    private disableModal(): void {
-        this.showEditDialog = false;
-    }
-
-    private displayEditDialog(): void {
-        this.showEditDialog = !this.showEditDialog;
+        this.form = new Form();
     }
 
     returnEvent() {
@@ -153,23 +147,19 @@ export class FormComponent implements OnInit {
 
     addSeason(seas) {
         this.summing.season = seas.name;
-        console.log(this.summing);
     }
 
     addBound(peop) {
         this.summing.bounds = peop.bounds;
-        console.log(this.summing);
     }
 
     addDays(days) {
         this.summing.days = days;
-        console.log(this.summing);
     }
 
     addDate() {
         const convertDate = this.datePipe.transform(this.eventForm.value.eventTime, 'yyyy/MM/dd');
         this.summing.date = convertDate;
-        console.log(this.summing);
     }
 
     getContent() {
@@ -223,10 +213,20 @@ export class FormComponent implements OnInit {
             $('.formDescription').prop('readonly', true);
             $('.hint1').slideUp();
             $('.hint2').slideUp();
+            this.editForm();
         } else {
             $('.formDescription').prop('readonly', false);
             $('.hint1').slideDown();
             $('.hint2').slideDown();
         }
+    }
+
+    editForm() {
+
+        this._contentService.editForm(this.form).subscribe(
+            data => console.log(this.responseStatus = data),
+            err => console.log(err),
+            () => this.returnMsg = 'Event is created!'
+        );
     }
 }

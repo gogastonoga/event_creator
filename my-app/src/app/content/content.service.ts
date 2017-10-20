@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
+import { Form } from '../form/form';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
@@ -10,8 +12,9 @@ export class ContentService {
 
     private _contentURL = 'http://localhost:8080/wolimierz/content';
     private _editHomepageURL = 'http://localhost:8080/wolimierz/content/home';
+    private _editFormURL = 'http://localhost:8080/wolimierz/content/form';
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private ahttp: AuthHttp) {
     }
 
     getContent() {
@@ -25,10 +28,14 @@ export class ContentService {
         });
     }
 
+    editForm(form: Form) {
+        console.log(form);
+        return this.ahttp.put(this._editFormURL, form, {
+        });
+    }
+
     editContentHomePage(content: Object) {
-        console.log(content);
-                return this.http.put(this._editHomepageURL, content, {
-                });
+                return this.ahttp.put(this._editHomepageURL, content);
             }
 
     private handleError(error: any) {
