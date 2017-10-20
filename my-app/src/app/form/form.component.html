@@ -30,7 +30,7 @@
         <div class="container" style="background-color: white;">
             <mat-form-field [hideRequiredMarker]="true">
               <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
-                matInput>
+                matInput id="name" [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel" [ngModelOptions]="{standalone: true}">
               <mat-hint class="hint1" align="start">Można edytować</mat-hint>
               <mat-hint class="hint2" align="end">{{message8.value.length}} / 110</mat-hint>
             </mat-form-field>
@@ -50,7 +50,7 @@
         <div class="container">
           <mat-form-field [hideRequiredMarker]="true">
             <input maxlength="40" #message2 readonly class="text formDescription" value="{{content?.formDto.accommodationDescription}}"
-              matInput>
+              matInput [(ngModel)]="form.accommodationDescription" name="accommodationDescription" #accommodationDescription="ngModel" [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
             <mat-hint class="hint2" align="end">{{message2.value.length}} / 40</mat-hint>
           </mat-form-field>
@@ -114,7 +114,8 @@
         <div class="desc">
           <div class="container">
             <mat-form-field [hideRequiredMarker]="true">
-              <input maxlength="40" #message3 readonly class="text formDescription" value="{{content?.formDto.dateFormDescription}}" matInput>
+              <input maxlength="40" #message3 readonly class="text formDescription" value="{{content?.formDto.dateFormDescription}}" matInput
+              [(ngModel)]="form.dateFormDescription" name="dateFormDescription" #dateFormDescription="ngModel" [ngModelOptions]="{standalone: true}">
               <mat-hint class="hint1" align="start">Można edytować</mat-hint>
               <mat-hint class="hint2" align="end">{{message3.value.length}} / 40</mat-hint>
             </mat-form-field>
@@ -137,7 +138,7 @@
         <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
             <input maxlength="40" #message4 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
-              matInput>
+              matInput [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel" [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
             <mat-hint class="hint2" align="end">{{message4.value.length}} / 40</mat-hint>
           </mat-form-field>
@@ -160,7 +161,8 @@
       <div class="desc">
         <div class="container">
           <mat-form-field [hideRequiredMarker]="true">
-            <input maxlength="40" #message5 readonly class="text formDescription" value="{{content?.formDto.budgetDescription}}" matInput>
+            <input maxlength="40" #message5 readonly class="text formDescription" value="{{content?.formDto.budgetDescription}}" matInput
+            [(ngModel)]="form.budgetDescription" name="budgetDescription" #budgetDescription="ngModel" [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
             <mat-hint class="hint2" align="end">{{message5.value.length}} / 40</mat-hint>
           </mat-form-field>
@@ -204,10 +206,10 @@
           </div>
         </div>
       </div>
-        <div class="container" class="container" style="background-color: white;">
+        <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
             <input maxlength="40" #message6 readonly class="text formDescription" value="{{content?.formDto.additionalDescription}}"
-              matInput>
+              matInput [(ngModel)]="form.additionalDescription" name="additionalDescription" #additionalDescription="ngModel" [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
             <mat-hint class="hint2" align="end">{{message6.value.length}} / 40</mat-hint>
           </mat-form-field>
@@ -241,7 +243,7 @@
       <div class="container" style="background-color: #e6ffff;">
               <mat-form-field [hideRequiredMarker]="true" *ngIf=(!eventForm.valid)>
                 <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}"
-                  matInput>
+                  matInput [(ngModel)]="form.summaryDescription" name="summaryDescription" #summaryDescription="ngModel" [ngModelOptions]="{standalone: true}">
                   <mat-hint class="hint1" align="start">Można edytować</mat-hint>
                   <mat-hint class="hint2" align="end">{{message7.value.length}} / 110</mat-hint>
               </mat-form-field>

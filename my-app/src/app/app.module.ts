@@ -21,6 +21,8 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { CreateUserComponent } from './create_user/create_user.component';
 import { CreateUserService } from './create_user/create_user.service';
+import { CostComponent } from './cost/cost.component';
+import {Dir} from '@angular/cdk/bidi';
 import { ContactComponent } from './contact/contact.component';
 
 import { UserService } from './services/user.service';
@@ -47,7 +49,7 @@ export function authHttpServiceFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    AppComponent, StartComponent, FormComponent, EditDialogComponent, LoginComponent, AdminComponent,
+    AppComponent, StartComponent, FormComponent, EditDialogComponent, LoginComponent, AdminComponent, CostComponent,
     UserComponent, CreateUserComponent, ContactComponent
   ],
   imports: [

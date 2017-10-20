@@ -2,11 +2,11 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Event, Organizer } from '../event/event';
 import { ContentService } from '../content/content.service';
 import { CostService } from '../cost/cost.service';
-import { Cost } from '../cost/cost';
 import { EventService } from '../event/event.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Summing } from './summing';
+import { Form } from './form';
 
 @Component({
     selector: 'app-form',
@@ -18,9 +18,8 @@ export class FormComponent implements OnInit {
 
     @Input() event: Event;
     @Input() organizer: Organizer;
-    showEditDialog = false;
     content;
-    costSettings: Cost;
+    costSettings;
     errorString: string;
     responseStatus: Object = [];
     returnMsg: String;
@@ -30,6 +29,7 @@ export class FormComponent implements OnInit {
     summing: Summing = { season: '', bounds: '', days: '', date: '' };
     progressBar = 0;
     editForms: boolean = false;
+    form: Form;
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
         private datePipe: DatePipe, private _costService: CostService) {
@@ -123,14 +123,7 @@ export class FormComponent implements OnInit {
         this.event = new Event();
         this.getContent();
         this.getCostSettings();
-    }
-
-    private disableModal(): void {
-        this.showEditDialog = false;
-    }
-
-    private displayEditDialog(): void {
-        this.showEditDialog = !this.showEditDialog;
+        this.form = new Form();
     }
 
     returnEvent() {
@@ -154,23 +147,19 @@ export class FormComponent implements OnInit {
 
     addSeason(seas) {
         this.summing.season = seas.name;
-        console.log(this.summing);
     }
 
     addBound(peop) {
         this.summing.bounds = peop.bounds;
-        console.log(this.summing);
     }
 
     addDays(days) {
         this.summing.days = days;
-        console.log(this.summing);
     }
 
     addDate() {
         const convertDate = this.datePipe.transform(this.eventForm.value.eventTime, 'yyyy/MM/dd');
         this.summing.date = convertDate;
-        console.log(this.summing);
     }
 
     getContent() {
@@ -187,7 +176,7 @@ export class FormComponent implements OnInit {
     getCostSettings() {
         this._costService.getCostSettings()
             .subscribe(
-            (costSettings: Cost) => {
+            (costSettings) => {
                 this.costSettings = costSettings;
                 console.log(this.costSettings);
             },
@@ -224,10 +213,20 @@ export class FormComponent implements OnInit {
             $('.formDescription').prop('readonly', true);
             $('.hint1').slideUp();
             $('.hint2').slideUp();
+            this.editForm();
         } else {
             $('.formDescription').prop('readonly', false);
             $('.hint1').slideDown();
             $('.hint2').slideDown();
         }
+    }
+
+    editForm() {
+
+        this._contentService.editForm(this.form).subscribe(
+            data => console.log(this.responseStatus = data),
+            err => console.log(err),
+            () => this.returnMsg = 'Event is created!'
+        );
     }
 }

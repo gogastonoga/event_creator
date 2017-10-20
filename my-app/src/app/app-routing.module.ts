@@ -8,6 +8,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { UserComponent } from './user/user.component';
+import { CostComponent } from './cost/cost.component';
 import { ContactComponent } from './contact/contact.component';
 import { CreateUserComponent } from './create_user/create_user.component';
 
@@ -28,6 +29,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+  { path: 'cost-settings', component: CostComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+
 ];
 
 @NgModule({

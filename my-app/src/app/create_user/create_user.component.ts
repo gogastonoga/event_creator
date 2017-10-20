@@ -35,7 +35,7 @@ export class CreateUserComponent implements OnInit {
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-    constructor(private _createUserService: CreateUserService, private fb: FormBuilder, public snackBar: MatSnackBar, private dir: Dir, private _appDataService: AppDataService) {
+    constructor(private _createUserService: CreateUserService, private fb: FormBuilder, public snackBar: MatSnackBar, private dir: Dir) {
     }
 
   
@@ -46,7 +46,7 @@ export class CreateUserComponent implements OnInit {
 
     createUser() {
         const formModel = this.userForm.value;
-        this._appDataService.create(formModel).subscribe(
+        this._createUserService.create(formModel).subscribe(
           data => console.log(this.responseStatus = data),
           err => {this.message = 'Wystąpił problem podczas dodania użytkownika.'},
           () => this.message = 'Użytkownik został dodany.'
