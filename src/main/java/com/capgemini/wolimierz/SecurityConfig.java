@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
-                .antMatchers(HttpMethod.POST, "/wolimierz/events")
+                .antMatchers(HttpMethod.POST, "/wolimierz/events", "/wolimierz/contactrequests")
                 .and().ignoring()
                 .antMatchers(HttpMethod.GET, "/wolimierz/content", "/wolimierz/health", "/wolimierz/mappings",
                         "/wolimierz/media**", "/wolimierz/costsettings/simply")

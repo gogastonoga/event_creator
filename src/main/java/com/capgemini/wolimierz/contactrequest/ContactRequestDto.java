@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class ContactRequestDto {
+    @NotNull
     private String message;
+    @NotNull
     private String creatorMail;
     private UUID globalId;
 

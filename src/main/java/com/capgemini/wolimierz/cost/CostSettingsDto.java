@@ -15,6 +15,7 @@ public class CostSettingsDto {
     private double accommodationPrice;
     private double mealPrice;
     private double trainingPrice;
+
     private Double margin;
     private Double discount;
     @Setter

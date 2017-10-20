@@ -9,6 +9,7 @@ import com.capgemini.wolimierz.event.model.Season;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,10 +19,15 @@ public class FormDto {
     private List<EventDto> events;
     private List<SizeDto> sizes;
     private List<SeasonDto> seasons;
+    @NotNull
     private String budgetDescription;
+    @NotNull
     private String additionalDescription;
+    @NotNull
     private String participantsDescription;
+    @NotNull
     private String accommodationDescription;
+    @NotNull
     private String dateFormDescription;
 
     public static FormDto from(Form form, List<EventType> eventTypes, List<EventSize> sizes, List<Season> seasons) {

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +24,7 @@ public class ContactRequestController {
 
     @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
     @RequestMapping(method = RequestMethod.GET, params = "id")
-    public ContactRequestDto find(@RequestParam(name = "id") UUID id) {
+    public ContactRequestDto find(@RequestParam(name = "id") @Valid @NotNull UUID id) {
         return contactRequestService.find(id);
     }
 
@@ -42,5 +44,10 @@ public class ContactRequestController {
     @RequestMapping(method = RequestMethod.GET, params = "action=count_pending")
     public long countPending() {
         return contactRequestService.countPending();
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ContactRequestDto create(@RequestBody @Valid ContactRequestDto contactRequestDto) {
+        return contactRequestService.create(contactRequestDto);
     }
 }

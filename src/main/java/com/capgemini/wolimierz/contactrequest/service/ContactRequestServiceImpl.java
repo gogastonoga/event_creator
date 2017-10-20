@@ -44,4 +44,12 @@ public class ContactRequestServiceImpl implements ContactRequestService {
     public long countPending() {
         return contactRequestRepository.countByWasReadFalse();
     }
+
+    @Override
+    public ContactRequestDto create(ContactRequestDto contactRequestDto) {
+        return ContactRequestDto
+                .from(contactRequestRepository.save(
+                        new ContactRequest(contactRequestDto.getMessage(), contactRequestDto.getCreatorMail()))
+                );
+    }
 }

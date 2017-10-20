@@ -4,10 +4,9 @@ import com.capgemini.wolimierz.cost.CostSettingsDto;
 import com.capgemini.wolimierz.cost.service.CostSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RequestMapping(path = "/wolimierz/costsettings")
@@ -33,7 +32,7 @@ public class CostSettingController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(method = RequestMethod.PUT)
-    public CostSettingsDto updateCostSettings(CostSettingsDto costSettingsDto) {
+    public CostSettingsDto updateCostSettings(@RequestBody @Valid CostSettingsDto costSettingsDto) {
         return costSettingService.updateCostSettings(costSettingsDto);
     }
 }

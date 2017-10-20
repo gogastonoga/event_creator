@@ -11,4 +11,6 @@ public interface ContactRequestService {
     ContactRequestDto find(UUID globalId);
 
     long countPending();
+
+    ContactRequestDto create(ContactRequestDto contactRequestDto);
 }

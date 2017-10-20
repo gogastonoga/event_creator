@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -28,7 +29,7 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(method = RequestMethod.POST)
-    public OfferDto createEvent(@RequestBody CreateEventDto createEventDto) {
+    public OfferDto createEvent(@RequestBody @Valid CreateEventDto createEventDto) {
         return new OfferDto(eventService.createEvent(createEventDto));
     }
 
