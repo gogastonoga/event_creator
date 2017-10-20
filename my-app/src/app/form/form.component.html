@@ -183,22 +183,22 @@
           <div class="col-lg-6">
             Dane kontaktowe:<br />
             <mat-form-field color="primary" style="padding-top: 10px;">
-              <input matInput placeholder="Imię:" formControlName="name">
+              <input matInput placeholder="Imię:" formControlName="name" required>
               <mat-icon matSuffix>account_box</mat-icon>
               <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
             <mat-form-field color="primary" style="padding-top: 10px;">
-              <input matInput placeholder="Nazwisko:" formControlName="surname">
+              <input matInput placeholder="Nazwisko:" formControlName="surname" required>
               <mat-icon matSuffix>account_box</mat-icon>
               <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
-            <mat-form-field type="email" pattern="[^ @]*@[^ @]*" color="primary" style="padding-top: 10px;">
-              <input matInput placeholder="E-mail:" formControlName="mail">
+            <mat-form-field color="primary" style="padding-top: 10px;">
+              <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" matInput placeholder="E-mail:" formControlName="mail" required>
               <mat-icon matSuffix>contact_mail</mat-icon>
-              <mat-error>To pole jest wymagane</mat-error>
+              <mat-error>Nieprawidłowy format</mat-error>
             </mat-form-field>
             <mat-form-field color="primary" style="padding-top: 10px;">
-              <input matInput placeholder="Telefon:" formControlName="phoneNumber">
+              <input matInput placeholder="Telefon:" formControlName="phoneNumber" required>
               <mat-icon matSuffix>phone</mat-icon>
               <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
