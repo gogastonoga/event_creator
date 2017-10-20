@@ -1,0 +1,36 @@
+
+ <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
+      <div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
+            <mat-toolbar class="toolbar">Dodaj użytkownika</mat-toolbar>
+            <mat-form-field color="primary" >
+              <input matInput placeholder="Imię" name="name" formControlName="name">
+              <mat-icon matSuffix>account_circle</mat-icon>
+              <mat-error>To pole jest wymagane</mat-error>
+            </mat-form-field><br />
+            <mat-form-field color="primary">
+                <input matInput placeholder="Nazwisko" name="surname" formControlName="surname">
+                <mat-icon matSuffix>account_circle</mat-icon>
+                <mat-error>To pole jest wymagane</mat-error>
+              </mat-form-field><br />
+              <mat-form-field color="primary">
+                <input matInput placeholder="E-mail" name="email" formControlName="email">
+                <mat-icon matSuffix>contact_mail</mat-icon>
+                <mat-error>To pole jest wymagane</mat-error>
+              </mat-form-field><br />
+
+              <mat-form-field>
+                    <input matInput placeholder="Hasło" [type]="hide ? 'password' : 'text'" name="password" formControlName="password" >
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                    <mat-error>Wprowadzone hasło jest zbyt krótkie</mat-error>
+                  </mat-form-field><br />
+              
+                  <mat-form-field>
+                    <mat-select matInput placeholder="Rola" formControlName="role">
+                      <mat-option *ngFor="let r of role" [value]="r">{{r}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+    </div>
+</form>
+<br />
+<button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button> 
+<button mat-raised-button class="accent-color button" [disabled]="!userForm.valid" (click)="[createUser(), open()]">Zapisz</button>

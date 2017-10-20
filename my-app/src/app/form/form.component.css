@@ -1,0 +1,91 @@
+p {
+  background-color: white;
+  font-size: 11px;
+  padding: 10px;
+}
+
+img {
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+}
+
+strong {
+  font-weight: 600;
+}
+
+.main {
+  margin-bottom: 30px;
+}
+
+.form-panel {
+  height: auto;
+}
+
+.form-panel:not(.active) {
+  display: none;
+}
+
+.tile {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #00A39F;
+  padding: 20px;
+}
+
+.tile a {
+  color: black;
+}
+
+.title {
+  margin-top: 0px;
+}
+
+.button {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.toolbar {
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.accommodation {
+  padding-bottom: 1em;
+}
+
+.budget {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.desc {
+  background-color: white;
+  margin-top: 0.25em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+}
+
+.container>* {
+  width: 100%;
+}
+
+.text {
+  text-align: center;
+  font-size: 14px;
+}
+
+.hint1,
+.hint2 {
+  display: none;
+  font-size: 10px;
+}

@@ -1,0 +1,30 @@
+<!-- <div>
+<button routerLink="/create-user" mat-raised-button class="accent-color button" color="primary">Dodaj użytkownika</button>
+</div> -->
+
+<button mat-icon-button [matMenuTriggerFor]="menu" style="position: fixed; background-color: #ffffff; ">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="/create-user">
+      <mat-icon>group_add</mat-icon>
+      <span>Dodaj użytkownika</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>archive</mat-icon>
+      <span>Edycja algorytmu</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
+
+
+<div class="container container-table">
+  <div class="row vertical-center-row">
+    <div class="text-center col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
