@@ -255,7 +255,7 @@
 
 <mat-progress-bar [value]="progressBar"></mat-progress-bar>
 <mat-toolbar>
-  <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+  <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button" matTooltip="Powrót na stronę główną">Anuluj</button>
   <div style="flex: 1 1 auto;">
     <button mat-raised-button class="accent-color button" (click)="previous()" [hidden]="isFirst()">Poprzedni</button>
     <button mat-raised-button class="accent-color button" (click)="next()" [hidden]="isLast()">Następny</button>

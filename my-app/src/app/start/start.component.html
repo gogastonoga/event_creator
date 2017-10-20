@@ -11,7 +11,7 @@
 
 <mat-toolbar>
   <div style="flex: 1 1 auto;">
-    <button routerLink="/form" routerLinkActive="active" mat-raised-button class="accent-color">Start</button>
+    <button routerLink="/form" routerLinkActive="active" mat-raised-button class="accent-color" matTooltip="Rozpocznij wypełnianie formularza">Start</button>
   </div>
   <mat-slide-toggle [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
