@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -32,15 +30,23 @@ public class Season implements Cost {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
-    @Setter
-    @DecimalMin("0.0")
-    @Column(name = "costFactor")
-    private double costFactor;
+    @Column(name = "PRICE")
+    private double price;
 
     public void updateFrom(SeasonDto seasonDto) {
         this.name = seasonDto.getName();
         this.description = seasonDto.getDescription();
         this.fromDate = seasonDto.getFrom();
         this.toDate = seasonDto.getTo();
+    }
+
+    @Override
+    public double getCostFactor() {
+        return price;
+    }
+
+    @Override
+    public void setCostFactor(double costFactor) {
+        this.price = costFactor;
     }
 }

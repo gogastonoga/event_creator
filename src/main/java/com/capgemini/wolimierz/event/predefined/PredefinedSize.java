@@ -7,16 +7,16 @@ public enum PredefinedSize {
     /**
      * Event for 1-20 people
      */
-    SMALL(1, 20, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "1", 1.0),
+    SMALL(1, 20, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "1", 0),
     /**
      * Event for 21-45 people
      */
-    MEDIUM(21, 45, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "2", 0.9),
+    MEDIUM(21, 45, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "2", -10),
 
     /**
      * Event for 45-100 people
      */
-    LARGE(45, 100, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "3", 0.8);
+    LARGE(45, 100, "https://i.ytimg.com/vi/pVrDRLOeMKY/hqdefault.jpg", "3", -20);
 
     private final String description;
     private final int lowerBound;

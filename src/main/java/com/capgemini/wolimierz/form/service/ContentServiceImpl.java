@@ -70,10 +70,10 @@ public class ContentServiceImpl implements ContentService {
                     Arrays.asList(
                             new Season(null, "Lato", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), "Description1",
-                                    UUID.randomUUID(), 1.2),
+                                    UUID.randomUUID(), 20),
                             new Season(null, "Cium", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), "Description2",
-                                    UUID.randomUUID(), 1.0))
+                                    UUID.randomUUID(), 0))
             );
         }
         if (eventSizeRepository.findAll().isEmpty()) {

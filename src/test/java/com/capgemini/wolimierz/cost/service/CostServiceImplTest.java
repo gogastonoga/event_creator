@@ -73,7 +73,7 @@ public class CostServiceImplTest {
     @Test
     public void calculateCostTestWithMultipleNightWithDiscount() {
         //given
-        when(costSettingRepository.findAll()).thenReturn(Collections.singletonList(new CostSettings(null, 15, 20, 100, 10, 10)));
+        when(costSettingRepository.findAll()).thenReturn(Collections.singletonList(new CostSettings(null, 15, 20, 100, 0, 10)));
         //when
         double cost = costSettingService.calculateCost(2, 1, 3, KindOfDays.WEEKEND);
         //then

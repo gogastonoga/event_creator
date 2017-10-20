@@ -29,7 +29,6 @@ public class EventSize implements Cost {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
-    @DecimalMin("0.0")
     @Setter
     @Column(name = "costFactor")
     private double costFactor;
