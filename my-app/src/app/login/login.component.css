@@ -1,18 +1,4 @@
-input {
-  margin: 20px 0;
-  height: 45px;
-}
 
-.form-wrapper {
-  display: block;
-  max-width: 400px;
-  margin: 0 auto 0;
-}
-
-button {
-  width: 100%;
-  height: 45px;
-}
 
 p {
   text-align: center;

@@ -1,21 +1,61 @@
-<p>Non-admin username and password: john.doe and jwtpass</p>
-<p>Admin user: admin.admin and jwtpass</p>
-
-<div class="form-wrapper">
+<h1 style="margin-bottom: 20px;">Zaloguj</h1>
+<div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-      <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Username"
-      />
-      <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+      <br />
+        <mat-form-field color="primary" >
+      <input matInput type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Login użytkownika"/>
+      <mat-icon matSuffix>account_circle</mat-icon>
+      <mat-error><div *ngIf="f.submitted && !username.valid">Username is required</div></mat-error>
+        </mat-form-field>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-      <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Password"
-      />
-      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
-    </div>
-    <div class="form-group">
-      <button [disabled]="loading" class="btn btn-primary">Sign In</button>
+        <mat-form-field color="primary" >
+      <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Hasło" [type]="hide ? 'password' : 'text'"/>
+      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+      <mat-error><div *ngIf="f.submitted && !password.valid">Password is required</div></mat-error>
+        </mat-form-field>
     </div>
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <button [disabled]="loading" mat-raised-button class="accent-color button">Zaloguj</button> <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button> 
+  <br /><br />
   </form>
 </div>
+
+
+
+<!-- <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
+  <div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
+        <mat-toolbar class="toolbar">Dodaj użytkownika</mat-toolbar>
+        <mat-form-field color="primary" >
+          <input matInput placeholder="Imię" name="name" formControlName="name">
+          <mat-icon matSuffix>account_circle</mat-icon>
+          <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br />
+        <mat-form-field color="primary">
+            <input matInput placeholder="Nazwisko" name="surname" formControlName="surname">
+            <mat-icon matSuffix>account_circle</mat-icon>
+            <mat-error>To pole jest wymagane</mat-error>
+          </mat-form-field><br />
+          <mat-form-field color="primary">
+            <input matInput placeholder="E-mail" name="email" formControlName="email">
+            <mat-icon matSuffix>contact_mail</mat-icon>
+            <mat-error>To pole jest wymagane</mat-error>
+          </mat-form-field><br />
+
+          <mat-form-field>
+                <input matInput placeholder="Hasło" [type]="hide ? 'password' : 'text'" name="password" formControlName="password" >
+                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error>Wprowadzone hasło jest zbyt krótkie</mat-error>
+              </mat-form-field><br />
+          
+              <mat-form-field>
+                <mat-select matInput placeholder="Rola" formControlName="role">
+                  <mat-option *ngFor="let r of role" [value]="r">{{r}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+</div>
+</form>
+<br />
+<button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button> 
+<button mat-raised-button class="accent-color button" [disabled]="!userForm.valid" (click)="[createUser(), open()]">Zapisz</button> -->
