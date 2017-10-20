@@ -1,0 +1,38 @@
+<form [formGroup]="costForm" (ngSubmit)="editCostSettings()" validate>
+    <div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
+        <mat-toolbar class="toolbar">Edycja kosztów wydarzenia</mat-toolbar>
+        <br />
+        <mat-form-field color="primary">
+                <span matSuffix>.00 zł</span>
+            <input type="number" min="0"  matInput placeholder="Cena noclegu" name="accommodationPrice" formControlName="accommodationPrice" [value]="costSettings?.accommodationPrice">
+            <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br />
+        <mat-form-field color="primary">
+                <span matSuffix>.00 zł</span>
+            <input type="number" min="0" matInput placeholder="Cena posiłku" name="mealPrice" formControlName="mealPrice" [value]="costSettings?.mealPrice">
+            <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br />
+        <mat-form-field color="primary">
+                <span matSuffix>.00 zł</span>
+            <input type="number" min="0" matInput placeholder="Cena szkolenia" name="trainingPrice" formControlName="trainingPrice" [value]="costSettings?.trainingPrice">
+            <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br />
+        <mat-form-field color="primary">
+                <span matSuffix>%</span>
+            <input type="number" min="0" max="100" matInput placeholder="Zniżka" name="discount" formControlName="discount" [value]="costSettings?.discount">
+            <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br />
+        <mat-form-field color="primary">
+                <span matSuffix>%</span>
+            <input type="number" min="0" max="100" matInput placeholder="Marża" name="margin" formControlName="margin" [value]="costSettings?.margin">
+            <mat-error>To pole jest wymagane</mat-error>
+        </mat-form-field><br /><br />
+
+
+    </div>
+</form>
+
+{{costForm.value | json}}
+<br />
+<button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+<button mat-raised-button class="accent-color button" [disabled]="!costForm.valid" (click)="editCostSettings()">Zapisz</button>
