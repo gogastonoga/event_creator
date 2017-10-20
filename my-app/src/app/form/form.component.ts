@@ -2,7 +2,6 @@ import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { Event, Organizer } from '../event/event';
 import { ContentService } from '../content/content.service';
 import { CostService } from '../cost/cost.service';
-import { Cost } from '../cost/cost';
 import { EventService } from '../event/event.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -20,7 +19,7 @@ export class FormComponent implements OnInit {
     @Input() organizer: Organizer;
     showEditDialog = false;
     content;
-    costSettings: Cost;
+    costSettings;
     errorString: string;
     responseStatus: Object = [];
     returnMsg: String;
@@ -187,7 +186,7 @@ export class FormComponent implements OnInit {
     getCostSettings() {
         this._costService.getCostSettings()
             .subscribe(
-            (costSettings: Cost) => {
+            (costSettings) => {
                 this.costSettings = costSettings;
                 console.log(this.costSettings);
             },

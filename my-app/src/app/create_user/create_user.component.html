@@ -2,6 +2,7 @@
  <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
       <div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
             <mat-toolbar class="toolbar">Dodaj użytkownika</mat-toolbar>
+            <br />
             <mat-form-field color="primary" >
               <input matInput placeholder="Imię" name="name" formControlName="name">
               <mat-icon matSuffix>account_circle</mat-icon>

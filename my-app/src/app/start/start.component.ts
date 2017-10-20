@@ -6,6 +6,7 @@ export class HomePageDto {
   description: string;
   backgroundVideoUrl: string;
   backgroundImageUrl: string;
+  contactRequestFormat: string;
 }
 @Component({
   selector: 'app-start',

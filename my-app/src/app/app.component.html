@@ -10,16 +10,20 @@
       <mat-icon>group_add</mat-icon>
       <span>Dodaj użytkownika</span>
     </button>
-    <button mat-menu-item disabled>
-      <mat-icon>archive</mat-icon>
-      <span>Edycja algorytmu</span>
+    <button mat-menu-item routerLink="/cost-settings">
+      <mat-icon>settings</mat-icon>
+      <span>Ustawienia kosztów</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item disabled>
       <mat-icon>notifications_off</mat-icon>
       <span>Disable alerts</span>
     </button>
+    <button mat-menu-item (click)="logout()" routerLink="/start">
+        <mat-icon>notifications_off</mat-icon>
+        <span>Wyloguj</span>
+      </button>
   </mat-menu>
-  <button (click)="logout()">Wyloguj</button>
+
 
 
 <div class="container container-table">

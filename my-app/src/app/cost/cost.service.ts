@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
@@ -10,7 +11,7 @@ export class CostService {
 
     private _costSettingsURL = 'http://localhost:8080/wolimierz/costsettings';
 
-    constructor(private http: Http) {
+    constructor(private http: AuthHttp) {
     }
 
     getCostSettings() {
