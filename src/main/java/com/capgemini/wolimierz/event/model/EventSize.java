@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.util.UUID;
 
 @Setter
@@ -15,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "EVENT_SIZES")
 @NoArgsConstructor
-public class EventSize {
+public class EventSize implements Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +29,10 @@ public class EventSize {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
-    @Column(name = "PRICE")
-    private double price;
+    @DecimalMin("0.0")
+    @Setter
+    @Column(name = "costFactor")
+    private double costFactor;
 
     @Setter
     @OneToOne(mappedBy = "eventSizeImage")
@@ -47,5 +51,10 @@ public class EventSize {
 
     public void updateFrom(EventSizeDto eventSizeDto) {
         this.description = eventSizeDto.getDescription();
+    }
+
+    @Override
+    public String getName() {
+        return String.format("%d - %d", lowerBound, higherBound);
     }
 }

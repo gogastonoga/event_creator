@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -16,7 +18,7 @@ import java.util.UUID;
 @Table(name = "SEASONS")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Season {
+public class Season implements Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,8 +32,10 @@ public class Season {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
-    @Column(name = "price")
-    private double price;
+    @Setter
+    @DecimalMin("0.0")
+    @Column(name = "costFactor")
+    private double costFactor;
 
     public void updateFrom(SeasonDto seasonDto) {
         this.name = seasonDto.getName();

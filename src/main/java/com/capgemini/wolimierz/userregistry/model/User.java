@@ -34,7 +34,7 @@ public class User {
 
     @Setter
     @NotNull
-    @Column(name = "EMAIL", nullable = false)
+    @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
     @NotNull

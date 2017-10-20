@@ -22,6 +22,9 @@ public class HomePageSettings {
     @Column(name = "DESCRIPTION", nullable = false, length = 2048)
     private String description;
 
+    @Column(name = "CONTACT_REQUEST_FORMAT", length = 2048)
+    private String contactRequestFormat;
+
     @Setter
     @OneToOne(mappedBy = "homePageSettingsImage")
     private Media image;

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,11 @@ public class Event {
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
 
+    @DecimalMin("0.0")
     @Column(name = "ESTIMATED_COST")
-    private Double estimatedCost;
+    private double estimatedCost;
+
+    @DecimalMin("0.0")
+    @Column(name = "ESTIMATED_DETAILED_COST")
+    private double estimatedDetailedCost;
 }

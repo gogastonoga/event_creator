@@ -1,12 +1,15 @@
 package com.capgemini.wolimierz.cost;
 
 import com.capgemini.wolimierz.cost.model.CostSettings;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.List;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 public class CostSettingsDto {
     private double accommodationPrice;
@@ -14,6 +17,20 @@ public class CostSettingsDto {
     private double trainingPrice;
     private Double margin;
     private Double discount;
+    @Setter
+    private List<DetailedCost> seasonCosts;
+    @Setter
+    private List<DetailedCost> eventTypeCosts;
+    @Setter
+    private List<DetailedCost> eventSizeCosts;
+
+    public CostSettingsDto(double accommodationPrice, double mealPrice, double trainingPrice, Double margin, Double discount) {
+        this.accommodationPrice = accommodationPrice;
+        this.mealPrice = mealPrice;
+        this.trainingPrice = trainingPrice;
+        this.margin = margin;
+        this.discount = discount;
+    }
 
     public static CostSettingsDto from(CostSettings costSettings) {
         return new CostSettingsDto(costSettings.getAccommodationPrice(), costSettings.getMealPrice(),

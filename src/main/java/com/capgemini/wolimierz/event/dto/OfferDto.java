@@ -28,6 +28,7 @@ public class OfferDto {
     private String additionalRequirements;
     private double budget;
     private double estimatedCost;
+    private double estimatedDetailedCost;
 
     public OfferDto(Event event) {
         this.organizer = OrganizerDto.from(event.getOrganizer());
@@ -44,6 +45,7 @@ public class OfferDto {
         this.additionalRequirements = event.getAdditionalRequirements();
         this.budget = event.getBudget();
         this.estimatedCost = event.getEstimatedCost();
+        this.estimatedDetailedCost = event.getEstimatedDetailedCost();
     }
 
 }

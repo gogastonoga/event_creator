@@ -33,5 +33,10 @@ public class CostSettings {
     private double discount;
 
     public void updateFrom(CostSettingsDto costSettingsDto) {
+        this.mealPrice = costSettingsDto.getMealPrice();
+        this.accommodationPrice = costSettingsDto.getAccommodationPrice();
+        this.trainingPrice = costSettingsDto.getTrainingPrice();
+        this.margin = costSettingsDto.getMargin();
+        this.discount = costSettingsDto.getDiscount();
     }
 }

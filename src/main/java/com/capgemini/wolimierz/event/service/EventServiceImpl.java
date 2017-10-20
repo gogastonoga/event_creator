@@ -2,8 +2,7 @@ package com.capgemini.wolimierz.event.service;
 
 import com.capgemini.wolimierz.controller.dto.CreateEventDto;
 import com.capgemini.wolimierz.cost.service.CostSettingService;
-import com.capgemini.wolimierz.event.model.Event;
-import com.capgemini.wolimierz.event.model.Organizer;
+import com.capgemini.wolimierz.event.model.*;
 import com.capgemini.wolimierz.event.repository.EventRepository;
 import com.capgemini.wolimierz.event.repository.EventSizeRepository;
 import com.capgemini.wolimierz.event.repository.EventTypeRepository;
@@ -34,24 +33,32 @@ public class EventServiceImpl implements EventService {
     }
 
     public Event createEvent(CreateEventDto createEventDto) {
+        List<EventType> eventTypes = eventTypeRepository.findAllByGlobalIdIn(createEventDto.getEventTypeIds());
+        EventSize eventSize = eventSizeRepository.findByGlobalId(createEventDto.getEventSizeId());
+        Season season = seasonRepository.findByGlobalId(createEventDto.getSeasonId());
         Event event = new Event(
                 null,
                 Organizer.from(createEventDto.getOrganizer()),
                 createEventDto.getEventTime(),
-                eventTypeRepository.findAllByGlobalIdIn(createEventDto.getEventTypeIds()),
+                eventTypes,
                 createEventDto.getRooms(),
                 createEventDto.getGuestsNumber(),
-                eventSizeRepository.findByGlobalId(createEventDto.getEventSizeId()),
+                eventSize,
                 createEventDto.getNights(),
                 createEventDto.getAdditionalRequirements(),
                 createEventDto.getMaxCost(),
                 createEventDto.getKindOfDays(),
-                seasonRepository.findByGlobalId(createEventDto.getSeasonId()),
+                season,
                 UUID.randomUUID(),
                 costSettingService.calculateCost(createEventDto.getNights(),
                         createEventDto.getRooms(),
                         createEventDto.getGuestsNumber(),
-                        createEventDto.getKindOfDays())
+                        createEventDto.getKindOfDays()),
+                costSettingService.calculateDetailedCost(createEventDto.getNights(),
+                        createEventDto.getRooms(),
+                        createEventDto.getGuestsNumber(),
+                        createEventDto.getKindOfDays(),
+                        eventTypes, eventSize, season)
         );
         return eventRepository.save(event);
     }
