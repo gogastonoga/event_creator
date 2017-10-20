@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 //java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=8008 -jar yourapplication.jar
 
@@ -34,8 +35,11 @@ public class EventServiceImpl implements EventService {
 
     public Event createEvent(CreateEventDto createEventDto) {
         List<EventType> eventTypes = eventTypeRepository.findAllByGlobalIdIn(createEventDto.getEventTypeIds());
-        EventSize eventSize = eventSizeRepository.findByGlobalId(createEventDto.getEventSizeId());
-        Season season = seasonRepository.findByGlobalId(createEventDto.getSeasonId());
+        EventSize eventSize = Optional.ofNullable(eventSizeRepository.findByGlobalId(createEventDto.getEventSizeId()))
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Size with id %s not found", createEventDto.getEventSizeId())));
+        Season season = Optional.ofNullable(seasonRepository.findByGlobalId(createEventDto.getSeasonId()))
+                .orElseThrow(() -> new IllegalArgumentException(String.format("Season with id %s not found", createEventDto.getEventSizeId())));
+
         Event event = new Event(
                 null,
                 Organizer.from(createEventDto.getOrganizer()),

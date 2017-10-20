@@ -4,6 +4,7 @@ import com.capgemini.wolimierz.contactrequest.model.ContactRequest;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
@@ -14,6 +15,7 @@ import java.util.UUID;
 public class ContactRequestDto {
     @NotNull
     private String message;
+    @Email
     @NotNull
     private String creatorMail;
     private UUID globalId;
