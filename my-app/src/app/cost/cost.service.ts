@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CostService {
 
-    private _costSettingsURL = 'http://localhost:8080/costsettings';
+    private _costSettingsURL = 'http://localhost:8080/wolimierz/costsettings';
 
     constructor(private http: Http) {
     }

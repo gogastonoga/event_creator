@@ -15,6 +15,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       this.router.navigate(['login'], { queryParams: { redirectTo: state.url } });
+      console.log('Niepoprawny login lub hasło.');
       return false;
     }
   }

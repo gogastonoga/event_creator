@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { ContentService } from '../content/content.service';
+import { UserService } from '../services/user.service';
 
 export class HomePageDto {
   description: string;
@@ -21,7 +22,7 @@ export class StartComponent implements OnInit {
   returnMsg: String;
   editStatus: boolean = false;
 
-  constructor(private _contentService: ContentService) {
+  constructor(private _contentService: ContentService, private _userService: UserService) {
   }
 
   ngOnInit() {
@@ -57,4 +58,5 @@ export class StartComponent implements OnInit {
       () => this.returnMsg = 'Event is created!'
     );
   }
+
 }

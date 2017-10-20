@@ -25,7 +25,7 @@ const routes: Routes = [
     component: UserComponent,
     canActivate: [AuthGuard]
   },
-  { path: 'create-user', component: CreateUserComponent },
+  { path: 'create-user', component: CreateUserComponent, canActivate: [AuthGuard, AdminAuthGuard] },
 ];
 
 @NgModule({

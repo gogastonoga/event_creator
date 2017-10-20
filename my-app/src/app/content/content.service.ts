@@ -8,8 +8,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class ContentService {
 
-    private _contentURL = 'http://localhost:8080/content';
-    private _editHomepageURL = 'http://localhost:8080/content/home';
+    private _contentURL = 'http://localhost:8080/wolimierz/content';
+    private _editHomepageURL = 'http://localhost:8080/wolimierz/content/home';
 
     constructor(private http: Http) {
     }

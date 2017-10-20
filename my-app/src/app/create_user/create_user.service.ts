@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class CreateUserService {
-    private _createprofileURL = 'http://localhost:8080/users';
+    private _createprofileURL = 'http://localhost:8080/wolimierz/users';
     constructor(private http:Http){
 
     }

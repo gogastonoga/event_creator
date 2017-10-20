@@ -7,6 +7,7 @@ import {MatSnackBar, MatSnackBarConfig,
     MatSnackBarVerticalPosition} from '@angular/material';
 import {Dir} from '@angular/cdk/bidi';
 import { ViewEncapsulation} from '@angular/core';
+import { AppDataService } from '../services/app-data.service';
 
 @Component({
     selector: 'create-user',
@@ -34,7 +35,7 @@ export class CreateUserComponent implements OnInit {
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-    constructor(private _createUserService: CreateUserService, private fb: FormBuilder, public snackBar: MatSnackBar, private dir: Dir) {
+    constructor(private _createUserService: CreateUserService, private fb: FormBuilder, public snackBar: MatSnackBar, private dir: Dir, private _appDataService: AppDataService) {
     }
 
   
@@ -45,7 +46,7 @@ export class CreateUserComponent implements OnInit {
 
     createUser() {
         const formModel = this.userForm.value;
-        this._createUserService.create(formModel).subscribe(
+        this._appDataService.create(formModel).subscribe(
           data => console.log(this.responseStatus = data),
           err => {this.message = 'Wystąpił problem podczas dodania użytkownika.'},
           () => this.message = 'Użytkownik został dodany.'
