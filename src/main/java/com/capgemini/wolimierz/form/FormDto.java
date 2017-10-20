@@ -5,12 +5,10 @@ import com.capgemini.wolimierz.event.dto.SeasonDto;
 import com.capgemini.wolimierz.event.dto.SizeDto;
 import com.capgemini.wolimierz.event.model.EventSize;
 import com.capgemini.wolimierz.event.model.EventType;
-import com.capgemini.wolimierz.event.predefined.PredefinedEventType;
 import com.capgemini.wolimierz.event.model.Season;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 

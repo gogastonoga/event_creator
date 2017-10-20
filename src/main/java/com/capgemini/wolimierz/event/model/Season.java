@@ -1,7 +1,6 @@
 package com.capgemini.wolimierz.event.model;
 
 import com.capgemini.wolimierz.event.dto.SeasonDto;
-import com.capgemini.wolimierz.utils.LocalDateConverter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

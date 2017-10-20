@@ -2,8 +2,8 @@ package com.capgemini.wolimierz.controller;
 
 import com.capgemini.wolimierz.controller.dto.CreateEventDto;
 import com.capgemini.wolimierz.event.dto.OfferDto;
-import com.capgemini.wolimierz.event.service.EventService;
 import com.capgemini.wolimierz.event.model.Event;
+import com.capgemini.wolimierz.event.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;

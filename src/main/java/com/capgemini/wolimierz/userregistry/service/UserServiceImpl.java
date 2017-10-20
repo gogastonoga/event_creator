@@ -4,17 +4,13 @@ import com.capgemini.wolimierz.userregistry.UserCreateDto;
 import com.capgemini.wolimierz.userregistry.model.Role;
 import com.capgemini.wolimierz.userregistry.model.User;
 import com.capgemini.wolimierz.userregistry.repository.UserRepository;
-import net.bytebuddy.agent.builder.AgentBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Optional;
-
-import static com.capgemini.wolimierz.SecurityConfig.ENCODING_STRENGTH;
 
 @Service
 public class UserServiceImpl implements UserService {

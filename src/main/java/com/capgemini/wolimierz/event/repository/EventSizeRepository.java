@@ -8,5 +8,6 @@ import java.util.UUID;
 
 public interface EventSizeRepository extends JpaRepository<EventSize, Long> {
     EventSize findByGlobalId(UUID eventSizeId);
+
     List<EventSize> findAllByGlobalIdIn(List<UUID> eventSizeIds);
 }

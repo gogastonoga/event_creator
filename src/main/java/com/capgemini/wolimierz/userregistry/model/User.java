@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
+
 @Getter
 @Entity
 @Table(name = "USERS")

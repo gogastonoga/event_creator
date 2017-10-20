@@ -2,9 +2,9 @@ package com.capgemini.wolimierz.event.service;
 
 import com.capgemini.wolimierz.controller.dto.CreateEventDto;
 import com.capgemini.wolimierz.cost.service.CostSettingService;
-import com.capgemini.wolimierz.event.repository.EventRepository;
 import com.capgemini.wolimierz.event.model.Event;
 import com.capgemini.wolimierz.event.model.Organizer;
+import com.capgemini.wolimierz.event.repository.EventRepository;
 import com.capgemini.wolimierz.event.repository.EventSizeRepository;
 import com.capgemini.wolimierz.event.repository.EventTypeRepository;
 import com.capgemini.wolimierz.event.repository.SeasonRepository;

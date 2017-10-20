@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RequestMapping(path = "/wolimierz/costsettings")
 @RestController
@@ -23,6 +24,11 @@ public class CostSettingController {
     @RequestMapping(method = RequestMethod.GET)
     public CostSettingsDto getCostSettings() {
         return costSettingService.getCostSettings();
+    }
+
+    @RequestMapping(value = "/simply", method = RequestMethod.GET)
+    public CostSettingsDto getClientCostSettings() {
+        return costSettingService.getClientCostSettings();
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")

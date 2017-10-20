@@ -9,4 +9,6 @@ public interface CostSettingService {
     CostSettingsDto updateCostSettings(CostSettingsDto costSettingsDto);
 
     Double calculateCost(int nights, int rooms, int usersNumber, KindOfDays kindOfDays);
+
+    CostSettingsDto getClientCostSettings();
 }

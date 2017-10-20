@@ -12,11 +12,16 @@ public class CostSettingsDto {
     private double accommodationPrice;
     private double mealPrice;
     private double trainingPrice;
-    private double margin;
-    private double discount;
+    private Double margin;
+    private Double discount;
 
     public static CostSettingsDto from(CostSettings costSettings) {
         return new CostSettingsDto(costSettings.getAccommodationPrice(), costSettings.getMealPrice(),
                 costSettings.getTrainingPrice(), costSettings.getMargin(), costSettings.getDiscount());
+    }
+
+    public static CostSettingsDto forClientFrom(CostSettings costSettings) {
+        return new CostSettingsDto(costSettings.getAccommodationPrice(), costSettings.getMealPrice(),
+                costSettings.getTrainingPrice(), null, null);
     }
 }

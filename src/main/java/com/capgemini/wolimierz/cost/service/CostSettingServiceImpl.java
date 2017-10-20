@@ -53,6 +53,12 @@ public class CostSettingServiceImpl implements CostSettingService {
         return (estimatedCost * (1 + costSettings.getMargin() / 100)) * (1 - costSettings.getDiscount() / 100);
     }
 
+    @Override
+    public CostSettingsDto getClientCostSettings() {
+        CostSettings costSettings = costSettingRepository.findAll().get(0);
+        return CostSettingsDto.forClientFrom(costSettings);
+    }
+
     private double getMealsCost(int nights, int usersNumber, CostSettings costSettings) {
         return nights * usersNumber * costSettings.getMealPrice();
     }
