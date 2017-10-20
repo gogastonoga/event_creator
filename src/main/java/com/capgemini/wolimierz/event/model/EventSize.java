@@ -27,12 +27,14 @@ public class EventSize {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
+    @Column(name = "PRICE")
+    private double price;
 
     @Setter
     @OneToOne(mappedBy = "eventSizeImage")
     private Media image;
 
-    public EventSize(int lowerBound, int higherBound, String description) {
+    public EventSize(int lowerBound, int higherBound, String description, double price) {
         this.lowerBound = lowerBound;
         this.higherBound = higherBound;
         this.description = description;
@@ -40,7 +42,7 @@ public class EventSize {
     }
 
     public EventSize(PredefinedSize size) {
-        this(size.getLowerBound(), size.getHigherBound(), size.getDescription());
+        this(size.getLowerBound(), size.getHigherBound(), size.getDescription(), size.getPrice());
     }
 
     public void updateFrom(EventSizeDto eventSizeDto) {

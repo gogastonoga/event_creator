@@ -30,6 +30,8 @@ public class Season {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
+    @Column(name = "price")
+    private double price;
 
     public void updateFrom(SeasonDto seasonDto) {
         this.name = seasonDto.getName();

@@ -21,11 +21,15 @@ public class EventType {
     private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
+    @Column(name = "PRICE")
+    private double price;
 
-    public EventType(String translation, String description) {
+
+    public EventType(String translation, String description, double price) {
         this.translation = translation;
         this.description = description;
         this.globalId = UUID.randomUUID();
+        this.price = price;
     }
 
     public void updateFrom(EventTypeDto dto) {

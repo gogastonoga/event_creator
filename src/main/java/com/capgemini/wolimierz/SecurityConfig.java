@@ -22,7 +22,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-//@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String SIGNING_KEY = "MaYzkSjmkzPC57L";//TODO change to @Value
     public static final Integer ENCODING_STRENGTH = 256;

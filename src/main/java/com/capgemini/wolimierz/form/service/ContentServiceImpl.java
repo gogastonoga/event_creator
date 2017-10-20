@@ -70,10 +70,10 @@ public class ContentServiceImpl implements ContentService {
                     Arrays.asList(
                             new Season(null, "Lato", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), "Description1",
-                                    UUID.randomUUID()),
+                                    UUID.randomUUID(), 10),
                             new Season(null, "Cium", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), "Description2",
-                                    UUID.randomUUID()))
+                                    UUID.randomUUID(), 20))
             );
         }
         if (eventSizeRepository.findAll().isEmpty()) {
@@ -84,7 +84,7 @@ public class ContentServiceImpl implements ContentService {
         }
         if (eventTypeRepository.findAll().isEmpty()) {
             eventTypeRepository.save(Arrays.stream(PredefinedEventType.values())
-                    .map(type -> new EventType(type.getTranslation(), type.getDescription()))
+                    .map(type -> new EventType(type.getTranslation(), type.getDescription(), 50))
                     .collect(Collectors.toList()));
         }
     }
