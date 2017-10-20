@@ -5,7 +5,6 @@ import { AuthHttp } from 'angular2-jwt';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class CostService {
 
@@ -20,11 +19,10 @@ export class CostService {
             .catch(this.handleError);
     }
 
-
     editCostSettings(costSettings: Object) {
         console.log(costSettings);
-                return this.http.put(this._costSettingsURL, costSettings);
-            }
+        return this.http.put(this._costSettingsURL, costSettings);
+    }
 
     private handleError(error: any) {
         console.log('Yup an error occurred', error);

@@ -20,6 +20,7 @@ strong {
 
 .form-panel {
   height: auto;
+  opacity: 1;
 }
 
 .form-panel:not(.active) {
@@ -88,4 +89,8 @@ strong {
 .hint2 {
   display: none;
   font-size: 10px;
+}
+
+.footer{
+  flex: 1 1 auto;
 }

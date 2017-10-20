@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
 import { ContentService } from '../content/content.service';
 import { CostService } from './cost.service';
-import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup , FormControl} from '@angular/forms';
+import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
 export class HomePageDto {
   description: string;
@@ -30,13 +30,13 @@ export class CostComponent implements OnInit {
 
   createForm() {
     this.costForm = this.fb.group({
-        accommodationPrice: '',
-        mealPrice: '',
-        trainingPrice: '',
-        discount: '',
-        margin: '',
+      accommodationPrice: '',
+      mealPrice: '',
+      trainingPrice: '',
+      discount: '',
+      margin: '',
     });
-}
+  }
 
   ngOnInit() {
     this.getCostSettings();
@@ -52,21 +52,18 @@ export class CostComponent implements OnInit {
   }
 
   editCostSettings() {
-      for (let i in this.costForm.value) {
-          if (this.costForm.value[i] === ''){
-              console.log(this.costForm.value[i]);
-            // delete 
-//console.log(i);
-         }
+    for (let i in this.costForm.value) {
+      if (this.costForm.value[i] === '') {
+        console.log(this.costForm.value[i]);
+        // delete 
+        //console.log(i);
       }
+    }
     const formModel = this.costForm.value;
     this._costService.editCostSettings(formModel).subscribe(
       data => console.log(this.responseStatus = data),
-      err => {this.message = 'Wystąpił problem podczas dodania użytkownika.'},
+      err => { this.message = 'Wystąpił problem podczas dodania użytkownika.' },
       () => this.message = 'Użytkownik został dodany.'
     );
   }
-
-
-
 }

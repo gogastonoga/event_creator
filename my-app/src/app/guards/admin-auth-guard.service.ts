@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 
 @Injectable()
 export class AdminAuthGuard implements CanActivate {
+
   constructor(private router: Router, private userService: UserService) {
   }
 

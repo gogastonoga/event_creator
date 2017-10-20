@@ -2,9 +2,10 @@
 
 <div class="main backgr">
   <form [formGroup]="eventForm" (ngSubmit)="createEvent()" validate>
-    <div class="form-panel active" id="first" style="opacity: 1;">
-      <mat-toolbar class="toolbar"><mat-icon matSuffix style="margin-right: 20px;">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
-      <div class="form-group" >
+    <div class="form-panel active" id="first">
+      <mat-toolbar class="toolbar">
+        <mat-icon matSuffix style="margin-right: 20px;">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
+      <div class="form-group">
         <div class="col-sm-4" *ngFor="let ev of content?.formDto.events">
           <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}}</b></span>
           <p *ngIf="ev.translation == 'Szkolenia z własnymi trenerami'">
@@ -28,18 +29,20 @@
           </div>
         </div>
         <div class="container" style="background-color: white;">
-            <mat-form-field [hideRequiredMarker]="true">
-              <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
-                matInput id="name" [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel" [ngModelOptions]="{standalone: true}">
-              <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-              <mat-hint class="hint2" align="end">{{message8.value.length}} / 110</mat-hint>
-            </mat-form-field>
-          </div>
+          <mat-form-field [hideRequiredMarker]="true">
+            <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
+              matInput id="name" [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel"
+              [ngModelOptions]="{standalone: true}">
+            <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+            <mat-hint class="hint2" align="end">{{message8.value.length}} / 110</mat-hint>
+          </mat-form-field>
+        </div>
       </div>
     </div>
 
     <div class="form-panel">
-      <mat-toolbar class="toolbar"><mat-icon matSuffix style="margin-right: 20px;">home</mat-icon>Nocleg</mat-toolbar>
+      <mat-toolbar class="toolbar">
+        <mat-icon matSuffix style="margin-right: 20px;">home</mat-icon>Nocleg</mat-toolbar>
       <div class="form-group">
         <mat-form-field class="accommodation" color="primary">
           <input matInput type="number" min="0" max="1000" placeholder="Liczba noclegów" formControlName="nights">
@@ -49,17 +52,19 @@
       <div class="desc">
         <div class="container">
           <mat-form-field [hideRequiredMarker]="true">
-            <input maxlength="40" #message2 readonly class="text formDescription" value="{{content?.formDto.accommodationDescription}}"
-              matInput [(ngModel)]="form.accommodationDescription" name="accommodationDescription" #accommodationDescription="ngModel" [ngModelOptions]="{standalone: true}">
+            <input maxlength="110" #message2 readonly class="text formDescription" value="{{content?.formDto.accommodationDescription}}"
+              matInput [(ngModel)]="form.accommodationDescription" name="accommodationDescription" #accommodationDescription="ngModel"
+              [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-            <mat-hint class="hint2" align="end">{{message2.value.length}} / 40</mat-hint>
+            <mat-hint class="hint2" align="end">{{message2.value.length}} / 110</mat-hint>
           </mat-form-field>
         </div>
       </div>
     </div>
 
     <div class="form-panel">
-      <mat-toolbar class="toolbar"><mat-icon matSuffix style="margin-right: 20px;">today</mat-icon>Termin </mat-toolbar>
+      <mat-toolbar class="toolbar">
+        <mat-icon matSuffix style="margin-right: 20px;">today</mat-icon>Termin </mat-toolbar>
       <div class="form-group">
         <div class="col-lg-6 backgr"><br /> Data wydarzenia:<br />
           <mat-form-field>
@@ -84,48 +89,45 @@
             </mat-select>
           </mat-form-field>
         </div>
-       Sezon letni:
+        Sezon letni:
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerSummerFrom" value="{{content?.formDto.seasons[0].from}}"
-            style="text-align: center;">
+          <input matInput [matDatepicker]="pickerSummerFrom" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;">
           <mat-datepicker-toggle matSuffix [for]="pickerSummerFrom"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #pickerSummerFrom></mat-datepicker>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerSummerTo"value="{{content?.formDto.seasons[0].to}}"
-            style="text-align: center;">
+          <input matInput [matDatepicker]="pickerSummerTo" value="{{content?.formDto.seasons[0].to}}" style="text-align: center;">
           <mat-datepicker-toggle matSuffix [for]="pickerSummerTo"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #pickerSummerTo></mat-datepicker>
         </mat-form-field><br /> Sezon zimowy:
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerWinterFrom" value="{{content?.formDto.seasons[0].from}}"
-            style="text-align: center;">
+          <input matInput [matDatepicker]="pickerWinterFrom" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;">
           <mat-datepicker-toggle matSuffix [for]="pickerWinterFrom"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #pickerWinterFrom></mat-datepicker>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerWinterTo" value="{{content?.formDto.seasons[0].to}}"
-            style="text-align: center;">
+          <input matInput [matDatepicker]="pickerWinterTo" value="{{content?.formDto.seasons[0].to}}" style="text-align: center;">
           <mat-datepicker-toggle matSuffix [for]="pickerWinterTo"></mat-datepicker-toggle>
           <mat-datepicker touchUi="true" #pickerWinterTo></mat-datepicker>
         </mat-form-field><br />
         <div class="desc">
           <div class="container">
             <mat-form-field [hideRequiredMarker]="true">
-              <input maxlength="40" #message3 readonly class="text formDescription" value="{{content?.formDto.dateFormDescription}}" matInput
-              [(ngModel)]="form.dateFormDescription" name="dateFormDescription" #dateFormDescription="ngModel" [ngModelOptions]="{standalone: true}">
+              <input maxlength="110" #message3 readonly class="text formDescription" value="{{content?.formDto.dateFormDescription}}" matInput
+                [(ngModel)]="form.dateFormDescription" name="dateFormDescription" #dateFormDescription="ngModel" [ngModelOptions]="{standalone: true}">
               <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-              <mat-hint class="hint2" align="end">{{message3.value.length}} / 40</mat-hint>
+              <mat-hint class="hint2" align="end">{{message3.value.length}} / 110</mat-hint>
             </mat-form-field>
           </div>
         </div>
-
-      </div>  
+      </div>
     </div>
+
     <div class="form-panel">
-      <mat-toolbar class="toolbar"><mat-icon matSuffix style="margin-right: 20px;">supervisor_account</mat-icon>Ilość uczestników</mat-toolbar>
+      <mat-toolbar class="toolbar">
+        <mat-icon matSuffix style="margin-right: 20px;">supervisor_account</mat-icon>Ilość uczestników</mat-toolbar>
       <div class="form-group">
         <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes">
           <label>
@@ -134,20 +136,20 @@
             </label>
         </div>
       </div>
-      
-        <div class="container" style="background-color: white;">
-          <mat-form-field [hideRequiredMarker]="true">
-            <input maxlength="40" #message4 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
-              matInput [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel" [ngModelOptions]="{standalone: true}">
-            <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-            <mat-hint class="hint2" align="end">{{message4.value.length}} / 40</mat-hint>
-          </mat-form-field>
-        </div>
-      
+      <div class="container" style="background-color: white;">
+        <mat-form-field [hideRequiredMarker]="true">
+          <input maxlength="110" #message4 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
+            matInput [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel"
+            [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+          <mat-hint class="hint2" align="end">{{message4.value.length}} / 110</mat-hint>
+        </mat-form-field>
+      </div>
     </div>
 
     <div class="form-panel">
-      <mat-toolbar class="toolbar"><mat-icon matSuffix style="margin-right: 20px;">shopping_cart</mat-icon> Wydatki</mat-toolbar>
+      <mat-toolbar class="toolbar">
+        <mat-icon matSuffix style="margin-right: 20px;">shopping_cart</mat-icon> Wydatki</mat-toolbar>
       <div class="form-group">
         Budżet:<br />
         <mat-slider formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
@@ -161,10 +163,10 @@
       <div class="desc">
         <div class="container">
           <mat-form-field [hideRequiredMarker]="true">
-            <input maxlength="40" #message5 readonly class="text formDescription" value="{{content?.formDto.budgetDescription}}" matInput
-            [(ngModel)]="form.budgetDescription" name="budgetDescription" #budgetDescription="ngModel" [ngModelOptions]="{standalone: true}">
+            <input maxlength="110" #message5 readonly class="text formDescription" value="{{content?.formDto.budgetDescription}}" matInput
+              [(ngModel)]="form.budgetDescription" name="budgetDescription" #budgetDescription="ngModel" [ngModelOptions]="{standalone: true}">
             <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-            <mat-hint class="hint2" align="end">{{message5.value.length}} / 40</mat-hint>
+            <mat-hint class="hint2" align="end">{{message5.value.length}} / 110</mat-hint>
           </mat-form-field>
         </div>
       </div>
@@ -175,9 +177,9 @@
       <div class="form-group">
         <div class="col-lg-6">
           Uwagi:<br />
-          <mat-form-field color="primary" style="width: 50%;">
-              <mat-icon matSuffix>message</mat-icon>
-            <textarea matInput placeholder="Twoje uwagi" style="height: 123px;" formControlName="additionalRequirements"></textarea>
+          <mat-form-field color="primary" style="width: 60%;">
+            <mat-icon matSuffix>message</mat-icon>
+            <textarea matInput placeholder="Twoje uwagi" style="height: 120px;" formControlName="additionalRequirements"></textarea>
           </mat-form-field>
         </div>
         <div formGroupName="organizer">
@@ -194,7 +196,8 @@
               <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
             <mat-form-field color="primary" style="padding-top: 10px;">
-              <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" matInput placeholder="E-mail:" formControlName="mail" required>
+              <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" matInput placeholder="E-mail:" formControlName="mail"
+                required>
               <mat-icon matSuffix>contact_mail</mat-icon>
               <mat-error>Nieprawidłowy format</mat-error>
             </mat-form-field>
@@ -206,13 +209,14 @@
           </div>
         </div>
       </div>
-        <div class="container" style="background-color: white;">
-          <mat-form-field [hideRequiredMarker]="true">
-            <input maxlength="40" #message6 readonly class="text formDescription" value="{{content?.formDto.additionalDescription}}"
-              matInput [(ngModel)]="form.additionalDescription" name="additionalDescription" #additionalDescription="ngModel" [ngModelOptions]="{standalone: true}">
-            <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-            <mat-hint class="hint2" align="end">{{message6.value.length}} / 40</mat-hint>
-          </mat-form-field>
+      <div class="container" style="background-color: white;">
+        <mat-form-field [hideRequiredMarker]="true">
+          <input maxlength="110" #message6 readonly class="text formDescription" value="{{content?.formDto.additionalDescription}}"
+            matInput [(ngModel)]="form.additionalDescription" name="additionalDescription" #additionalDescription="ngModel"
+            [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+          <mat-hint class="hint2" align="end">{{message6.value.length}} / 110</mat-hint>
+        </mat-form-field>
       </div>
     </div>
 
@@ -237,28 +241,28 @@
         <mat-form-field color="primary"><input matInput readonly placeholder="Sezon:"> {{summing.season}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Zakres tygodnia:"> {{summing.days}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Ilość uczestników:"> {{summing.bounds}}</mat-form-field>
-        
+
       </div>
 
       <div class="container" style="background-color: #e6ffff;">
-              <mat-form-field [hideRequiredMarker]="true" *ngIf=(!eventForm.valid)>
-                <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}"
-                  matInput [(ngModel)]="form.summaryDescription" name="summaryDescription" #summaryDescription="ngModel" [ngModelOptions]="{standalone: true}">
-                  <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-                  <mat-hint class="hint2" align="end">{{message7.value.length}} / 110</mat-hint>
-              </mat-form-field>
-          </div>
+        <mat-form-field [hideRequiredMarker]="true" *ngIf=(!eventForm.valid)>
+          <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}" matInput
+            [(ngModel)]="form.summaryDescription" name="summaryDescription" #summaryDescription="ngModel" [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+          <mat-hint class="hint2" align="end">{{message7.value.length}} / 110</mat-hint>
+        </mat-form-field>
+      </div>
     </div>
   </form>
 
   <!-- heroForm value: {{ eventForm.value | json}} -->
-  
+
 </div>
 
 <mat-progress-bar [value]="progressBar"></mat-progress-bar>
 <mat-toolbar>
   <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button" matTooltip="Powrót na stronę główną">Anuluj</button>
-  <div style="flex: 1 1 auto;">
+  <div class="footer">
     <button mat-raised-button class="accent-color button" (click)="previous()" [hidden]="isFirst()">Poprzedni</button>
     <button mat-raised-button class="accent-color button" (click)="next()" [hidden]="isLast()">Następny</button>
     <button mat-raised-button class="accent-color button" (click)="[next(), addDate()]" [hidden]="isSubmit()">Podsumowanie</button>

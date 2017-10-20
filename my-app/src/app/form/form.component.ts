@@ -222,7 +222,6 @@ export class FormComponent implements OnInit {
     }
 
     editForm() {
-
         this._contentService.editForm(this.form).subscribe(
             data => console.log(this.responseStatus = data),
             err => console.log(err),

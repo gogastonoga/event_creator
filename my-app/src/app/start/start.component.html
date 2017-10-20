@@ -1,14 +1,12 @@
-
 <h1 style="margin-bottom: 20px;">Wolimierz Application</h1>
-
 <div class="container">
   <mat-form-field [hideRequiredMarker]="true">
-    <input maxlength="90" id="homeDescription" [(ngModel)]="start.description" name="description" #description="ngModel" #message readonly class="text" value="{{content?.mainPage.description}}" matInput >
+    <input maxlength="90" id="homeDescription" [(ngModel)]="start.description" name="description" #description="ngModel" #message
+      readonly class="text" value="{{content?.mainPage.description}}" matInput>
     <mat-hint id="hint1" align="start">Można edytować</mat-hint>
     <mat-hint id="hint2" align="end">{{message.value.length}} / 90</mat-hint>
   </mat-form-field>
 </div>
-
 <mat-toolbar>
   <div style="flex: 1 1 auto;">
     <button routerLink="/form" routerLinkActive="active" mat-raised-button class="accent-color" matTooltip="Rozpocznij wypełnianie formularza">Start</button>

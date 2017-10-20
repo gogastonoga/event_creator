@@ -6,7 +6,6 @@ import { FormGroup } from '@angular/forms';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class EventService {
 
@@ -16,7 +15,6 @@ export class EventService {
     }
 
     createEvent(event: Object) {
-
         return this.http.post(this._createEventURL, event, {
         });
     }

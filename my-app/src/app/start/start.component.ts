@@ -59,5 +59,4 @@ export class StartComponent implements OnInit {
       () => this.returnMsg = 'Event is created!'
     );
   }
-
 }

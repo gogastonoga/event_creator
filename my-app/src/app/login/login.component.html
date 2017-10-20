@@ -1,28 +1,33 @@
 <h1 style="margin-bottom: 20px;">Zaloguj</h1>
-<div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">
+<div class="backgr">
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <br />
-        <mat-form-field color="primary" >
-      <input matInput type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Login użytkownika"/>
-      <mat-icon matSuffix>account_circle</mat-icon>
-      <mat-error><div *ngIf="f.submitted && !username.valid">Login jest wymagany</div></mat-error>
-        </mat-form-field>
+      <mat-form-field color="primary">
+        <input matInput type="text" name="username" [(ngModel)]="model.username" #username="ngModel" required placeholder="Login użytkownika"
+        />
+        <mat-icon matSuffix>account_circle</mat-icon>
+        <mat-error>
+          <div *ngIf="f.submitted && !username.valid">Login jest wymagany</div>
+        </mat-error>
+      </mat-form-field>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-        <mat-form-field color="primary" >
-      <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Hasło" [type]="hide ? 'password' : 'text'"/>
-      <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-      <mat-error><div *ngIf="f.submitted && !password.valid">Hasło jest wymagane</div></mat-error>
-        </mat-form-field>
+      <mat-form-field color="primary">
+        <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required placeholder="Hasło"
+          [type]="hide ? 'password' : 'text'" />
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        <mat-error>
+          <div *ngIf="f.submitted && !password.valid">Hasło jest wymagane</div>
+        </mat-error>
+      </mat-form-field>
     </div>
     <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-    <button [disabled]="loading" mat-raised-button class="accent-color button">Zaloguj</button> <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button> 
-  <br /><br />
+    <button [disabled]="loading" mat-raised-button class="accent-color button">Zaloguj</button>
+    <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+    <br /><br />
   </form>
 </div>
-
-
 
 <!-- <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
   <div class="backgr" style="width: 50%; margin: 0 auto; box-shadow: 4px 6px 15px -2px rgba(0,0,0,0.48)">

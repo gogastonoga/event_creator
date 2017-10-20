@@ -6,7 +6,6 @@ import { Form } from '../form/form';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class ContentService {
 
@@ -35,8 +34,8 @@ export class ContentService {
     }
 
     editContentHomePage(content: Object) {
-                return this.ahttp.put(this._editHomepageURL, content);
-            }
+        return this.ahttp.put(this._editHomepageURL, content);
+    }
 
     private handleError(error: any) {
         console.log('Yup an error occurred', error);
