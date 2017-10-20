@@ -32,5 +32,6 @@ public class EventType {
 
     public void updateFrom(EventTypeDto dto) {
         this.description = dto.getDescription();
+        this.translation = dto.getName();
     }
 }

@@ -37,6 +37,5 @@ public class Season {
         this.description = seasonDto.getDescription();
         this.fromDate = seasonDto.getFrom();
         this.toDate = seasonDto.getTo();
-        this.globalId = seasonDto.getGlobalId();
     }
 }

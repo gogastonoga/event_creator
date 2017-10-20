@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .disable();*/
         http
-              //  .cors().and()
+                //  .cors().and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -123,60 +123,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         defaultTokenServices.setSupportRefreshToken(true);
         return defaultTokenServices;
     }
-
-  /*  @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "10.42.96.238:4200"));
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");*//* configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Origin"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT"));*//*
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
-
-    @Bean
-    public FilterRegistrationBean corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:4200");
-        config.addAllowedOrigin("10.42.96.238:4200");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        source.registerCorsConfiguration("/**", config);
-        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
-        bean.setOrder(0);
-        return bean;
-    }*/
-
-    /*@Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/events", "/login").permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/content", "/health", "/mappings").permitAll()
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/events").hasAuthority("ADMIN")
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.PUT, "/content/**").hasAuthority("ADMIN")
-                .anyRequest().fullyAuthenticated().and()
-                .httpBasic()
-*//*                .and().formLogin().loginPage("/login").failureUrl("/login?error").usernameParameter("email").permitAll()
-                .and().logout().logoutUrl("/logout").deleteCookies("remember-me").permitAll()
-                .and().rememberMe()*//*
-                .and().csrf().disable();
-    }*/
-
-    /*@Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());
-    }*/
 }
