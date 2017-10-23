@@ -22,6 +22,7 @@ export class StartComponent implements OnInit {
   responseStatus: Object = [];
   returnMsg: String;
   editStatus: boolean = false;
+  disabledEdit: boolean = true;
 
   constructor(private _contentService: ContentService, private _userService: UserService) {
   }
@@ -29,6 +30,9 @@ export class StartComponent implements OnInit {
   ngOnInit() {
     this.getContent();
     this.start = new HomePageDto();
+    if (localStorage.getItem('DEdit') === 'false') {
+      this.disabledEdit = false;
+    }
   }
 
   getContent = () => {
@@ -40,15 +44,17 @@ export class StartComponent implements OnInit {
   }
 
   edit() {
-    if (this.editStatus) {
-      $('#homeDescription').prop('readonly', true);
-      $('#hint1').slideUp();
-      $('#hint2').slideUp();
-      this.editHomepage();
-    } else {
-      $('#homeDescription').prop('readonly', false);
-      $('#hint1').slideDown();
-      $('#hint2').slideDown();
+    if (!this.disabledEdit) {
+      if (this.editStatus) {
+        $('#homeDescription').prop('readonly', true);
+        $('#hint1').slideUp();
+        $('#hint2').slideUp();
+        this.editHomepage();
+      } else {
+        $('#homeDescription').prop('readonly', false);
+        $('#hint1').slideDown();
+        $('#hint2').slideDown();
+      }
     }
   }
 

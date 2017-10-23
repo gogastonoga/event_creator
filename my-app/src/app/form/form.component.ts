@@ -54,6 +54,7 @@ export class FormComponent implements OnInit {
     ];
     editEventTypes: editEventTypes[] = [];
     apiEndPoint = 'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=';
+    disabledEdit: boolean = true;
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
         private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp) {
@@ -149,6 +150,9 @@ export class FormComponent implements OnInit {
         this.getCostSettings();
         this.form = new Form();
         //this.editEventTypes = new editEventTypes();
+        if (localStorage.getItem('DEdit') === 'false') {
+          this.disabledEdit = false;
+        }
     }
 
     returnEvent() {
@@ -234,6 +238,7 @@ export class FormComponent implements OnInit {
     }
 
     edit() {
+        if (!this.disabledEdit) {
         if (this.editForms) {
             $('.formDescription').prop('readonly', true);
             $('.hint1').slideUp();
@@ -244,7 +249,7 @@ export class FormComponent implements OnInit {
             $('.formDescription').prop('readonly', false);
             $('.hint1').slideDown();
             $('.hint2').slideDown();
-        }
+        }}
     }
 
     editForm() {

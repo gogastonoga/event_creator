@@ -26,7 +26,9 @@ export class UserService {
     this.accessToken = null;
     this.isAdmin = false;
     localStorage.removeItem(TOKEN_NAME);
-  }
+    localStorage.setItem('DEdit', 'true');
+    localStorage.setItem('ULoged', 'false');
+    }
 
   isAdminUser(): boolean {
     return this.isAdmin;
