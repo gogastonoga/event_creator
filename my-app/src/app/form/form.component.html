@@ -11,19 +11,18 @@
           <p *ngIf="ev.translation == 'Szkolenia z własnymi trenerami'">
             <mat-form-field color="primary">
               <input type="number" min="0" matInput placeholder="Ile sal potrzebujesz?" name="details" formControlName="rooms">
-              <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
             <mat-form-field color="primary">
               <input type="number" min="0" matInput placeholder="Na ilu uczestników?" name="details" formControlName="guestsNumber">
-              <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>
           </p>
           <div class="desc">
             <div class="container">
               <mat-form-field [hideRequiredMarker]="true">
-                <input maxlength="40" #message1 readonly class="text formDescription" value="{{ev.description}}" matInput>
+                <input maxlength="40" readonly class="text formDescription" value="{{ev.description}}" matInput (change)="onChange(ev)" id="eventDescription">
+                <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
                 <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-                <mat-hint class="hint2" align="end">{{message1.value.length}} / 40</mat-hint>
+                <mat-hint class="hint2" align="end"> / 40</mat-hint>
               </mat-form-field>
             </div>
           </div>
@@ -91,26 +90,26 @@
         </div>
         Sezon letni:
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerSummerFrom" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;">
-          <mat-datepicker-toggle matSuffix [for]="pickerSummerFrom"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #pickerSummerFrom></mat-datepicker>
+          <input matInput readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
+          [(ngModel)]="formEditDate[0].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerSummerTo" value="{{content?.formDto.seasons[0].to}}" style="text-align: center;">
-          <mat-datepicker-toggle matSuffix [for]="pickerSummerTo"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #pickerSummerTo></mat-datepicker>
+          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
+          [(ngModel)]="formEditDate[0].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field><br /> Sezon zimowy:
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerWinterFrom" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;">
-          <mat-datepicker-toggle matSuffix [for]="pickerWinterFrom"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #pickerWinterFrom></mat-datepicker>
+          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
+          [(ngModel)]="formEditDate[1].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput [matDatepicker]="pickerWinterTo" value="{{content?.formDto.seasons[0].to}}" style="text-align: center;">
-          <mat-datepicker-toggle matSuffix [for]="pickerWinterTo"></mat-datepicker-toggle>
-          <mat-datepicker touchUi="true" #pickerWinterTo></mat-datepicker>
+          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
+          [(ngModel)]="formEditDate[1].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}">
+          <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field><br />
         <div class="desc">
           <div class="container">
@@ -133,7 +132,14 @@
           <label>
             <img src="{{peop.imageUrl}}"><br />
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
-            </label>
+            <!-- <input type="file" (change)="[createUrl(peop), fileChange($event)]" placeholder="Upload file"  > -->
+            <image-upload 
+            [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
+            [headers]="{Authorization: 'MyToken'}">
+          </image-upload>
+          </label>
+            
+         
         </div>
       </div>
       <div class="container" style="background-color: white;">

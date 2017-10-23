@@ -12,6 +12,7 @@ export class ContentService {
     private _contentURL = 'http://localhost:8080/wolimierz/content';
     private _editHomepageURL = 'http://localhost:8080/wolimierz/content/home';
     private _editFormURL = 'http://localhost:8080/wolimierz/content/form';
+    private _editSeasonsURL = 'http://localhost:8080/wolimierz/content/seasons';
 
     constructor(private http: Http, private ahttp: AuthHttp) {
     }
@@ -33,9 +34,16 @@ export class ContentService {
         });
     }
 
+    editSeasons(form) {
+        console.log(form);
+        return this.ahttp.put(this._editSeasonsURL, form, {
+        });
+    }
+
     editContentHomePage(content: Object) {
         return this.ahttp.put(this._editHomepageURL, content);
     }
+
 
     private handleError(error: any) {
         console.log('Yup an error occurred', error);

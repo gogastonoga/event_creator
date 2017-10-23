@@ -35,6 +35,7 @@ import { AdminAuthGuard } from './guards/admin-auth-guard.service';
 import { TOKEN_NAME } from './services/auth.constant';
 import { AppDataService } from './services/app-data.service';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
+import { ImageUploadModule } from "angular2-image-upload";
 
 import * as $ from 'jquery';
 
@@ -60,7 +61,7 @@ export function authHttpServiceFactory(http: Http) {
     MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
     MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatStepperModule, HttpModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, ImageUploadModule.forRoot()
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },

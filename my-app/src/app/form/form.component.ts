@@ -7,6 +7,14 @@ import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, F
 import { DatePipe } from '@angular/common';
 import { Summing } from './summing';
 import { Form } from './form';
+import { formEditDate } from './editDate';
+import { editEventTypes } from './editDate';
+import { ElementRef, ViewChild } from '@angular/core';
+import { Http } from '@angular/http';
+import { RequestOptions } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {Headers} from '@angular/http';
+import { AuthHttp } from 'angular2-jwt';
 
 @Component({
     selector: 'app-form',
@@ -19,6 +27,7 @@ export class FormComponent implements OnInit {
     @Input() event: Event;
     @Input() organizer: Organizer;
     content;
+    media;
     costSettings;
     errorString: string;
     responseStatus: Object = [];
@@ -30,9 +39,24 @@ export class FormComponent implements OnInit {
     progressBar = 0;
     editForms: boolean = false;
     form: Form;
+    formEditDate: formEditDate[] = [{
+        name: 'LETNI',
+        from: '' + '',
+        to: '' + '',
+        description: ''
+    },
+    {
+        name: 'ZIMOWY',
+        from: '' + '',
+        to: '' + '',
+        description: ''
+    }
+    ];
+    editEventTypes: editEventTypes[] = [];
+    apiEndPoint = 'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=';
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
-        private datePipe: DatePipe, private _costService: CostService) {
+        private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp) {
         this.createForm();
     }
 
@@ -124,6 +148,7 @@ export class FormComponent implements OnInit {
         this.getContent();
         this.getCostSettings();
         this.form = new Form();
+        //this.editEventTypes = new editEventTypes();
     }
 
     returnEvent() {
@@ -214,6 +239,7 @@ export class FormComponent implements OnInit {
             $('.hint1').slideUp();
             $('.hint2').slideUp();
             this.editForm();
+            this.editSeasons();
         } else {
             $('.formDescription').prop('readonly', false);
             $('.hint1').slideDown();
@@ -228,4 +254,67 @@ export class FormComponent implements OnInit {
             () => this.returnMsg = 'Event is created!'
         );
     }
+
+    editSeasons() {
+        for (let i = 0; i < 2; i++) {
+            if (this.formEditDate[i].from !== '') {
+                this.formEditDate[i].from = this.formEditDate[i].from + 'T00:00:00';
+            }
+            if (this.formEditDate[i].to !== '') {
+                this.formEditDate[i].to = this.formEditDate[i].to + 'T00:00:00';
+            }
+        }
+        console.log(this.formEditDate);
+        this._contentService.editSeasons(this.formEditDate).subscribe(
+            data => console.log(this.responseStatus = data),
+            err => console.log(err),
+            () => this.returnMsg = 'Event is created!'
+        );
+
+
+    }
+
+    
+    editEventType(ev) {
+        console.log(ev);
+    }
+
+    // onChange(ev){
+    //     console.log(ev + "sadsa");
+    //     let eventType = {
+    //         description: $('#eventDescription').text(),
+    //         name: '',
+    //         globalId: ev.globalId
+    //     }
+    //     this.editEventTypes.push(eventType);
+    //     console.log(this.editEventTypes);
+    //  
+
+    // createUrl(peop){
+    //     console.log(peop + 'aaaaaaaaaaaaaaaaaaaaaa');
+    //     this.apiEndPoint = this.apiEndPoint + peop.globalId;
+    // }
+
+    // fileChange(event) {
+    //     let fileList: FileList = event.target.files;
+    //     if(fileList.length > 0) {
+    //         let file: File = fileList[0];
+    //         let formData:FormData = new FormData();
+    //         formData.append('uploadFile', file, file.name);
+    //         let headers = new Headers();
+    //         /** No need to include Content-Type in Angular 4 */
+    //         headers.append('Content-Type', 'multipart/form-data');
+    //         headers.append('Accept', 'application/json');
+    //         let options = new RequestOptions({ headers: headers });
+    //         this.ahttp.put(`${this.apiEndPoint}`, formData, options)
+    //             .map(res => res.json())
+    //             .catch(error => Observable.throw(error))
+    //             .subscribe(
+    //                 data => console.log('success'),
+    //                 error => console.log(error)
+    //             )
+    //     }
+    // }
+
 }
+
