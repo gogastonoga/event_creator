@@ -269,5 +269,5 @@
     <button mat-raised-button class="accent-color button" [disabled]="!eventForm.valid" (click)="createEvent()" [hidden]="isSave()"
       matTooltip="Nie wypełniono wszystkich niezbędnych pól formularza">Zapisz</button>
   </div>
-  <mat-slide-toggle [(ngModel)]="editForms" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
+  <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editForms" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>

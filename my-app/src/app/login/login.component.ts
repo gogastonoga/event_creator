@@ -38,10 +38,14 @@ export class LoginComponent implements OnInit {
         } else {
           this.error = 'Username or password is incorrect';
         }
+        localStorage.setItem('DEdit', 'false');
+        localStorage.setItem('ULoged', 'true');
       },
       error => {
         this.error = 'Username or password is incorrect';
         this.loading = false;
+        localStorage.setItem('DEdit', 'true');
+        localStorage.setItem('ULoged', 'false');
       });
   }
 
