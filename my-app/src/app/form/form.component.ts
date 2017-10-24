@@ -48,13 +48,9 @@ export class FormComponent implements OnInit {
         dateFormDescription: '',
         summaryDescription: '',
     }
-    formEditDate: editSeasons[] = [{
-        name: 'LETNI',
-        from: '',
-        to: '',
-        globalId: ''
-    }
-    ];
+    formEditDate: editSeasons[] = [];
+    editSummer: editSeasons = {globalId: '', from: '', to: '', name: 'Letni'};
+    editWinter: editSeasons = {globalId: '', from: '', to: '', name: 'Zimowy'};
 
     editEventTypess = [];
     apiEndPoint = 'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=';
@@ -280,22 +276,17 @@ export class FormComponent implements OnInit {
         );
     }
 
-    onChangeSeason(season) {
-        console.log(season.name + "bbbbbbbbbbbbbbaaaaaaa");
-        if (season.name === 'LETNI') {
-            this.formEditDate[0].globalId = season.globalId;
-            console.log(this.formEditDate);
-        }
-        if (season.name === 'Zimowy') {
-            this.formEditDate[1].globalId = season.globalId;
-            console.log(this.formEditDate);
-        }
+    onChangeSeasonWinter(season) {
+        this.editWinter.globalId = season.globalId;
+        this.formEditDate.push(this.editWinter);
+    }
+
+    onChangeSeasonSummer(season) {
+        this.editSummer.globalId = season.globalId;
+        this.formEditDate.push(this.editSummer);
     }
 
     editEvents() {
-        console.log(this.editEventTypess[0] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(this.editEventTypess[1] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
-        console.log(this.editEventTypess[2] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
         this.dupa.eventTypes = this.editEventTypess;
         this._contentService.editEvents(this.dupa).subscribe(
             data => console.log(this.responseStatus = data),

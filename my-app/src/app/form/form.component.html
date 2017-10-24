@@ -7,7 +7,7 @@
         <mat-icon matSuffix style="margin-right: 20px;">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
       <div class="form-group">
         <div class="col-sm-4" *ngFor="let ev of content?.formDto.events; let i = index" [attr.data-index]="i">
-          <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}} {{i}}</b></span>
+          <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}}</b></span>
           <p *ngIf="ev.translation == 'Szkolenia z własnymi trenerami'">
             <mat-form-field color="primary">
               <input type="number" min="0" matInput placeholder="Ile sal potrzebujesz?" name="details" formControlName="rooms">
@@ -123,27 +123,32 @@
             </mat-select>
           </mat-form-field>
         </div>
-        Sezon letni:
+        Sezon zimowy:
         <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[0].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[0])">
+          [(ngModel)]="editSummer.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
+          id="date" data-inputmask="'alias': 'date'" />
+         
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[0].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[0])">
+          [(ngModel)]="editSummer.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
+          >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
-        </mat-form-field><br /> Sezon zimowy:
-        <!-- <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[1].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[1])">
+        </mat-form-field><br /> Sezon letni:
+        <mat-form-field class="example-full-width">
+          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[1].from}}" style="text-align: center;"
+          [(ngModel)]="editWinter.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
+          >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[1].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[1])">
+          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[1].to}}" style="text-align: center;"
+          [(ngModel)]="editWinter.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
+          >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field><br />
         <div class="desc">
@@ -155,7 +160,7 @@
               <mat-hint class="hint2" align="end">{{message3.value.length}} / 110</mat-hint>
             </mat-form-field>
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
 
