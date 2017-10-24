@@ -38,14 +38,14 @@ public class MediaController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/image", method = RequestMethod.PUT, params = "parent=home_page")
+    @RequestMapping(path = "/image", method = RequestMethod.POST, params = "parent=home_page")
     public String uploadHomePageImage(@RequestParam(name = "image") MultipartFile media) throws IOException {
         return mediaService.updateHomePageSettings(media, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "/image", method = RequestMethod.PUT, params = "parent=event_size")
+    @RequestMapping(path = "/image", method = RequestMethod.POST, params = "parent=event_size")
     public String uploadEventSizeImage(@RequestParam(name = "image") MultipartFile media,
                                        @RequestParam("parentId") UUID parentId) throws IOException {
 

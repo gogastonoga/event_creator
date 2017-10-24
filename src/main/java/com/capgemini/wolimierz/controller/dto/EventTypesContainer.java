@@ -12,6 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EventTypesContainer {
-    @NotNull
     private List<EventTypeDto> eventTypes = new ArrayList<>();
 }

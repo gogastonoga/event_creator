@@ -57,7 +57,8 @@ public class ContentServiceImpl implements ContentService {
                             "Additional form part description",
                             "Participants form part description",
                             "Accommodation form part description",
-                            "Date form description"
+                            "Date form description",
+                            "Summary description"
                     )
             );
         }
@@ -69,11 +70,9 @@ public class ContentServiceImpl implements ContentService {
             seasonRepository.save(
                     Arrays.asList(
                             new Season(null, "Lato", LocalDate.of(2017, 7, 1),
-                                    LocalDate.of(2017, 8, 30), "Description1",
-                                    UUID.randomUUID(), 20),
-                            new Season(null, "Cium", LocalDate.of(2017, 7, 1),
-                                    LocalDate.of(2017, 8, 30), "Description2",
-                                    UUID.randomUUID(), 0))
+                                    LocalDate.of(2017, 8, 30), UUID.randomUUID(), 20),
+                            new Season(null, "Zima", LocalDate.of(2017, 7, 1),
+                                    LocalDate.of(2017, 8, 30), UUID.randomUUID(), 0))
             );
         }
         if (eventSizeRepository.findAll().isEmpty()) {
@@ -126,7 +125,7 @@ public class ContentServiceImpl implements ContentService {
                     updateFrom.ifPresent(season::updateFrom);
                 });
         return seasonRepository.save(seasonsToUpdate).stream()
-                .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(), season.getDescription(),
+                .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(),
                         season.getName(), season.getGlobalId()))
                 .collect(Collectors.toList());
     }

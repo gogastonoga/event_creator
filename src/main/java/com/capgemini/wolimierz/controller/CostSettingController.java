@@ -25,7 +25,7 @@ public class CostSettingController {
         return costSettingService.getCostSettings();
     }
 
-    @RequestMapping(value = "/simply", method = RequestMethod.GET)
+    @RequestMapping(value = "/simple", method = RequestMethod.GET)
     public CostSettingsDto getClientCostSettings() {
         return costSettingService.getClientCostSettings();
     }

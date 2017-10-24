@@ -38,7 +38,7 @@ public class EventType implements Cost {
 
     public void updateFrom(EventTypeDto dto) {
         this.description = dto.getDescription();
-        this.translation = dto.getName();
+        //this.translation = dto.getName();
     }
 
     @Override

@@ -13,6 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SeasonsContainer {
-    @NotNull
     private List<SeasonDto> seasons = new ArrayList<>();
 }

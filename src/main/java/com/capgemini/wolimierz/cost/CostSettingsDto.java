@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,14 +17,14 @@ public class CostSettingsDto {
     private double mealPrice;
     private double trainingPrice;
 
-    private Double margin;
-    private Double discount;
+    private double margin;
+    private double discount;
     @Setter
-    private List<DetailedCost> seasonCosts;
+    private List<DetailedCost> seasonCosts = new ArrayList<>();
     @Setter
-    private List<DetailedCost> eventTypeCosts;
+    private List<DetailedCost> eventTypeCosts = new ArrayList<>();
     @Setter
-    private List<DetailedCost> eventSizeCosts;
+    private List<DetailedCost> eventSizeCosts = new ArrayList<>();
 
     public CostSettingsDto(double accommodationPrice, double mealPrice, double trainingPrice, Double margin, Double discount) {
         this.accommodationPrice = accommodationPrice;

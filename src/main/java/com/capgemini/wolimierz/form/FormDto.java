@@ -29,6 +29,8 @@ public class FormDto {
     private String accommodationDescription;
     @NotNull
     private String dateFormDescription;
+    @NotNull
+    private String summaryDescription;
 
     public static FormDto from(Form form, List<EventType> eventTypes, List<EventSize> sizes, List<Season> seasons) {
         return new FormDto(
@@ -39,14 +41,17 @@ public class FormDto {
                         .map(SizeDto::from)
                         .collect(Collectors.toList()),
                 seasons.stream()
-                        .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(), season.getDescription(),
+                        .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(),
                                 season.getName(), season.getGlobalId()))
                         .collect(Collectors.toList()),
                 form.getBudgetDescription(),
                 form.getAdditionalDescription(),
                 form.getParticipantsDescription(),
                 form.getAccommodationDescription(),
-                form.getDateFormDescription()
+                form.getDateFormDescription(),
+                form.getSummaryDescription()
         );
     }
+
+
 }

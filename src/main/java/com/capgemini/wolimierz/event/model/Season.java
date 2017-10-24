@@ -26,8 +26,6 @@ public class Season implements Cost {
     private LocalDate fromDate;
     @Column(name = "TO_DATE", nullable = false)
     private LocalDate toDate;
-    @Column(name = "DESCRIPTION")
-    private String description;
     @Column(name = "GLOBAL_ID", nullable = false, unique = true)
     private UUID globalId;
     @Column(name = "PRICE")
@@ -35,9 +33,12 @@ public class Season implements Cost {
 
     public void updateFrom(SeasonDto seasonDto) {
         this.name = seasonDto.getName();
-        this.description = seasonDto.getDescription();
-        this.fromDate = seasonDto.getFrom();
-        this.toDate = seasonDto.getTo();
+        if (seasonDto.getFrom() != null) {
+            this.fromDate = seasonDto.getFrom();
+        }
+        if (seasonDto.getTo() != null) {
+            this.toDate = seasonDto.getTo();
+        }
     }
 
     @Override

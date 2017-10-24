@@ -10,7 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class EventTypeDto extends DescriptionDto {
     private UUID globalId;
-    @NotNull
+   // @NotNull
     private String name;
 
     public EventTypeDto(String description, String name, UUID globalId) {
