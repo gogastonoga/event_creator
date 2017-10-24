@@ -3,12 +3,6 @@ import { ContentService } from '../content/content.service';
 import { CostService } from './cost.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 
-export class HomePageDto {
-  description: string;
-  backgroundVideoUrl: string;
-  backgroundImageUrl: string;
-  contactRequestFormat: string;
-}
 @Component({
   selector: 'app-cost',
   templateUrl: './cost.component.html',
@@ -21,7 +15,6 @@ export class CostComponent implements OnInit {
   costSettings;
   errorString: string;
   responseStatus: Object = [];
-  returnMsg: String;
   editStatus: boolean = false;
   costForm: FormGroup;
 
@@ -46,7 +39,7 @@ export class CostComponent implements OnInit {
   getCostSettings = () => {
     this._costService.getCostSettings()
       .subscribe(
-      items => { this.costSettings = items; },
+      costSettings => { this.costSettings = costSettings; },
       error => this.errorString = <any>error
       );
   }
@@ -61,9 +54,7 @@ export class CostComponent implements OnInit {
     }
     const formModel = this.costForm.value;
     this._costService.editCostSettings(formModel).subscribe(
-      data => console.log(this.responseStatus = data),
-      err => { this.message = 'Wystąpił problem podczas dodania użytkownika.' },
-      () => this.message = 'Użytkownik został dodany.'
+      data => console.log(this.responseStatus = data)
     );
   }
 }

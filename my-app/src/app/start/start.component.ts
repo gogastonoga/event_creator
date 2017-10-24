@@ -20,7 +20,6 @@ export class StartComponent implements OnInit {
   content;
   errorString: string;
   responseStatus: Object = [];
-  returnMsg: String;
   editStatus: boolean = false;
   disabledEdit: boolean = true;
 
@@ -60,9 +59,7 @@ export class StartComponent implements OnInit {
 
   editHomepage() {
     this._contentService.editContentHomePage(this.start).subscribe(
-      data => console.log(this.responseStatus = data),
-      err => console.log(err),
-      () => this.returnMsg = 'Event is created!'
+      data => console.log(this.responseStatus = data)
     );
   }
 }

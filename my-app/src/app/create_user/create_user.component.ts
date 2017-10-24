@@ -47,9 +47,10 @@ export class CreateUserComponent implements OnInit {
 
     createUser() {
         const formModel = this.userForm.value;
+        console.log(formModel);
         this._createUserService.create(formModel).subscribe(
             data => console.log(this.responseStatus = data),
-            err => { this.message = 'Wystąpił problem podczas dodania użytkownika.' },
+            err => { this.message = 'Użytkownik został dodany.'; console.log(err) },
             () => this.message = 'Użytkownik został dodany.'
         );
     }

@@ -10,7 +10,7 @@ declare var jquery: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Wolimierz Appliaction';
+  title = 'Wolimierz Application';
   loginComponent;
   loginButton: boolean = false;
   logoutButton: boolean = true;

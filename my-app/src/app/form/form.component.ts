@@ -1,39 +1,41 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { Event, Organizer } from '../event/event';
 import { ContentService } from '../content/content.service';
 import { CostService } from '../cost/cost.service';
 import { EventService } from '../event/event.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { Summing } from './summing';
-import { Form } from './form';
-import { formEditDate } from './editDate';
-import { editEventTypes } from './editDate';
+import { Form, Description } from './form';
+import { formEditDate } from './form';
+import { editEventTypes } from './form';
+import { Summing } from './form';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { RequestOptions } from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import {Headers} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
+import {
+    MatSnackBar, MatSnackBarConfig,
+    MatSnackBarHorizontalPosition,
+    MatSnackBarVerticalPosition
+} from '@angular/material';
+import { Dir } from '@angular/cdk/bidi';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.css'],
-    providers: [ContentService, EventService, DatePipe]
+    providers: [ContentService, EventService, DatePipe, Dir]
 })
 export class FormComponent implements OnInit {
 
-    @Input() event: Event;
-    @Input() organizer: Organizer;
     content;
-    media;
-    costSettings;
     errorString: string;
     responseStatus: Object = [];
-    returnMsg: String;
     eventForm: FormGroup;
     eventArray = [];
+    returnMsg;
     contentEventArray = [];
     summing: Summing = { season: '', bounds: '', days: '', date: '' };
     progressBar = 0;
@@ -55,10 +57,31 @@ export class FormComponent implements OnInit {
     editEventTypes: editEventTypes[] = [];
     apiEndPoint = 'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=';
     disabledEdit: boolean = true;
+    message: string = 'Wydarzenie zostało utworzone.';
+    actionButtonLabel: string = 'Zamknij';
+    action: boolean = true;
+    setAutoHide: boolean = true;
+    autoHide: number = 5000;
+    addExtraClass: boolean = true;
+    horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+    verticalPosition: MatSnackBarVerticalPosition = 'bottom';
+    @Input() eventType: editEventTypes;
+
+    descriptions: Description[] = new Array();
+    
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
-        private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp) {
+        private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp, private dir: Dir,  public snackBar: MatSnackBar) {
         this.createForm();
+    }
+
+    ngOnInit() {
+        this.getContent();
+        this.form = new Form();
+        this.eventType = new editEventTypes();
+        if (localStorage.getItem('DEdit') === 'false') {
+            this.disabledEdit = false;
+        }
     }
 
     isFirst(): boolean {
@@ -115,7 +138,7 @@ export class FormComponent implements OnInit {
             }),
             nights: ['', Validators.required],
             eventTime: '',
-            eventTypeIds: this.returnEvent(),
+            eventTypeIds: '',
             maxCost: ['', Validators.required],
             eventSizeId: ['', Validators.required],
             additionalRequirements: ['', Validators.required],
@@ -144,27 +167,13 @@ export class FormComponent implements OnInit {
         this.progressBar -= 100 / 6;
     }
 
-    ngOnInit() {
-        this.event = new Event();
-        this.getContent();
-        this.getCostSettings();
-        this.form = new Form();
-        //this.editEventTypes = new editEventTypes();
-        if (localStorage.getItem('DEdit') === 'false') {
-          this.disabledEdit = false;
-        }
-    }
-
-    returnEvent() {
-        return this.eventArray;
-    }
-
     select(event) {
         if (event.selected === false) {
             event.selected = true;
             this.contentEventArray.push(event.translation);
             this.eventArray.push(event.globalId);
             this.eventForm.value.eventTypeIds = this.eventArray;
+            console.log(this.eventForm.value.eventTypeIds);
         }
         else {
             event.selected = false;
@@ -196,21 +205,25 @@ export class FormComponent implements OnInit {
             .subscribe(
             (content: Object) => {
                 this.content = content;
-                console.log(this.content.formDto.events);
+                this.parseToDescription(this.content);
+                console.log(this.descriptions);
             },
             error => this.errorString = <any>error
             );
+        
     }
 
-    getCostSettings() {
-        this._costService.getCostSettings()
-            .subscribe(
-            (costSettings) => {
-                this.costSettings = costSettings;
-                console.log(this.costSettings);
-            },
-            error => this.errorString = <any>error
-            );
+    parseToDescription(content) {
+        console.log(this.descriptions[0]);
+        
+        for (let i = 0; i < content.formDto.events.length; i++) {
+            let description = {
+                value: content.formDto.events[i].description
+            }
+            this.descriptions.push(description);
+        }
+        console.log(this.descriptions);
+        return this.descriptions;
     }
 
     createEvent() {
@@ -229,34 +242,31 @@ export class FormComponent implements OnInit {
         this._eventService.createEvent(formModel).subscribe(
             data => console.log(this.responseStatus = data),
             err => console.log(err),
-            () => this.returnMsg = 'Event is created!'
+            () => this.message = 'Wydarzenie zostało utworzone.'
         );
-    }
-
-    onInputChange(event: any) {
-        console.log('This is emitted as the thumb slides');
     }
 
     edit() {
         if (!this.disabledEdit) {
-        if (this.editForms) {
-            $('.formDescription').prop('readonly', true);
-            $('.hint1').slideUp();
-            $('.hint2').slideUp();
-            this.editForm();
-            this.editSeasons();
-        } else {
-            $('.formDescription').prop('readonly', false);
-            $('.hint1').slideDown();
-            $('.hint2').slideDown();
-        }}
+            if (this.editForms) {
+                $('.formDescription').prop('readonly', true);
+                $('.hint1').slideUp();
+                $('.hint2').slideUp();
+                this.editForm();
+                this.editSeasons();
+                this.editEvents();
+            } else {
+                $('.formDescription').prop('readonly', false);
+                $('.hint1').slideDown();
+                $('.hint2').slideDown();
+            }
+        }
     }
 
     editForm() {
         this._contentService.editForm(this.form).subscribe(
             data => console.log(this.responseStatus = data),
-            err => console.log(err),
-            () => this.returnMsg = 'Event is created!'
+            err => console.log(err)
         );
     }
 
@@ -272,33 +282,56 @@ export class FormComponent implements OnInit {
         console.log(this.formEditDate);
         this._contentService.editSeasons(this.formEditDate).subscribe(
             data => console.log(this.responseStatus = data),
-            err => console.log(err),
-            () => this.returnMsg = 'Event is created!'
+            err => console.log(err)
         );
-
-
     }
 
-    
-    editEventType(ev) {
-        console.log(ev);
+    editEvents() {
+        this._contentService.editEvents(this.editEventTypes).subscribe(
+            data => console.log(this.responseStatus = data),
+            err => console.log(err)
+        );
     }
 
-    // onChange(ev){
-    //     console.log(ev + "sadsa");
-    //     let eventType = {
-    //         description: $('#eventDescription').text(),
-    //         name: '',
-    //         globalId: ev.globalId
-    //     }
-    //     this.editEventTypes.push(eventType);
-    //     console.log(this.editEventTypes);
-    //  
+    onInputChange(event: any) {
+        console.log('This is emitted as the thumb slides');
+    }
+
+    open() {
+        let config = new MatSnackBarConfig();
+        config.verticalPosition = this.verticalPosition;
+        config.horizontalPosition = this.horizontalPosition;
+        config.duration = this.setAutoHide ? this.autoHide : 0;
+        config.extraClasses = this.addExtraClass ? ['party'] : undefined;
+        config.direction = this.dir.value;
+        this.snackBar.open(this.message, this.action ? this.actionButtonLabel : undefined, config);
+    }
+
+
+
+    onChange(ev, i: number){
+        // console.log(ev + "sadsa");
+        // if (ev.translation === 'Integracja') {
+
+        // }
+        let eventType = {
+            description:  this.descriptions[i].value,
+            name: '',
+            globalId: ev.globalId
+        }
+       
+        this.editEventTypes.push(eventType);
+        console.log(this.editEventTypes);
+    }
 
     // createUrl(peop){
     //     console.log(peop + 'aaaaaaaaaaaaaaaaaaaaaa');
     //     this.apiEndPoint = this.apiEndPoint + peop.globalId;
     // }
+
+    getToken() {
+        localStorage.getItem('accessToken');
+    }
 
     // fileChange(event) {
     //     let fileList: FileList = event.target.files;

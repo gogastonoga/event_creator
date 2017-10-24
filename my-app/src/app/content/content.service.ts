@@ -13,6 +13,7 @@ export class ContentService {
     private _editHomepageURL = 'http://localhost:8080/wolimierz/content/home';
     private _editFormURL = 'http://localhost:8080/wolimierz/content/form';
     private _editSeasonsURL = 'http://localhost:8080/wolimierz/content/seasons';
+    private _editEventTypesURL = 'http://localhost:8080/wolimierz/content/eventtypes';
 
     constructor(private http: Http, private ahttp: AuthHttp) {
     }
@@ -28,14 +29,17 @@ export class ContentService {
         });
     }
 
+    editEvents(eventTypes: Object) {
+        return this.ahttp.put(this._editEventTypesURL, eventTypes, {
+        });
+    }
+
     editForm(form: Form) {
-        console.log(form);
         return this.ahttp.put(this._editFormURL, form, {
         });
     }
 
-    editSeasons(form) {
-        console.log(form);
+    editSeasons(form: Object) {
         return this.ahttp.put(this._editSeasonsURL, form, {
         });
     }

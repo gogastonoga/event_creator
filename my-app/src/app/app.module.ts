@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { FormComponent } from './form/form.component';
 import { RouterModule } from '@angular/router';
-import { EditDialogComponent } from './dialog/edit-dialog/edit-dialog.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
@@ -52,7 +51,7 @@ export function authHttpServiceFactory(http: Http) {
 
 @NgModule({
   declarations: [
-    AppComponent, StartComponent, FormComponent, EditDialogComponent, LoginComponent, AdminComponent, CostComponent,
+    AppComponent, StartComponent, FormComponent, LoginComponent, AdminComponent, CostComponent,
     UserComponent, CreateUserComponent, ContactComponent
   ],
   imports: [
@@ -65,13 +64,7 @@ export function authHttpServiceFactory(http: Http) {
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },
-    AuthenticationService,
-    UserService,
-    AuthGuard,
-    AdminAuthGuard,
-    AppDataService,
-    CostService,
-    CreateUserService
+    AuthenticationService, UserService, AuthGuard, AdminAuthGuard, AppDataService, CostService, CreateUserService
   ],
   bootstrap: [AppComponent]
 })

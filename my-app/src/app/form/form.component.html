@@ -6,8 +6,8 @@
       <mat-toolbar class="toolbar">
         <mat-icon matSuffix style="margin-right: 20px;">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
       <div class="form-group">
-        <div class="col-sm-4" *ngFor="let ev of content?.formDto.events">
-          <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}}</b></span>
+        <div class="col-sm-4" *ngFor="let ev of content?.formDto.events; let i = index" [attr.data-index]="i">
+          <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}} {{i}}</b></span>
           <p *ngIf="ev.translation == 'Szkolenia z własnymi trenerami'">
             <mat-form-field color="primary">
               <input type="number" min="0" matInput placeholder="Ile sal potrzebujesz?" name="details" formControlName="rooms">
@@ -19,14 +19,49 @@
           <div class="desc">
             <div class="container">
               <mat-form-field [hideRequiredMarker]="true">
-                <input maxlength="40" readonly class="text formDescription" value="{{ev.description}}" matInput (change)="onChange(ev)" id="eventDescription">
+                <input maxlength="40" readonly class="text formDescription" value="{{ev.description}}" matInput (change)="onChange(ev, i)"
+                [(ngModel)]="descriptions[i].value" name="value"
+                #value="ngModel" [ngModelOptions]="{standalone: true}">
                 <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
-                <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+                  <mat-hint class="hint1" align="start">Można edytować</mat-hint>
                 <mat-hint class="hint2" align="end"> / 40</mat-hint>
               </mat-form-field>
-            </div>
+            </div> 
           </div>
-        </div>
+        </div>  
+<!--  
+        <div class="col-sm-4">
+            <span class="tile title"><mat-checkbox (click)="select(content?.formDto.events[0])"></mat-checkbox> <b>{{content?.formDto.events[0].translation}}</b></span>
+            <div class="desc">
+                <div class="container">
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input maxlength="40" readonly class="text formDescription" value="{{content?.formDto.events[0].description}}" matInput (change)="onChange(content?.formDto.events[0])"
+                    [(ngModel)]="eventType.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}">
+                    <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
+                     <!-- <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+                    <mat-hint class="hint2" align="end"> / 40</mat-hint>
+                  </mat-form-field>
+                </div> 
+              
+          </div>
+        </div> 
+
+        <div class="col-sm-4">
+            <span class="tile title"><mat-checkbox (click)="select(content?.formDto.events[1])"></mat-checkbox> <b>{{content?.formDto.events[1].translation}}</b></span>
+            <div class="desc">
+                <div class="container">
+                  <mat-form-field [hideRequiredMarker]="true">
+                    <input maxlength="40" readonly class="text formDescription" value="{{content?.formDto.events[1].description}}" matInput (change)="onChange(content?.formDto.events[1])"
+                    [(ngModel)]="eventType.description1" name="description1" #description1="ngModel" [ngModelOptions]="{standalone: true}">
+                    <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
+                    <!-- <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+                    <mat-hint class="hint2" align="end"> / 40</mat-hint>
+                  </mat-form-field>
+                </div> 
+              
+          </div>
+        </div> --> --> -->
+
         <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
             <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
@@ -135,7 +170,7 @@
             <!-- <input type="file" (change)="[createUrl(peop), fileChange($event)]" placeholder="Upload file"  > -->
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
-            [headers]="{Authorization: 'MyToken'}">
+            [headers]="{Authorization: getToken()}">
           </image-upload>
           </label>
             
@@ -272,8 +307,7 @@
     <button mat-raised-button class="accent-color button" (click)="previous()" [hidden]="isFirst()">Poprzedni</button>
     <button mat-raised-button class="accent-color button" (click)="next()" [hidden]="isLast()">Następny</button>
     <button mat-raised-button class="accent-color button" (click)="[next(), addDate()]" [hidden]="isSubmit()">Podsumowanie</button>
-    <button mat-raised-button class="accent-color button" [disabled]="!eventForm.valid" (click)="createEvent()" [hidden]="isSave()"
-      matTooltip="Nie wypełniono wszystkich niezbędnych pól formularza">Zapisz</button>
+    <button mat-raised-button class="accent-color button" [disabled]="!eventForm.valid" (click)="[createEvent(), open()]" [hidden]="isSave()">Zapisz</button>
   </div>
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editForms" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>

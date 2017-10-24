@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { Event } from '../event/event';
 import { FormGroup } from '@angular/forms';
 import 'rxjs/Rx';
 import 'rxjs/add/operator/map';
