@@ -60,7 +60,7 @@
                 </div> 
               
           </div>
-        </div> --> --> -->
+        </div> --> 
 
         <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
@@ -126,24 +126,24 @@
         Sezon letni:
         <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[0].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}">
+          [(ngModel)]="formEditDate[0].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[0])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[0].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}">
+          [(ngModel)]="formEditDate[0].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[0])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field><br /> Sezon zimowy:
-        <mat-form-field class="example-full-width">
+        <!-- <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[1].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}">
+          [(ngModel)]="formEditDate[1].from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[1])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
           <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
-          [(ngModel)]="formEditDate[1].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}">
+          [(ngModel)]="formEditDate[1].to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeason(content?.formDto.seasons[1])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
         </mat-form-field><br />
         <div class="desc">
@@ -155,7 +155,7 @@
               <mat-hint class="hint2" align="end">{{message3.value.length}} / 110</mat-hint>
             </mat-form-field>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -166,11 +166,21 @@
         <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes">
           <label>
             <img src="{{peop.imageUrl}}"><br />
+           
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
-            <!-- <input type="file" (change)="[createUrl(peop), fileChange($event)]" placeholder="Upload file"  > -->
+            <input type="file" (change)="[createUrl(peop), fileChange($event)]" placeholder="Upload file">
+            
+            <!-- <form action="http://localhost:8080" method="post" enctype="multipart/form-data">
+              <p><input type="text" name="text1" value="text default">
+              <p><input type="text" name="text2" value="a&#x03C9;b">
+              <p><input type="file" name="file1">
+              <p><input type="file" name="file2">
+              <p><input type="file" name="file3">
+              <p><button type="submit">Submit</button>
+            </form> -->
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
-            [headers]="{Authorization: getToken()}">
+            [headers]="myHeaders">
           </image-upload>
           </label>
             

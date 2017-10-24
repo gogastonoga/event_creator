@@ -1,4 +1,4 @@
-<form [formGroup]="costForm" (ngSubmit)="editCostSettings()" validate>
+<!-- <form [formGroup]="costForm" (ngSubmit)="editCostSettings()" validate>
     <div class="backgr">
         <mat-toolbar class="toolbar">Edycja kosztów wydarzenia</mat-toolbar>
         <br />
@@ -36,6 +36,31 @@
 </form>
 
 {{costForm.value | json}}
-<br />
+<br /> -->
+<div class="backgr">
+    <mat-toolbar class="toolbar">Edycja kosztów wydarzenia</mat-toolbar>
+    <br />
+<form (ngSubmit)="editCostSettings()" #costForm="ngForm">
+    <mat-form-field color="primary">
+        <input matInput type="number" class="budget" type="number" step="0.01" min="0" placeholder="Cena noclegu" required [(ngModel)]="costSettings.accommodationPrice" name="accommodationPrice" #accommodationPrice="ngModel" >               
+    </mat-form-field><br />
+        <mat-form-field color="primary">
+        <input matInput type="number" class="budget" type="number" step="0.01" min="0" placeholder="Cena posiłku" [(ngModel)]="costSettings.mealPrice" name="mealPrice">            
+    </mat-form-field><br />
+        <mat-form-field color="primary">
+        <input matInput type="number" class="budget" type="number" step="0.01" min="0" placeholder="Cena szkolenia" [(ngModel)]="costSettings.trainingPrice" name="trainingPrice">                
+    </mat-form-field><br />
+    <mat-form-field color="primary">
+        <span matSuffix>%</span>
+        <input matInput type="number" class="budget" type="number" placeholder="Marża" [(ngModel)]="costSettings.margin" name="margin">          
+    </mat-form-field><br />
+        <mat-form-field color="primary">
+            <span matSuffix>%</span>
+        <input matInput type="number" class="budget" type="number" placeholder="Obniżka" [(ngModel)]="costSettings.discount" name="discount">          
+    </mat-form-field><br /><br />
+    <!-- <button type="submit" class="btn btn-success" [disabled]="!costForm.form.valid">Submit</button><br /> -->
+</form>
 <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
-<button mat-raised-button class="accent-color button" [disabled]="!costForm.valid" (click)="editCostSettings()">Zapisz</button>
+<button mat-raised-button class="accent-color button" [disabled]="!costForm.form.valid" (click)="editCostSettings()">Zapisz</button><br /><br />
+</div>
+

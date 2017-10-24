@@ -30,6 +30,7 @@ export class ContentService {
     }
 
     editEvents(eventTypes: Object) {
+        console.log(eventTypes);
         return this.ahttp.put(this._editEventTypesURL, eventTypes, {
         });
     }
@@ -40,6 +41,7 @@ export class ContentService {
     }
 
     editSeasons(form: Object) {
+        console.log(form);
         return this.ahttp.put(this._editSeasonsURL, form, {
         });
     }

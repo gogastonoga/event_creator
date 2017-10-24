@@ -5,8 +5,8 @@ import { EventService } from '../event/event.service';
 import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Form, Description } from './form';
-import { formEditDate } from './form';
-import { editEventTypes } from './form';
+import { editSeasons } from './form';
+import { editEventTypes, Dupa, DupaSeasons } from './form';
 import { Summing } from './form';
 import { ElementRef, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
@@ -40,21 +40,23 @@ export class FormComponent implements OnInit {
     summing: Summing = { season: '', bounds: '', days: '', date: '' };
     progressBar = 0;
     editForms: boolean = false;
-    form: Form;
-    formEditDate: formEditDate[] = [{
+    form: Form = {
+        budgetDescription: '',
+        additionalDescription: '',
+        participantsDescription: '',
+        accommodationDescription: '',
+        dateFormDescription: '',
+        summaryDescription: '',
+    }
+    formEditDate: editSeasons[] = [{
         name: 'LETNI',
-        from: '' + '',
-        to: '' + '',
-        description: ''
-    },
-    {
-        name: 'ZIMOWY',
-        from: '' + '',
-        to: '' + '',
-        description: ''
+        from: '',
+        to: '',
+        globalId: ''
     }
     ];
-    editEventTypes: editEventTypes[] = [];
+
+    editEventTypess = [];
     apiEndPoint = 'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=';
     disabledEdit: boolean = true;
     message: string = 'Wydarzenie zostało utworzone.';
@@ -66,22 +68,25 @@ export class FormComponent implements OnInit {
     horizontalPosition: MatSnackBarHorizontalPosition = 'center';
     verticalPosition: MatSnackBarVerticalPosition = 'bottom';
     @Input() eventType: editEventTypes;
+    dupa;
+    dupaSeasons;
 
     descriptions: Description[] = new Array();
-    
+
 
     constructor(private _contentService: ContentService, private _eventService: EventService, private fb: FormBuilder,
-        private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp, private dir: Dir,  public snackBar: MatSnackBar) {
+        private datePipe: DatePipe, private _costService: CostService, private http: Http, private ahttp: AuthHttp, private dir: Dir, public snackBar: MatSnackBar) {
         this.createForm();
     }
 
     ngOnInit() {
         this.getContent();
-        this.form = new Form();
         this.eventType = new editEventTypes();
         if (localStorage.getItem('DEdit') === 'false') {
             this.disabledEdit = false;
         }
+        this.dupa = new Dupa();
+        this.dupaSeasons = new DupaSeasons();
     }
 
     isFirst(): boolean {
@@ -210,19 +215,16 @@ export class FormComponent implements OnInit {
             },
             error => this.errorString = <any>error
             );
-        
+
     }
 
     parseToDescription(content) {
-        console.log(this.descriptions[0]);
-        
         for (let i = 0; i < content.formDto.events.length; i++) {
             let description = {
                 value: content.formDto.events[i].description
             }
             this.descriptions.push(description);
         }
-        console.log(this.descriptions);
         return this.descriptions;
     }
 
@@ -271,23 +273,31 @@ export class FormComponent implements OnInit {
     }
 
     editSeasons() {
-        for (let i = 0; i < 2; i++) {
-            if (this.formEditDate[i].from !== '') {
-                this.formEditDate[i].from = this.formEditDate[i].from + 'T00:00:00';
-            }
-            if (this.formEditDate[i].to !== '') {
-                this.formEditDate[i].to = this.formEditDate[i].to + 'T00:00:00';
-            }
-        }
-        console.log(this.formEditDate);
-        this._contentService.editSeasons(this.formEditDate).subscribe(
+        this.dupaSeasons.seasons = this.formEditDate;
+        this._contentService.editSeasons(this.dupaSeasons).subscribe(
             data => console.log(this.responseStatus = data),
             err => console.log(err)
         );
     }
 
+    onChangeSeason(season) {
+        console.log(season.name + "bbbbbbbbbbbbbbaaaaaaa");
+        if (season.name === 'LETNI') {
+            this.formEditDate[0].globalId = season.globalId;
+            console.log(this.formEditDate);
+        }
+        if (season.name === 'Zimowy') {
+            this.formEditDate[1].globalId = season.globalId;
+            console.log(this.formEditDate);
+        }
+    }
+
     editEvents() {
-        this._contentService.editEvents(this.editEventTypes).subscribe(
+        console.log(this.editEventTypess[0] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(this.editEventTypess[1] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        console.log(this.editEventTypess[2] + "aaaaaaaaaaaaaaaaaaaaaaaaaa");
+        this.dupa.eventTypes = this.editEventTypess;
+        this._contentService.editEvents(this.dupa).subscribe(
             data => console.log(this.responseStatus = data),
             err => console.log(err)
         );
@@ -309,50 +319,56 @@ export class FormComponent implements OnInit {
 
 
 
-    onChange(ev, i: number){
-        // console.log(ev + "sadsa");
-        // if (ev.translation === 'Integracja') {
-
-        // }
-        let eventType = {
-            description:  this.descriptions[i].value,
-            name: '',
+    onChange(ev, i: number) {
+        for (let j = 0; j < this.editEventTypess.length; j++) {
+            if (this.editEventTypess[j].globalId === ev.globalId) {
+                var index = this.editEventTypess.indexOf(this.editEventTypess[j]);
+                if (index > -1) {
+                    this.editEventTypess.splice(index, 1);
+                }
+            }
+        }
+        let eventType: editEventTypes = {
+            description: this.descriptions[i].value,
             globalId: ev.globalId
         }
-       
-        this.editEventTypes.push(eventType);
-        console.log(this.editEventTypes);
+        this.editEventTypess.push(eventType);
     }
 
-    // createUrl(peop){
-    //     console.log(peop + 'aaaaaaaaaaaaaaaaaaaaaa');
-    //     this.apiEndPoint = this.apiEndPoint + peop.globalId;
-    // }
+    createUrl(peop) {
+        console.log(peop + 'aaaaaaaaaaaaaaaaaaaaaa');
+        this.apiEndPoint = this.apiEndPoint + peop.globalId;
+    }
 
     getToken() {
-        localStorage.getItem('accessToken');
+        console.log(localStorage.getItem('access_token'));
+        localStorage.getItem('access_token');
     }
 
-    // fileChange(event) {
-    //     let fileList: FileList = event.target.files;
-    //     if(fileList.length > 0) {
-    //         let file: File = fileList[0];
-    //         let formData:FormData = new FormData();
-    //         formData.append('uploadFile', file, file.name);
-    //         let headers = new Headers();
-    //         /** No need to include Content-Type in Angular 4 */
-    //         headers.append('Content-Type', 'multipart/form-data');
-    //         headers.append('Accept', 'application/json');
-    //         let options = new RequestOptions({ headers: headers });
-    //         this.ahttp.put(`${this.apiEndPoint}`, formData, options)
-    //             .map(res => res.json())
-    //             .catch(error => Observable.throw(error))
-    //             .subscribe(
-    //                 data => console.log('success'),
-    //                 error => console.log(error)
-    //             )
-    //     }
-    // }
+    fileChange(event) {
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            let file: File = fileList[0];
+            let formData: FormData = new FormData();
+            formData.append('uploadFile', file, file.name);
+            let headers = new Headers();
+            /** No need to include Content-Type in Angular 4 */
+            headers.append('Content-Type', 'multipart/form-data');
+            headers.append('Accept', 'application/json');
+            let options = new RequestOptions({ headers: headers });
+            this.ahttp.post(`${this.apiEndPoint}`, formData, options)
+                .map(res => res.json())
+                .catch(error => Observable.throw(error))
+                .subscribe(
+                data => console.log('success'),
+                error => console.log(error)
+                )
+        }
+    }
+
+    myHeaders: { [name: string]: any } = {
+        'Authorization': localStorage.getItem('access_token')
+    };
 
 }
 

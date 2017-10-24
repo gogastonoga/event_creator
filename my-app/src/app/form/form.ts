@@ -4,6 +4,7 @@ export class Form {
     participantsDescription: string;
     accommodationDescription: string;
     dateFormDescription: string;
+    summaryDescription: string;
 }
 
 export class Summing {
@@ -13,19 +14,26 @@ export class Summing {
     date: string;
 }
 
-export class formEditDate {
+export class editSeasons {
+    globalId: string;
     name: string;
     from: string;
     to: string;
-    description: string;
 }
 
 export class editEventTypes {
     globalId: string;
-    name: string;
     description: string;
 }
 
 export class Description {
     value: string;
+}
+
+export class Dupa {
+    eventTypes: editEventTypes[];
+}
+
+export class DupaSeasons {
+    seasons: editSeasons[];
 }
