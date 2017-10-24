@@ -130,7 +130,8 @@ public class CostSettingServiceImpl implements CostSettingService {
 
     @Override
     public Double calculateDetailedCost(int nights, int rooms, int guestsNumber, KindOfDays kindOfDays, List<EventType> eventTypes, EventSize eventSize, Season season) {
-        CostSettings costSettings = costSettingRepository.findAll().get(0);//todo nigts+1? for trainings
+        CostSettings costSettings = costSettingRepository.findAll().get(0);//todo nigts+1? for trainings  // size facotr?!?!  // wykluczanie się liczby dni/sezony/typu dni etc.
+        // nights * guestNumbers * accomodation *factor -> seasons/ type of days?!?!?TODO dzwoń !!
         Double estimatedCost = getAccommodationCost(nights, rooms, costSettings, 1 + season.getCostFactor() / 100) +
                 getMealsCost(nights, guestsNumber, costSettings, 1 + eventSize.getCostFactor() / 100) +
                 nights * eventTypes.stream().mapToDouble(EventType::getCostFactor).sum();
