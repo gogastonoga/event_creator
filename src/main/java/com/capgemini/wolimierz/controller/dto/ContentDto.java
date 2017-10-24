@@ -8,10 +8,12 @@ import com.capgemini.wolimierz.form.FormDto;
 import com.capgemini.wolimierz.form.HomePageSettings;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 public class ContentDto {
     private HomePageDto mainPage;

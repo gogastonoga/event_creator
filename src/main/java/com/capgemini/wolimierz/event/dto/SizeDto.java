@@ -4,10 +4,12 @@ package com.capgemini.wolimierz.event.dto;
 import com.capgemini.wolimierz.controller.dto.DescriptionDto;
 import com.capgemini.wolimierz.event.model.EventSize;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Getter
+@NoArgsConstructor
 public class SizeDto extends DescriptionDto {
     private UUID globalId;
     private String bounds;

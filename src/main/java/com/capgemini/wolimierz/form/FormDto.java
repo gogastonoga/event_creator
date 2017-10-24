@@ -8,6 +8,7 @@ import com.capgemini.wolimierz.event.model.EventType;
 import com.capgemini.wolimierz.event.model.Season;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class FormDto {
     private List<EventDto> events;
     private List<SizeDto> sizes;

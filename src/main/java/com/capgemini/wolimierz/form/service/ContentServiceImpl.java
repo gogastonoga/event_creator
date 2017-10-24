@@ -69,9 +69,9 @@ public class ContentServiceImpl implements ContentService {
         if (seasonRepository.findAll().isEmpty()) {
             seasonRepository.save(
                     Arrays.asList(
-                            new Season(null, "Lato", LocalDate.of(2017, 7, 1),
+                            new Season(null, "Letni", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), UUID.randomUUID(), 20),
-                            new Season(null, "Zima", LocalDate.of(2017, 7, 1),
+                            new Season(null, "Zimowy", LocalDate.of(2017, 7, 1),
                                     LocalDate.of(2017, 8, 30), UUID.randomUUID(), 0))
             );
         }

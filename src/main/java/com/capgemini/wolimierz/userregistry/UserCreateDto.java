@@ -3,12 +3,14 @@ package com.capgemini.wolimierz.userregistry;
 import com.capgemini.wolimierz.userregistry.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserCreateDto {
     @NotNull
