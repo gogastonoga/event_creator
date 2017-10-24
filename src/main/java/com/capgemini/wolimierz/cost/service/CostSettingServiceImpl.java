@@ -136,7 +136,19 @@ public class CostSettingServiceImpl implements CostSettingService {
                 getMealsCost(nights, guestsNumber, costSettings, 1 + eventSize.getCostFactor() / 100) +
                 nights * eventTypes.stream().mapToDouble(EventType::getCostFactor).sum();
         return (estimatedCost * (1 + costSettings.getMargin() / 100)) * (1 - costSettings.getDiscount() / 100);
-    }
+    }/**
+     ACCOMODATION:
+     nights * guestNumbers * accomodation *factor
+     guestNumbers -> guestNumbers || eventSize cost?!
+     factor-> season || typeOfDays?!
+     MEALS
+     guestNumbers -> guestNumbers || eventSize cost?!
+     number of meals? -> calculation  is the number of days defined by user
+     EVENT_TYPE
+     impact of number of people / seasons on cost
+     multiple types -> sum / max of many / other?!?!?!
+     order of applying of margin and discount -> it impact on "force" of the later operation
+ **/
 
     @Override
     public CostSettingsDto getClientCostSettings() {
