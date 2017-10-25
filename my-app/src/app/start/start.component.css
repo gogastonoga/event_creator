@@ -17,4 +17,7 @@
   display: none;
 }
 
-
+::-webkit-file-upload-button {
+  background: rgba(0, 162, 96, 0.70);
+  color: white;
+}

@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectorRef, NgZone, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, Directive } from '@angular/core';
 import { ContentService } from '../content/content.service';
 import { UserService } from '../services/user.service';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload'
 
 export class HomePageDto {
   description: string;
@@ -19,7 +20,7 @@ export class FileHolder {
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css'],
-  providers: [ContentService]
+  providers: [ContentService],
 })
 export class StartComponent implements OnInit {
 
@@ -29,11 +30,13 @@ export class StartComponent implements OnInit {
   responseStatus: Object = [];
   editStatus: boolean = false;
   disabledEdit: boolean = true;
+  message;
 
   constructor(private _contentService: ContentService, private _userService: UserService) {
   }
 
   ngOnInit() {
+    $('#message').hide();
     this.getContent();
     this.start = new HomePageDto();
     if (localStorage.getItem('DEdit') === 'false') {
@@ -77,6 +80,7 @@ export class StartComponent implements OnInit {
 
 onUploadFinished(file: FileHolder) {
   console.log(JSON.stringify(file.serverResponse));
+  $('#message').show();
 }
 
 onRemoved(file: FileHolder) {
@@ -86,5 +90,23 @@ onRemoved(file: FileHolder) {
 onUploadStateChanged(state: boolean) {
   console.log(JSON.stringify(state));
 }
+
+URL = 'http://localhost:8080/wolimierz/media/video';
+
+    public uploader:FileUploader = new FileUploader({
+      url: this.URL,
+      authToken: 'Bearer ' + localStorage.getItem('access_token'),
+      disableMultipart: true
+    });
+    public hasBaseDropZoneOver:boolean = false;
+    public hasAnotherDropZoneOver:boolean = false;
+   
+    public fileOverBase(e:any):void {
+      this.hasBaseDropZoneOver = e;
+    }
+   
+    public fileOverAnother(e:any):void {
+      this.hasAnotherDropZoneOver = e;
+    }
 
 }

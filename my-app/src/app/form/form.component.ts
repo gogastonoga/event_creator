@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, Directive } from '@angular/core';
 import { ContentService } from '../content/content.service';
 import { CostService } from '../cost/cost.service';
 import { EventService } from '../event/event.service';
@@ -22,11 +22,14 @@ import {
 import { Dir } from '@angular/cdk/bidi';
 import { ViewEncapsulation } from '@angular/core';
 
+
 export class FileHolder {
     public serverResponse: any;
     public pending: boolean = false;
     constructor(public src: string, public file: File) { }
   }
+
+
 
 @Component({
     selector: 'app-form',
@@ -378,5 +381,6 @@ export class FormComponent implements OnInit {
         console.log(JSON.stringify(state));
       }
 
+   
 }
 

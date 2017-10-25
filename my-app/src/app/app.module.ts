@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Directive } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 import {
@@ -36,6 +36,8 @@ import { AppDataService } from './services/app-data.service';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InputMaskModule } from 'ng2-inputmask';
+import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module'; 
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload'
 import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
@@ -49,6 +51,9 @@ export function authHttpServiceFactory(http: Http) {
   }), http);
 }
 
+@Directive({ selector: '[ng2FileSelect]' })
+@Directive({ selector: '[ng2FileDrop]' })
+
 @NgModule({
   declarations: [
     AppComponent, StartComponent, FormComponent, LoginComponent, AdminComponent, CostComponent,
@@ -60,7 +65,7 @@ export function authHttpServiceFactory(http: Http) {
     MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
     MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatStepperModule, HttpModule,
-    ReactiveFormsModule, ImageUploadModule.forRoot(), InputMaskModule
+    ReactiveFormsModule, ImageUploadModule.forRoot(), InputMaskModule, FileUploadModule
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },

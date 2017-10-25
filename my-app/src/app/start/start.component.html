@@ -7,7 +7,7 @@
     <mat-hint id="hint2" align="end">{{message.value.length}} / 90</mat-hint>
   </mat-form-field>
 
-  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto;">
+  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;">
     <image-upload 
     [url]="'http://localhost:8080/wolimierz/media/image?parent=home_page'"
     [headers]="myHeaders"
@@ -17,9 +17,22 @@
     (removed)="onRemoved($event)"
     (uploadFinished)="onUploadFinished($event)"
     (uploadStateChanged)="onUploadStateChanged($event)">
-    </image-upload>
-    </div>
+    </image-upload><br />
+    <p id="message" style="background-color: aquamarine">Plik został dodany</p>
+<div style="margin: 0 auto;">
+  Dodaj wideo:
+    <input type="file" ng2FileSelect 
+    [uploader]="uploader" style="margin: 0 auto;">
+    <tr *ngFor="let item of uploader.queue">
+    <button type="button" mat-raised-button class="accent-color" style="margin-left: 190px;"
+    (click)="item.upload()">Dodaj wideo
+</button>
+</tr>
+</div>
 
+</div>
+
+    
 </div>
 
 <mat-toolbar>
