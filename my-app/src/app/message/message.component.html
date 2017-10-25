@@ -3,7 +3,18 @@
 <button mat-raised-button class="accent-color button" (click)="third()">TRZECIE</button>
 
 <div id="all" class="form-panel">
-    all
+    
+
+        <tbody>
+                <tr *ngFor="let message of messages ">
+                  <!-- <td class="text-left">{{item.name}}</td>
+                  <td class="text-left">{{item.category}}</td>
+                  <td class="text-left">{{item.dateOfAdded}}</td>
+                  <td><button type="button" class="btn btn-info"><a [routerLink]="['/detail', item.id]" class="col-1-4">Details</a></button></td> -->
+                </tr>
+              </tbody>
+
+
 </div>
 <div id="dont-read" class="form-panel">
         nieprzeczytane

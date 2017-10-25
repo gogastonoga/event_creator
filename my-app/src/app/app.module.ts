@@ -37,7 +37,8 @@ import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InputMaskModule } from 'ng2-inputmask';
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module'; 
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload'
+import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { MessageService } from './message/message.service';
 import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
@@ -69,7 +70,7 @@ export function authHttpServiceFactory(http: Http) {
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },
-    AuthenticationService, UserService, AuthGuard, AdminAuthGuard, AppDataService, CostService, CreateUserService
+    AuthenticationService, UserService, AuthGuard, AdminAuthGuard, AppDataService, CostService, CreateUserService, MessageService
   ],
   bootstrap: [AppComponent]
 })

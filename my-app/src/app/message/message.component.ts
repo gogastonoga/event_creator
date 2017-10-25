@@ -4,23 +4,24 @@ import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
-
+import { MessageService } from './message.service';
 
 @Component({
     selector: 'app-form',
     templateUrl: './message.component.html',
     styleUrls: ['./message.component.css'],
+    providers: [MessageService]
 })
 export class MessageComponent implements OnInit {
 
+    messages;
+    errorString;
 
+    constructor(private _messageService: MessageService) { }
 
-
-    constructor(){}
-    
-ngOnInit() {
-    this.addCladdActive();
-}
+    ngOnInit() {
+        this.addCladdActive();
+    }
 
     all = (): void => {
         $('#third').removeClass('active').hide();
@@ -38,16 +39,21 @@ ngOnInit() {
         $('#all').removeClass('active').hide();
         $('#dont-read').removeClass('active').hide();
         $('#third').fadeIn().addClass('active').show();
-        // const cur = $('.form-panel').index($('.form-panel.active'));
-        // if (cur !== 0) {
-        //     $('.form-panel').removeClass('active').hide();
-        //     $('.form-panel').eq(cur - 1).fadeIn().addClass('active');
-        // }
     }
 
     addCladdActive() {
         $('#all').addClass('active');
     }
+
+    getContactRequest = () => {
+        this._messageService.getContactRequest()
+            .subscribe(
+            messages => { this.messages = messages; },
+            error => this.errorString = <any>error
+            );
+    }
+
+
 
 }
 
