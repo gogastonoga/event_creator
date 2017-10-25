@@ -1,0 +1,9 @@
+.form-panel {
+    height: auto;
+    opacity: 1;
+  }
+  
+  .form-panel:not(.active) {
+    display: none;
+  }
+  

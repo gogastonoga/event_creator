@@ -29,38 +29,6 @@
             </div> 
           </div>
         </div>  
-<!--  
-        <div class="col-sm-4">
-            <span class="tile title"><mat-checkbox (click)="select(content?.formDto.events[0])"></mat-checkbox> <b>{{content?.formDto.events[0].translation}}</b></span>
-            <div class="desc">
-                <div class="container">
-                  <mat-form-field [hideRequiredMarker]="true">
-                    <input maxlength="40" readonly class="text formDescription" value="{{content?.formDto.events[0].description}}" matInput (change)="onChange(content?.formDto.events[0])"
-                    [(ngModel)]="eventType.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}">
-                    <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
-                     <!-- <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-                    <mat-hint class="hint2" align="end"> / 40</mat-hint>
-                  </mat-form-field>
-                </div> 
-              
-          </div>
-        </div> 
-
-        <div class="col-sm-4">
-            <span class="tile title"><mat-checkbox (click)="select(content?.formDto.events[1])"></mat-checkbox> <b>{{content?.formDto.events[1].translation}}</b></span>
-            <div class="desc">
-                <div class="container">
-                  <mat-form-field [hideRequiredMarker]="true">
-                    <input maxlength="40" readonly class="text formDescription" value="{{content?.formDto.events[1].description}}" matInput (change)="onChange(content?.formDto.events[1])"
-                    [(ngModel)]="eventType.description1" name="description1" #description1="ngModel" [ngModelOptions]="{standalone: true}">
-                    <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
-                    <!-- <mat-hint class="hint1" align="start">Można edytować</mat-hint>
-                    <mat-hint class="hint2" align="end"> / 40</mat-hint>
-                  </mat-form-field>
-                </div> 
-              
-          </div>
-        </div> --> 
 
         <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
@@ -78,6 +46,7 @@
       <mat-toolbar class="toolbar">
         <mat-icon matSuffix style="margin-right: 20px;">home</mat-icon>Nocleg</mat-toolbar>
       <div class="form-group">
+        <b>Liczba noclegów</b><br />
         <mat-form-field class="accommodation" color="primary">
           <input matInput type="number" min="0" max="1000" placeholder="Liczba noclegów" formControlName="nights">
           <mat-error>To pole jest wymagane</mat-error>
@@ -100,21 +69,21 @@
       <mat-toolbar class="toolbar">
         <mat-icon matSuffix style="margin-right: 20px;">today</mat-icon>Termin </mat-toolbar>
       <div class="form-group">
-        <div class="col-lg-6 backgr"><br /> Data wydarzenia:<br />
+        <div class="col-lg-6 backgr"><br /><b> Data wydarzenia:</b><br />
           <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Wybierz datę" formControlName="eventTime" [disabled]="isNotEmptyTermin()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi="true" #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 backgr"><br /> Orientacyjny termin wydarzenia:<br />
+        <div class="col-lg-6 backgr"><br /> <b>Orientacyjny termin wydarzenia:</b><br />
           <mat-form-field>
             <mat-select matInput placeholder="Sezon..." ng-hide="!date" formControlName="seasonId" [disabled]="isNotEmptyDate()">
               <mat-option></mat-option>
-              <mat-option *ngFor="let seas of content?.formDto.seasons" [value]="seas.globalId" (click)="addSeason(seas)">{{seas.description}}</mat-option>
+              <mat-option *ngFor="let seas of content?.formDto.seasons" [value]="seas.globalId" (click)="addSeason(seas)">{{seas.name}}</mat-option>
             </mat-select>
           </mat-form-field>
-          <br /> Zakres tygodnia:<br />
+          <br /> <b>Zakres tygodnia:</b><br />
           <mat-form-field>
             <mat-select placeholder="Dni tygodnia.." formControlName="kindOfDays" [disabled]="isNotEmptyDate()" matTooltip="Dni robocze: Pn-Czw | Weekend Pt-Nd">
               <mat-option></mat-option>
@@ -123,34 +92,39 @@
             </mat-select>
           </mat-form-field>
         </div>
-        Sezon zimowy:
+        <b>Sezon zimowy:</b>
         <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
+          <input matInput pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
           [(ngModel)]="editSummer.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
-          id="date" data-inputmask="'alias': 'date'" />
+          id="date" />
          
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
+          <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
           [(ngModel)]="editSummer.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
           >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
-        </mat-form-field><br /> Sezon letni:
+          <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
+        </mat-form-field><br /> 
+        <b>Sezon letni:</b>
         <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[1].from}}" style="text-align: center;"
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[1].from}}" style="text-align: center;"
           [(ngModel)]="editWinter.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
           >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
+          <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput readonly class="formDescription"  value="{{content?.formDto.seasons[1].to}}" style="text-align: center;"
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[1].to}}" style="text-align: center;"
           [(ngModel)]="editWinter.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
           >
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
-        </mat-form-field><br />
+          <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
+        </mat-form-field><br /><br />
         <div class="desc">
           <div class="container">
             <mat-form-field [hideRequiredMarker]="true">
@@ -170,22 +144,18 @@
       <div class="form-group">
         <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes">
           <label>
-            <img src="{{peop.imageUrl}}"><br />
+            <img src="http://localhost:8080/wolimierz/media?id={{peop.globalId}}"><br />
            
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
-            <input type="file" (change)="[createUrl(peop), fileChange($event)]" placeholder="Upload file">
-            
-            <!-- <form action="http://localhost:8080" method="post" enctype="multipart/form-data">
-              <p><input type="text" name="text1" value="text default">
-              <p><input type="text" name="text2" value="a&#x03C9;b">
-              <p><input type="file" name="file1">
-              <p><input type="file" name="file2">
-              <p><input type="file" name="file3">
-              <p><button type="submit">Submit</button>
-            </form> -->
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
-            [headers]="myHeaders">
+            [headers]="myHeaders"
+            [buttonCaption]="'Dodaj obrazek'"
+            [fileTooLargeMessage]="'Maksymalny rozmiar obrazka to 10MB!'"
+            [dropBoxMessage]="'Upuść swoje zdjęcie tutaj'"
+            (removed)="onRemoved($event)"
+            (uploadFinished)="onUploadFinished($event)"
+            (uploadStateChanged)="onUploadStateChanged($event)">
           </image-upload>
           </label>
             
@@ -258,7 +228,7 @@
               <mat-error>Nieprawidłowy format</mat-error>
             </mat-form-field>
             <mat-form-field color="primary" style="padding-top: 10px;">
-              <input matInput placeholder="Telefon:" formControlName="phoneNumber" required>
+              <input matInput mask="000-000-000" placeholder="Telefon:" formControlName="phoneNumber" required>
               <mat-icon matSuffix>phone</mat-icon>
               <mat-error>To pole jest wymagane</mat-error>
             </mat-form-field>

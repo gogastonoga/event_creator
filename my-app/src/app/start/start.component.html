@@ -6,7 +6,22 @@
     <mat-hint id="hint1" align="start">Można edytować</mat-hint>
     <mat-hint id="hint2" align="end">{{message.value.length}} / 90</mat-hint>
   </mat-form-field>
+
+  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto;">
+    <image-upload 
+    [url]="'http://localhost:8080/wolimierz/media/image?parent=home_page'"
+    [headers]="myHeaders"
+    [buttonCaption]="'Dodaj obrazek'"
+    [fileTooLargeMessage]="'Maksymalny rozmiar obrazka to 10MB!'"
+    [dropBoxMessage]="'Upuść swoje zdjęcie tutaj'"
+    (removed)="onRemoved($event)"
+    (uploadFinished)="onUploadFinished($event)"
+    (uploadStateChanged)="onUploadStateChanged($event)">
+    </image-upload>
+    </div>
+
 </div>
+
 <mat-toolbar>
   <div style="flex: 1 1 auto;">
     <button routerLink="/form" routerLinkActive="active" mat-raised-button class="accent-color" matTooltip="Rozpocznij wypełnianie formularza">Start</button>

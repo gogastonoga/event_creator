@@ -25,7 +25,7 @@ import { CreateUserService } from './create_user/create_user.service';
 import { CostComponent } from './cost/cost.component';
 import { Dir } from '@angular/cdk/bidi';
 import { ContactComponent } from './contact/contact.component';
-
+import { MessageComponent } from './message/message.component';
 import { UserService } from './services/user.service';
 import { CostService } from './cost/cost.service';
 import { AuthenticationService } from './services/authentication.service';
@@ -35,7 +35,7 @@ import { TOKEN_NAME } from './services/auth.constant';
 import { AppDataService } from './services/app-data.service';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { ImageUploadModule } from "angular2-image-upload";
-
+import { InputMaskModule } from 'ng2-inputmask';
 import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
@@ -52,7 +52,7 @@ export function authHttpServiceFactory(http: Http) {
 @NgModule({
   declarations: [
     AppComponent, StartComponent, FormComponent, LoginComponent, AdminComponent, CostComponent,
-    UserComponent, CreateUserComponent, ContactComponent
+    UserComponent, CreateUserComponent, ContactComponent, MessageComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, MatAutocompleteModule, MatNativeDateModule, BrowserAnimationsModule, RouterModule,
@@ -60,7 +60,7 @@ export function authHttpServiceFactory(http: Http) {
     MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
     MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatStepperModule, HttpModule,
-    ReactiveFormsModule, ImageUploadModule.forRoot()
+    ReactiveFormsModule, ImageUploadModule.forRoot(), InputMaskModule
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },

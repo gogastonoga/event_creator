@@ -22,6 +22,12 @@ import {
 import { Dir } from '@angular/cdk/bidi';
 import { ViewEncapsulation } from '@angular/core';
 
+export class FileHolder {
+    public serverResponse: any;
+    public pending: boolean = false;
+    constructor(public src: string, public file: File) { }
+  }
+
 @Component({
     selector: 'app-form',
     templateUrl: './form.component.html',
@@ -343,7 +349,6 @@ export class FormComponent implements OnInit {
             let formData: FormData = new FormData();
             formData.append('uploadFile', file, file.name);
             let headers = new Headers();
-            /** No need to include Content-Type in Angular 4 */
             headers.append('Content-Type', 'multipart/form-data');
             headers.append('Accept', 'application/json');
             let options = new RequestOptions({ headers: headers });
@@ -358,8 +363,20 @@ export class FormComponent implements OnInit {
     }
 
     myHeaders: { [name: string]: any } = {
-        'Authorization': localStorage.getItem('access_token')
+        'Authorization': 'Bearer' + localStorage.getItem('access_token')
     };
+
+    onUploadFinished(file: FileHolder) {
+        console.log(JSON.stringify(file.serverResponse));
+      }
+      
+      onRemoved(file: FileHolder) {
+        // do some stuff with the removed file.
+      }
+      
+      onUploadStateChanged(state: boolean) {
+        console.log(JSON.stringify(state));
+      }
 
 }
 

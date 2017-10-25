@@ -19,6 +19,10 @@
     <mat-icon>question_answer</mat-icon>
     <span>Kontakt</span>
   </button>
+  <button mat-menu-item routerLink="/messages">
+    <mat-icon>question_answer</mat-icon>
+    <span>Wiadomości</span>
+  </button>
   <button [hidden]="logoutButton" mat-menu-item (click)="logout()" routerLink="/start">
     <mat-icon>all_inclusive</mat-icon>
     <span>Wyloguj</span>

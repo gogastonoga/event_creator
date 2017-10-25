@@ -8,11 +8,18 @@ export class HomePageDto {
   backgroundImageUrl: string;
   contactRequestFormat: string;
 }
+
+export class FileHolder {
+  public serverResponse: any;
+  public pending: boolean = false;
+  constructor(public src: string, public file: File) { }
+} 
+
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css'],
-  providers: [ContentService],
+  providers: [ContentService]
 })
 export class StartComponent implements OnInit {
 
@@ -62,4 +69,22 @@ export class StartComponent implements OnInit {
       data => console.log(this.responseStatus = data)
     );
   }
+
+  
+  myHeaders: { [name: string]: any } = {
+    'Authorization': 'Bearer' + localStorage.getItem('access_token')
+};
+
+onUploadFinished(file: FileHolder) {
+  console.log(JSON.stringify(file.serverResponse));
+}
+
+onRemoved(file: FileHolder) {
+  // do some stuff with the removed file.
+}
+
+onUploadStateChanged(state: boolean) {
+  console.log(JSON.stringify(state));
+}
+
 }
