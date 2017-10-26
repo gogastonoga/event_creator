@@ -1,17 +1,19 @@
-<h1>Kontakt</h1>
-<div class="backgr">
-  <form name="form" novalidate>
-    <div class="form-group">
-      <br />
-      <mat-form-field class="text-field" color="primary">
-        <textarea matInput placeholder="Temat:"></textarea>
-      </mat-form-field>
-      <mat-form-field class="text-field" color="primary">
-        <textarea class="message" matInput placeholder="Wiadomość:"></textarea>
-      </mat-form-field>
-    </div>
-    <button mat-raised-button class="accent-color button">Wyślij</button>
-    <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
-    <br /><br />
-  </form>
+<form (ngSubmit)="createContact()" #itemForm="ngForm">
+  {{diagnostic}}
+  <div class="form-group">
+      <input type="text" class="form-control" id="name" required [(ngModel)]="contact.name" name="name" #name="ngModel" placeholder="name">          
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control" id="imageURL" [(ngModel)]="contact.surname" name="imageURL" placeholder="imageURL">           
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control" id="color" [(ngModel)]="contact.creatorMail" name="color" placeholder="email" required>       
+  </div>
+  <div class="form-group">
+      <input type="text" class="form-control" id="weight" [(ngModel)]="contact.topic" name="weight" placeholder="weight" required>            
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="weight" [(ngModel)]="contact.message" name="weight" placeholder="weight" required>            
 </div>
+  <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">Submit</button><br />
+</form>

@@ -22,7 +22,7 @@
 <div style="margin: 0 auto;">
   Dodaj wideo:
     <input type="file" ng2FileSelect 
-    [uploader]="uploader" style="margin: 0 auto;">
+    [uploader]="uploader" style="margin: 0 auto;" name="video">
     <tr *ngFor="let item of uploader.queue">
     <button type="button" mat-raised-button class="accent-color" style="margin-left: 190px;"
     (click)="item.upload()">Dodaj wideo

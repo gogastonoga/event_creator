@@ -96,7 +96,7 @@ URL = 'http://localhost:8080/wolimierz/media/video';
     public uploader:FileUploader = new FileUploader({
       url: this.URL,
       authToken: 'Bearer ' + localStorage.getItem('access_token'),
-      disableMultipart: true
+      itemAlias: 'video'
     });
     public hasBaseDropZoneOver:boolean = false;
     public hasAnotherDropZoneOver:boolean = false;

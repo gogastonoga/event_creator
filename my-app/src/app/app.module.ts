@@ -39,6 +39,7 @@ import { InputMaskModule } from 'ng2-inputmask';
 import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module'; 
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { MessageService } from './message/message.service';
+import {ContactService} from './contact/contact.service';
 import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
@@ -70,7 +71,7 @@ export function authHttpServiceFactory(http: Http) {
   ],
   providers: [
     { provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http] },
-    AuthenticationService, UserService, AuthGuard, AdminAuthGuard, AppDataService, CostService, CreateUserService, MessageService
+    AuthenticationService, UserService, AuthGuard, AdminAuthGuard, AppDataService, CostService, CreateUserService, MessageService, ContactService
   ],
   bootstrap: [AppComponent]
 })
