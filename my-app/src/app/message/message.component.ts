@@ -21,6 +21,7 @@ export class MessageComponent implements OnInit {
 
     ngOnInit() {
         this.addCladdActive();
+        this.getContactRequest();
     }
 
     all = (): void => {

@@ -12,6 +12,7 @@ import { CostComponent } from './cost/cost.component';
 import { MessageComponent } from './message/message.component';
 import { ContactComponent } from './contact/contact.component';
 import { CreateUserComponent } from './create_user/create_user.component';
+import { MessageDetailComponent } from './message-detail/message-detail.component';
 
 const routes: Routes = [
   { 
@@ -56,8 +57,14 @@ const routes: Routes = [
   { 
     path: 'messages', 
     component: MessageComponent, 
-    //canActivate: [AuthGuard, AdminAuthGuard] 
-  }
+    canActivate: [AuthGuard, AdminAuthGuard] 
+  },
+  { 
+    path: 'detail/:id', 
+    component: MessageDetailComponent,
+    canActivate: [AuthGuard, AdminAuthGuard] 
+   },
+
 
 ];
 

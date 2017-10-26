@@ -40,6 +40,7 @@ import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { MessageService } from './message/message.service';
 import {ContactService} from './contact/contact.service';
+import { MessageDetailComponent } from './message-detail/message-detail.component';
 import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
@@ -59,7 +60,7 @@ export function authHttpServiceFactory(http: Http) {
 @NgModule({
   declarations: [
     AppComponent, StartComponent, FormComponent, LoginComponent, AdminComponent, CostComponent,
-    UserComponent, CreateUserComponent, ContactComponent, MessageComponent
+    UserComponent, CreateUserComponent, ContactComponent, MessageComponent, MessageDetailComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, MatAutocompleteModule, MatNativeDateModule, BrowserAnimationsModule, RouterModule,
