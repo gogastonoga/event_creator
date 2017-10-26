@@ -49,7 +49,9 @@ public class ContactRequestServiceImpl implements ContactRequestService {
     public ContactRequestDto create(ContactRequestDto contactRequestDto) {
         return ContactRequestDto
                 .from(contactRequestRepository.save(
-                        new ContactRequest(contactRequestDto.getMessage(), contactRequestDto.getCreatorMail()))
+                        new ContactRequest(contactRequestDto.getMessage(), contactRequestDto.getCreatorMail(),
+                                contactRequestDto.getName(), contactRequestDto.getSurname(),
+                                contactRequestDto.getTopic()))
                 );
     }
 }
