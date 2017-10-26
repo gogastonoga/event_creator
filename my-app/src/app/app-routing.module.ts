@@ -60,13 +60,12 @@ const routes: Routes = [
     canActivate: [AuthGuard, AdminAuthGuard] 
   },
   { 
-    path: 'detail/:id', 
+    path: 'detail/:id' , 
     component: MessageDetailComponent,
     canActivate: [AuthGuard, AdminAuthGuard] 
    },
-
-
 ];
+
 
 @NgModule({
   imports: [
