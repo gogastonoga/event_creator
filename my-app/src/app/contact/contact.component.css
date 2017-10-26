@@ -9,9 +9,13 @@ h1 {
 }
 
 .text-field {
-  width: 70%;
+  width: 80%;
 }
 
-.message {
-  height: 10em;
+.grid {
+  margin: auto;
+  width: 80%;
+  display: grid;
+  grid-row-gap: 0;
+  grid-template-columns: auto auto;
 }

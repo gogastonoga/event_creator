@@ -1,19 +1,31 @@
-<form (ngSubmit)="createContact()" #itemForm="ngForm">
-  {{diagnostic}}
-  <div class="form-group">
-      <input type="text" class="form-control" id="name" required [(ngModel)]="contact.name" name="name" #name="ngModel" placeholder="name">          
-  </div>
-  <div class="form-group">
-      <input type="text" class="form-control" id="imageURL" [(ngModel)]="contact.surname" name="imageURL" placeholder="imageURL">           
-  </div>
-  <div class="form-group">
-      <input type="text" class="form-control" id="color" [(ngModel)]="contact.creatorMail" name="color" placeholder="email" required>       
-  </div>
-  <div class="form-group">
-      <input type="text" class="form-control" id="weight" [(ngModel)]="contact.topic" name="weight" placeholder="weight" required>            
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" id="weight" [(ngModel)]="contact.message" name="weight" placeholder="weight" required>            
+<h1>Kontakt</h1>
+<div class="backgr">
+    <form (ngSubmit)="createContact()" #itemForm="ngForm">
+        {{diagnostic}}
+        <div class="form-group">
+            <br />
+            <div class="grid">
+                <mat-form-field class="text-field" color="primary">
+                    <input matInput type="text" id="name" [(ngModel)]="contact.name" name="name" #name="ngModel" placeholder="Imię:">
+                </mat-form-field>
+                <mat-form-field class="text-field" color="primary">
+                    <input matInput type="text" id="surname" [(ngModel)]="contact.surname" name="surname" placeholder="Nazwisko:">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="text-field" color="primary">
+                <input matInput type="text" id="email" [(ngModel)]="contact.creatorMail" name="email" placeholder="E-mail:" required>
+            </mat-form-field>
+            <mat-form-field class="text-field" color="primary">
+                <input matInput type="text" id="topic" [(ngModel)]="contact.topic" name="topic" placeholder="Temat:" required>
+            </mat-form-field>
+            <mat-form-field class="text-field" color="primary">
+                <textarea matInput type="text" rows="7" id="message" [(ngModel)]="contact.message" name="weight" placeholder="Wiadomość:"
+                    required></textarea>
+            </mat-form-field>
+        </div>
+        <button mat-raised-button type="submit" class="accent-color button" [disabled]="!itemForm.form.valid">Wyślij</button>
+        <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+        <br />
+        <br />
+    </form>
 </div>
-  <button type="submit" class="btn btn-success" [disabled]="!itemForm.form.valid">Submit</button><br />
-</form>
