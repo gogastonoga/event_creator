@@ -1,5 +1,7 @@
 package com.capgemini.wolimierz.form.service;
 
+import com.capgemini.wolimierz.EntityDtoWithGlobalId;
+import com.capgemini.wolimierz.UpdatableEntity;
 import com.capgemini.wolimierz.controller.dto.ContentDto;
 import com.capgemini.wolimierz.controller.dto.EventSizeDto;
 import com.capgemini.wolimierz.controller.dto.EventTypeDto;
@@ -41,6 +43,7 @@ public class ContentServiceImpl implements ContentService {
     private final EventTypeRepository eventTypeRepository;
     private final EnvironmentService environmentService;
 
+    //https://www.percederberg.net/tools/text_converter.html
     @Value("${initial.budget.description}")
     private String budgetDescription;
     @Value("${initial.additional.description}")
@@ -85,6 +88,50 @@ public class ContentServiceImpl implements ContentService {
 
     @PostConstruct
     public void initContentSettings() {
+        initFormSettings();
+        initHomePageSettings();
+        initSeasons();
+        initEventSizes();
+        initEventTypes();
+    }
+
+    private void initEventTypes() {
+        if (eventTypeRepository.findAll().isEmpty()) {
+            eventTypeRepository.save(Arrays.stream(PredefinedEventType.values())
+                    .map(type -> new EventType(type.getTranslation(), type.getDescription(), 1))
+                    .collect(Collectors.toList()));
+        }
+    }
+
+    private void initEventSizes() {
+        if (eventSizeRepository.findAll().isEmpty()) {
+            eventSizeRepository.save(Arrays.stream(PredefinedSize.values())
+                    .map(EventSize::new)
+                    .collect(Collectors.toList())
+            );
+        }
+    }
+
+    private void initSeasons() {
+        if (seasonRepository.findAll().isEmpty()) {
+            seasonRepository.save(
+                    Arrays.asList(
+                            new Season(null, summerSeasonName, getLocalDateFromIsoString(summerFrom),
+                                    getLocalDateFromIsoString(summerTo), UUID.randomUUID(), 20),
+                            new Season(null, winterSeasonName, getLocalDateFromIsoString(winterFrom),
+                                    getLocalDateFromIsoString(winterTo), UUID.randomUUID(), 0))
+            );
+        }
+    }
+
+    private void initHomePageSettings() {
+        if (homePageSettingsRepository.findAll().isEmpty()) {
+            homePageSettingsRepository.save(new HomePageSettings(null, homePageDescription, null, null, null)
+            );
+        }
+    }
+
+    private void initFormSettings() {
         if (formRepository.findAll().isEmpty()) {
             formRepository.save(new Form(null,
                             budgetDescription,
@@ -96,30 +143,6 @@ public class ContentServiceImpl implements ContentService {
                             errorDescription
                     )
             );
-        }
-        if (homePageSettingsRepository.findAll().isEmpty()) {
-            homePageSettingsRepository.save(new HomePageSettings(null, homePageDescription, null, null, null)
-            );
-        }
-        if (seasonRepository.findAll().isEmpty()) {
-            seasonRepository.save(
-                    Arrays.asList(
-                            new Season(null, summerSeasonName, getLocalDateFromIsoString(summerFrom),
-                                    getLocalDateFromIsoString(summerTo), UUID.randomUUID(), 20),
-                            new Season(null, winterSeasonName, getLocalDateFromIsoString(winterFrom),
-                                    getLocalDateFromIsoString(winterTo), UUID.randomUUID(), 0))
-            );
-        }
-        if (eventSizeRepository.findAll().isEmpty()) {
-            eventSizeRepository.save(Arrays.stream(PredefinedSize.values())
-                    .map(EventSize::new)
-                    .collect(Collectors.toList())
-            );
-        }
-        if (eventTypeRepository.findAll().isEmpty()) {
-            eventTypeRepository.save(Arrays.stream(PredefinedEventType.values())
-                    .map(type -> new EventType(type.getTranslation(), type.getDescription(), 1))
-                    .collect(Collectors.toList()));
         }
     }
 
@@ -159,54 +182,48 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public List<SeasonDto> updateSeasons(List<SeasonDto> seasons) {
-        List<UUID> seasonIds = seasons.stream().map(SeasonDto::getGlobalId).collect(Collectors.toList());
+        List<UUID> seasonIds = collectGlobalIds(seasons);
         List<Season> seasonsToUpdate = seasonRepository.findAllByGlobalIdIn(seasonIds);
-        seasonsToUpdate.
-                forEach(season -> {
-                    Optional<SeasonDto> updateFrom = seasons.stream()
-                            .filter(s -> s.getGlobalId().equals(season.getGlobalId())).findAny();
-                    updateFrom.ifPresent(season::updateFrom);
-                });
+        update(seasons, seasonsToUpdate);
         return seasonRepository.save(seasonsToUpdate).stream()
-                .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(),
-                        season.getName(), season.getGlobalId()))
+                .map(SeasonDto::from)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<EventTypeDto> updateEventTypes(List<EventTypeDto> eventTypes) {
-        List<UUID> eventTypeIds = eventTypes.stream().map(EventTypeDto::getGlobalId).collect(Collectors.toList());
+        List<UUID> eventTypeIds = collectGlobalIds(eventTypes);
         List<EventType> eventTypesToUpdate = eventTypeRepository.findAllByGlobalIdIn(eventTypeIds);
-        eventTypesToUpdate.forEach(eventType ->
-                {
-                    Optional<EventTypeDto> dto = eventTypes.stream()
-                            .filter(eventTypeDto -> eventTypeDto.getGlobalId().equals(eventType.getGlobalId()))
-                            .findAny();
-                    dto.ifPresent(eventType::updateFrom);
-                }
-        );
+        update(eventTypes, eventTypesToUpdate);
+        eventTypesToUpdate.forEach(eventType -> updateEntity(eventTypes, eventType));
         return eventTypeRepository.save(eventTypesToUpdate).stream()
-                .map(eventType -> new EventTypeDto(eventType.getDescription(), eventType.getTranslation(), eventType.getGlobalId()))
+                .map(EventTypeDto::from)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<EventSizeDto> updateEventSizes(List<EventSizeDto> eventSizes) {
-        List<UUID> eventTypeIds = eventSizes.stream().map(EventSizeDto::getGlobalId).collect(Collectors.toList());
+        List<UUID> eventTypeIds = collectGlobalIds(eventSizes);
         List<EventSize> eventSizesToUpdate = eventSizeRepository.findAllByGlobalIdIn(eventTypeIds);
-        eventSizesToUpdate.forEach(eventSize ->
-                {
-                    Optional<EventSizeDto> dto = eventSizes.stream()
-                            .filter(eventSizeDto -> eventSizeDto.getGlobalId().equals(eventSize.getGlobalId()))
-                            .findAny();
-                    dto.ifPresent(eventSize::updateFrom);
-                }
-        );
+        update(eventSizes, eventSizesToUpdate);
         String mediaUrl = environmentService.getMediaBasicUrl();
         return eventSizeRepository.save(eventSizesToUpdate).stream()
-                .map(eventSize -> new EventSizeDto(eventSize.getDescription(),
-                        eventSize.getGlobalId(), eventSize.getImage() == null ?
-                        null : mediaUrl + eventSize.getImage().getGlobalId()))
+                .map(eventSize -> EventSizeDto.from(eventSize, mediaUrl))
                 .collect(Collectors.toList());
+    }
+
+    private <T extends EntityDtoWithGlobalId> void update(List<T> dtos, List<? extends UpdatableEntity<T>> entities) {
+        entities.forEach(eventSize -> updateEntity(dtos, eventSize));
+    }
+
+    private <T extends EntityDtoWithGlobalId> void updateEntity(List<T> dtos, UpdatableEntity<T> entity) {
+        Optional<T> dto = dtos.stream()
+                .filter(eventSizeDto -> eventSizeDto.getGlobalId().equals(entity.getGlobalId()))
+                .findAny();
+        dto.ifPresent(entity::updateFrom);
+    }
+
+    private <T extends EntityDtoWithGlobalId> List<UUID> collectGlobalIds(List<T> dtos) {
+        return dtos.stream().map(T::getGlobalId).collect(Collectors.toList());
     }
 }

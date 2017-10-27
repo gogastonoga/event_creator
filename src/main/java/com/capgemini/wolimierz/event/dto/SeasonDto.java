@@ -1,5 +1,6 @@
 package com.capgemini.wolimierz.event.dto;
 
+import com.capgemini.wolimierz.EntityDtoWithGlobalId;
 import com.capgemini.wolimierz.event.model.Season;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,7 +10,7 @@ import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
-public class SeasonDto {
+public class SeasonDto implements EntityDtoWithGlobalId {
     private LocalDate from;
     private LocalDate to;
     private UUID globalId;

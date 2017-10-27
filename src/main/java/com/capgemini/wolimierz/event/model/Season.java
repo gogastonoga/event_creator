@@ -1,5 +1,7 @@
 package com.capgemini.wolimierz.event.model;
 
+import com.capgemini.wolimierz.GlobalEntity;
+import com.capgemini.wolimierz.UpdatableEntity;
 import com.capgemini.wolimierz.event.dto.SeasonDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +18,7 @@ import java.util.UUID;
 @Table(name = "SEASONS")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Season implements Cost {
+public class Season implements Cost, GlobalEntity, UpdatableEntity<SeasonDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

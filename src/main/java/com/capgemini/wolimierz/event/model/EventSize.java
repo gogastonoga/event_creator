@@ -1,5 +1,7 @@
 package com.capgemini.wolimierz.event.model;
 
+import com.capgemini.wolimierz.GlobalEntity;
+import com.capgemini.wolimierz.UpdatableEntity;
 import com.capgemini.wolimierz.controller.dto.EventSizeDto;
 import com.capgemini.wolimierz.event.predefined.PredefinedSize;
 import com.capgemini.wolimierz.media.model.Media;
@@ -8,8 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
 import java.util.UUID;
 
 @Setter
@@ -17,7 +17,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "EVENT_SIZES")
 @NoArgsConstructor
-public class EventSize implements Cost {
+public class EventSize implements Cost, GlobalEntity, UpdatableEntity<EventSizeDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

@@ -1,5 +1,7 @@
 package com.capgemini.wolimierz.event.model;
 
+import com.capgemini.wolimierz.GlobalEntity;
+import com.capgemini.wolimierz.UpdatableEntity;
 import com.capgemini.wolimierz.controller.dto.EventTypeDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "EVENT_TYPES")
-public class EventType implements Cost {
+public class EventType implements Cost, GlobalEntity, UpdatableEntity<EventTypeDto> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

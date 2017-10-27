@@ -48,7 +48,6 @@ public class MediaController {
     @RequestMapping(path = "/image", method = RequestMethod.POST, params = "parent=event_size")
     public String uploadEventSizeImage(@RequestParam(name = "image") MultipartFile media,
                                        @RequestParam("parentId") UUID parentId) throws IOException {
-
         return mediaService.updateEventSizeImage(media, parentId, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
