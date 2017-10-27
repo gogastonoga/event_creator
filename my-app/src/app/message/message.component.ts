@@ -21,6 +21,7 @@ export class MessageComponent implements OnInit {
 
     public sortOrder = 'asc';
     numberOfItems: number;
+    numberOfPages: number;
     limit: number;
     page: number;
     messages;
@@ -40,7 +41,9 @@ export class MessageComponent implements OnInit {
     }
 
     nextPage(): void {
-        this.page += 1;
+        if (this.page < this.numberOfPages) {
+            this.page += 1;
+        }
     }
 
     previousPage(): void {
@@ -77,6 +80,7 @@ export class MessageComponent implements OnInit {
             messages => {
                 this.messages = messages;
                 this.numberOfItems = this.messages.length;
+                this.numberOfPages = Math.ceil(this.numberOfItems / this.limit);
             },
             error => this.errorString = <any>error
             );
@@ -88,6 +92,7 @@ export class MessageComponent implements OnInit {
             dontReadMessages => {
                 this.dontReadMessages = dontReadMessages;
                 this.numberOfItems = this.messages.length;
+                this.numberOfPages = Math.ceil(this.numberOfItems / this.limit);
             },
             error => this.errorString = <any>error
             );
