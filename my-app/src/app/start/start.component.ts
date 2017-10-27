@@ -40,6 +40,7 @@ export class StartComponent implements OnInit {
 
   ngOnInit() {
     $('#message').hide();
+    $('#message2').hide();
     this.getContent();
     this.start = new HomePageDto();
     if (localStorage.getItem('DEdit') === 'false') {
@@ -51,14 +52,13 @@ export class StartComponent implements OnInit {
   clearSelectedFile(): void {
     if (this.uploader.queue.length > 0) {
       this.selectedFile.nativeElement.value = '';
-      this.uploader.queue[0].remove();
+      this.uploader.clearQueue();
     }
   }
 
-  clearQueue(): void {
-    if (this.uploader.queue.length > 0) {
-      this.uploader.clearQueue();
-    }
+  itemUpload(): void {
+    this.uploader.queue[0].upload();
+    $('#addVideo').prop('disabled', true);
   }
 
   getContent = () => {
