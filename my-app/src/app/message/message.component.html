@@ -1,12 +1,13 @@
 <a>
-        <div class="header">
+        <div>
                 <button mat-raised-button class="accent-color button" (click)="all()">WSZYSTKIE</button>
                 <button mat-raised-button class="accent-color button" (click)="dontRead()">NIEPRZECZYTANE</button>
-                <label>Numer strony: </label>
-                <input class="input" type="number" name="page" [(ngModel)]="page" min="1" [attr.max]="[numberOfItems]" step="1" placeholder="Strona">
-                <button mat-raised-button class="accent-color button" (click)="previousPage()">
-                        <</button>
-                                <button mat-raised-button class="accent-color button" (click)="nextPage()">></button>
+                <label>Numer strony:</label>
+                <b>{{page}} / {{numberOfPages}}
+                        <button mat-raised-button class="accent-color button" (click)="previousPage()">
+                                <</button>
+                                        <button mat-raised-button class="accent-color button" (click)="nextPage()">></button>
+                </b>
         </div>
 </a>
 <div id="all" class="form-panel">
