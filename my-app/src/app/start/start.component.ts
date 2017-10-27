@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Directive } from '@angular/core';
+import { Component, OnInit, Input, Directive, ViewChild } from '@angular/core';
 import { ContentService } from '../content/content.service';
 import { UserService } from '../services/user.service';
 import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload'
@@ -107,6 +107,12 @@ URL = 'http://localhost:8080/wolimierz/media/video';
    
     public fileOverAnother(e:any):void {
       this.hasAnotherDropZoneOver = e;
+    }
+
+    @ViewChild('videoPlayer') videoplayer: any;
+    
+    toggleVideo(event: any) {
+        this.videoplayer.nativeElement.play();
     }
 
 }
