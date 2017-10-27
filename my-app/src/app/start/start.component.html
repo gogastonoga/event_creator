@@ -9,7 +9,7 @@
   <img src="http://{{content?.mainPage.backgroundImageUrl}}" style="width: 200px; height: 200px; margin: 0 auto;">
 
   <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;">
-    <image-upload 
+    <image-upload
     [url]="'http://localhost:8080/wolimierz/media/image?parent=home_page'"
     [headers]="myHeaders"
     [buttonCaption]="'Dodaj obrazek'"
@@ -18,22 +18,18 @@
     (removed)="onRemoved($event)"
     (uploadFinished)="onUploadFinished($event)"
     (uploadStateChanged)="onUploadStateChanged($event)">
-    </image-upload><br />
+    </image-upload>
+    <br />
     <p id="message" style="background-color: aquamarine">Plik został dodany</p>
-<div style="margin: 0 auto;">
-  Dodaj wideo:
-    <input type="file" ng2FileSelect 
-    [uploader]="uploader" style="margin: 0 auto;" name="video">
-    <tr *ngFor="let item of uploader.queue">
-    <button type="button" mat-raised-button class="accent-color" style="margin-left: 190px;"
-    (click)="item.upload()">Dodaj wideo
-</button>
-</tr>
-</div>
-
-</div>
-
-    
+    <div style="margin: 0 auto;">
+      Dodaj wideo:
+      <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" style="margin: 0 auto;" name="video" (click)="clearQueue(); clearSelectedFile();">
+      <tr *ngFor="let item of uploader.queue">
+        <button type="button" mat-raised-button class="accent-color" style="margin-left: 190px;" (click)="item.upload();">Dodaj wideo</button>
+        <button type="button" mat-raised-button class="accent-color" style="margin-left: 10px;" (click)="clearSelectedFile();">Usuń</button>
+      </tr>
+    </div>
+  </div>
 </div>
 
 <mat-toolbar>
@@ -42,10 +38,10 @@
   </div>
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
-{{content?.mainPage.backgroundVideoUrl}} fddgfgd
-{{createVideoUrl(content?.mainPage.backgroundVideoUrl)}}
 
-<div class="video" *ngIf="newUrl !== undefined" >
+{{newUrl}}
+
+<div class="video" *ngIf="newUrl != undefined">
   <video controls (click)="toggleVideo()" #videoPlayer poster="https://img.cda.pl/obr/oryginalne/850ca7d90566b9ed82c60d9d50771230.jpg">
       <source [src]="newUrl" controls type="video/mp4" />
       Browser not supported

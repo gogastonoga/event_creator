@@ -47,10 +47,24 @@ export class StartComponent implements OnInit {
     }
   }
 
+  @ViewChild('selectedFile') selectedFile: any;
+  clearSelectedFile(): void {
+    if (this.uploader.queue.length > 0) {
+      this.selectedFile.nativeElement.value = '';
+      this.uploader.queue[0].remove();
+    }
+  }
+
+  clearQueue(): void {
+    if (this.uploader.queue.length > 0) {
+      this.uploader.clearQueue();
+    }
+  }
+
   getContent = () => {
     this._contentService.getContent()
       .subscribe(
-      items => { this.content = items; console.log(this.content); },
+      items => { this.content = items; this.createVideoUrl(this.content.mainPage.backgroundVideoUrl) },
       error => this.errorString = <any>error
       );
   }
@@ -71,7 +85,7 @@ export class StartComponent implements OnInit {
   }
 
   editHomepage() {
-    this._contentService.editContentHomePage(this.start).delay(3000).subscribe(
+    this._contentService.editContentHomePage(this.start).subscribe(
       data => console.log(this.responseStatus = data)
     );
   }
@@ -93,7 +107,7 @@ export class StartComponent implements OnInit {
   onUploadStateChanged(state: boolean) {
     console.log(JSON.stringify(state));
   }
-
+  
   public uploader: FileUploader = new FileUploader({
     url: this.URL,
     authToken: 'Bearer ' + localStorage.getItem('access_token'),
@@ -116,9 +130,12 @@ export class StartComponent implements OnInit {
   }
 
   createVideoUrl(url) {
+    //console.log(url);
     console.log(url);
+    console.log(this.newUrl);
     this.newUrl = 'http://' + url;
     console.log(this.newUrl);
+    //return 'http://' + url;
     }
 
 }
