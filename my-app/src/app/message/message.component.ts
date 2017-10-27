@@ -8,7 +8,6 @@ import { MessageService } from './message.service';
 import { Contact } from "../contact/contact";
 import { DatePipe } from '@angular/common';
 
-
 // export class DateString {
 //     dateString: string;
 // }
@@ -18,7 +17,6 @@ import { DatePipe } from '@angular/common';
     styleUrls: ['./message.component.css'],
     providers: [MessageService]
 })
-
 export class MessageComponent implements OnInit {
 
     public sortOrder = 'asc';
@@ -37,6 +35,18 @@ export class MessageComponent implements OnInit {
         this.addCladdActive();
         this.getContactRequest();
         this.getDontReadMessages();
+        this.limit = 10;
+        this.page = 1;
+    }
+
+    nextPage(): void {
+        this.page += 1;
+    }
+
+    previousPage(): void {
+        if (this.page > 1) {
+            this.page -= 1;
+        }
     }
 
     all = (): void => {
@@ -64,7 +74,10 @@ export class MessageComponent implements OnInit {
     getContactRequest = () => {
         this._messageService.getContactRequest()
             .subscribe(
-            messages => { this.messages = messages; },
+            messages => {
+                this.messages = messages;
+                this.numberOfItems = this.messages.length;
+            },
             error => this.errorString = <any>error
             );
     }
@@ -72,13 +85,11 @@ export class MessageComponent implements OnInit {
     getDontReadMessages = () => {
         this._messageService.getDontReadMessages()
             .subscribe(
-            dontReadMessages => { this.dontReadMessages = dontReadMessages; },
+            dontReadMessages => {
+                this.dontReadMessages = dontReadMessages;
+                this.numberOfItems = this.messages.length;
+            },
             error => this.errorString = <any>error
             );
     }
-
 }
-
-
-
-

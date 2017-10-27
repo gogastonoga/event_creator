@@ -1,14 +1,15 @@
-<button mat-raised-button class="accent-color button" (click)="all()">WSZYSTKIE</button>
-<button mat-raised-button class="accent-color button" (click)="dontRead()">NIEPRZECZYTANE</button>
-<button mat-raised-button class="accent-color button" (click)="third()">TRZECIE</button>
-<br /><br />
 <a>
-  <label>Numer strony: </label><input class="input" type="number" name="page" [(ngModel)]="page" min="1" [attr.max]="[numberOfItems]" step="1" placeholder="Strona">
-  <label>Limit na stronie: </label><input class="input" type="number" name="limit" [(ngModel)]="limit" min="1" step="1" placeholder="Limit">
+        <div class="header">
+                <button mat-raised-button class="accent-color button" (click)="all()">WSZYSTKIE</button>
+                <button mat-raised-button class="accent-color button" (click)="dontRead()">NIEPRZECZYTANE</button>
+                <label>Numer strony: </label>
+                <input class="input" type="number" name="page" [(ngModel)]="page" min="1" [attr.max]="[numberOfItems]" step="1" placeholder="Strona">
+                <button mat-raised-button class="accent-color button" (click)="previousPage()">
+                        <</button>
+                                <button mat-raised-button class="accent-color button" (click)="nextPage()">></button>
+        </div>
 </a>
 <div id="all" class="form-panel">
-
-
         <table class="table table-striped" style="background-color: #DADADA;" [mfData]="messages" #mf="mfDataTable">
                 <thead>
                         <tr>
@@ -22,15 +23,16 @@
                         <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
-                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
-                                <td><button mat-raised-button class="accent-color button"><a 
-                                        style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a></button></td>
+                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}
+                                </td>
+                                <td>
+                                        <button mat-raised-button class="accent-color button">
+                                                <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
+                                        </button>
+                                </td>
                         </tr>
                 </tbody>
         </table>
-
-
-
 </div>
 <div id="dont-read" class="form-panel">
         <table class="table table-striped" style="background-color: #DADADA;" [mfData]="dontReadMessages" #mf="mfDataTable">
@@ -46,13 +48,14 @@
                         <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
-                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
-                                <td><button mat-raised-button class="accent-color button"><a 
-                                        style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a></button></td>
+                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}
+                                </td>
+                                <td>
+                                        <button mat-raised-button class="accent-color button">
+                                                <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
+                                        </button>
+                                </td>
                         </tr>
                 </tbody>
         </table>
-</div>
-<div id="third" class="form-panel">
-        third
 </div>
