@@ -11,7 +11,7 @@
         </div>
 </a>
 <div id="all" class="form-panel">
-        <table class="table table-striped" style="background-color: #DADADA;" [mfData]="messages" #mf="mfDataTable">
+        <table class="table table-striped" style="background-color: #DADADA;">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -21,13 +21,13 @@
                         </tr>
                 </thead>
                 <tbody>
-                        <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
+                        <tr *ngFor="let message of messages | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}
                                 </td>
                                 <td>
-                                        <button mat-raised-button class="accent-color button">
+                                        <button mat-raised-button class="accent-color button" (click)="readMessage()">
                                                 <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
                                         </button>
                                 </td>
@@ -36,7 +36,7 @@
         </table>
 </div>
 <div id="dont-read" class="form-panel">
-        <table class="table table-striped" style="background-color: #DADADA;" [mfData]="dontReadMessages" #mf="mfDataTable">
+        <table class="table table-striped" style="background-color: #DADADA;">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -46,13 +46,13 @@
                         </tr>
                 </thead>
                 <tbody>
-                        <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
+                        <tr *ngFor="let message of dontReadMessages | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}
                                 </td>
                                 <td>
-                                        <button mat-raised-button class="accent-color button">
+                                        <button mat-raised-button class="accent-color button" (click)="readMessage()">
                                                 <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
                                         </button>
                                 </td>

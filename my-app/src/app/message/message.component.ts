@@ -20,7 +20,9 @@ import { DatePipe } from '@angular/common';
 export class MessageComponent implements OnInit {
 
     public sortOrder = 'asc';
+    read: boolean = false;
     numberOfItems: number;
+    numberOfAllItems: number;
     numberOfPages: number;
     limit: number;
     page: number;
@@ -40,6 +42,19 @@ export class MessageComponent implements OnInit {
         this.page = 1;
     }
 
+    readMessage(): void {
+        if (this.read) {
+            this.numberOfItems = this.dontReadMessages.length;
+            this.numberOfPages = Math.ceil(this.numberOfItems / this.limit);
+        } else {
+            this.numberOfAllItems = this.messages.length;
+            this.numberOfPages = Math.ceil(this.numberOfAllItems / this.limit);
+        }
+        if (this.page > this.numberOfPages) {
+            this.page = this.numberOfPages;
+        }
+    }
+
     nextPage(): void {
         if (this.page < this.numberOfPages) {
             this.page += 1;
@@ -53,21 +68,17 @@ export class MessageComponent implements OnInit {
     }
 
     all = (): void => {
-        $('#third').removeClass('active').hide();
-        $('#dont-read').removeClass('active').hide();
-        $('#all').fadeIn().addClass('active').show();
+        $('#dont-read').hide();
+        $('#all').fadeIn().show();
+        this.read = false;
+        this.readMessage();
     }
 
     dontRead = (): void => {
-        $('#all').removeClass('active').hide();
-        $('#third').removeClass('active').hide();
+        $('#all').hide();
         $('#dont-read').fadeIn().show();
-    }
-
-    third = (): void => {
-        $('#all').removeClass('active').hide();
-        $('#dont-read').removeClass('active').hide();
-        $('#third').fadeIn().addClass('active').show();
+        this.read = true;
+        this.readMessage();
     }
 
     addCladdActive() {
@@ -79,8 +90,8 @@ export class MessageComponent implements OnInit {
             .subscribe(
             messages => {
                 this.messages = messages;
-                this.numberOfItems = this.messages.length;
-                this.numberOfPages = Math.ceil(this.numberOfItems / this.limit);
+                this.numberOfAllItems = this.messages.length;
+                this.numberOfPages = Math.ceil(this.numberOfAllItems / this.limit);
             },
             error => this.errorString = <any>error
             );
@@ -91,7 +102,7 @@ export class MessageComponent implements OnInit {
             .subscribe(
             dontReadMessages => {
                 this.dontReadMessages = dontReadMessages;
-                this.numberOfItems = this.messages.length;
+                this.numberOfItems = this.dontReadMessages.length;
                 this.numberOfPages = Math.ceil(this.numberOfItems / this.limit);
             },
             error => this.errorString = <any>error
