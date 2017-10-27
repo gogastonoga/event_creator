@@ -144,8 +144,7 @@
       <div class="form-group">
         <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes">
           <label>
-            <img src="http://localhost:8080/wolimierz/media?id={{peop.globalId}}"><br />
-           
+            <img src="http://{{peop.imageUrl}}"><br />
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"

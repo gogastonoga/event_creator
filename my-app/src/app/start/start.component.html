@@ -6,6 +6,7 @@
     <mat-hint id="hint1" align="start">Można edytować</mat-hint>
     <mat-hint id="hint2" align="end">{{message.value.length}} / 90</mat-hint>
   </mat-form-field>
+  <img src="http://{{content?.mainPage.backgroundImageUrl}}" style="width: 200px; height: 200px; margin: 0 auto;">
 
   <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;">
     <image-upload
@@ -43,3 +44,12 @@
   </div>
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
+
+{{newUrl}}
+
+<div class="video" *ngIf="newUrl != undefined">
+  <video controls (click)="toggleVideo()" #videoPlayer poster="https://img.cda.pl/obr/oryginalne/850ca7d90566b9ed82c60d9d50771230.jpg">
+      <source [src]="newUrl" controls type="video/mp4" />
+      Browser not supported
+  </video>
+</div>
