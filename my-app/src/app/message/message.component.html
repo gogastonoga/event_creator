@@ -5,8 +5,11 @@
                 <label>Numer strony:</label>
                 <b>{{page}} / {{numberOfPages}}
                         <button mat-raised-button class="accent-color button" (click)="previousPage()">
-                                <</button>
-                                        <button mat-raised-button class="accent-color button" (click)="nextPage()">></button>
+                                <mat-icon matSuffix>chevron_left</mat-icon>
+                        </button>
+                        <button mat-raised-button class="accent-color button" (click)="nextPage()">
+                                <mat-icon matSuffix>chevron_right</mat-icon>
+                        </button>
                 </b>
         </div>
 </a>

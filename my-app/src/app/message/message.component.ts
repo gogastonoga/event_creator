@@ -8,9 +8,6 @@ import { MessageService } from './message.service';
 import { Contact } from "../contact/contact";
 import { DatePipe } from '@angular/common';
 
-// export class DateString {
-//     dateString: string;
-// }
 @Component({
     selector: 'app-form',
     templateUrl: './message.component.html',
@@ -19,7 +16,6 @@ import { DatePipe } from '@angular/common';
 })
 export class MessageComponent implements OnInit {
 
-    public sortOrder = 'asc';
     read: boolean = false;
     numberOfItems: number;
     numberOfAllItems: number;
