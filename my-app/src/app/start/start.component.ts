@@ -71,7 +71,7 @@ export class StartComponent implements OnInit {
   }
 
   editHomepage() {
-    this._contentService.editContentHomePage(this.start).subscribe(
+    this._contentService.editContentHomePage(this.start).delay(3000).subscribe(
       data => console.log(this.responseStatus = data)
     );
   }
