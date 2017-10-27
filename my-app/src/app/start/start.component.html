@@ -1,4 +1,4 @@
-<div class="video" *ngIf="newUrl != undefined" style="background: fixed;">
+<div class="video" *ngIf="newUrl != undefined"
   <video (click)="toggleVideo()" #videoPlayer autoplay >
       <source [src]="newUrl" controls type="video/mp4" />
       Browser not supported
