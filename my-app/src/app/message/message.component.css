@@ -12,3 +12,10 @@
     background-color: #DADADA;
     box-shadow: 6px 6px 16px -5px rgba(0,0,0,0.75);
   }
+  
+  .input {
+    margin-top: 2px;
+    margin-left: 15px;
+    margin-right: 25px;
+    width: 4em;
+  }

@@ -2,10 +2,14 @@
 <button mat-raised-button class="accent-color button" (click)="dontRead()">NIEPRZECZYTANE</button>
 <button mat-raised-button class="accent-color button" (click)="third()">TRZECIE</button>
 <br /><br />
+<a>
+  <label>Numer strony: </label><input class="input" type="number" name="page" [(ngModel)]="page" min="1" [attr.max]="[numberOfItems]" step="1" placeholder="Strona">
+  <label>Limit na stronie: </label><input class="input" type="number" name="limit" [(ngModel)]="limit" min="1" step="1" placeholder="Limit">
+</a>
 <div id="all" class="form-panel">
 
 
-        <table class="table table-striped" style="background-color: #DADADA;">
+        <table class="table table-striped" style="background-color: #DADADA;" [mfData]="messages" #mf="mfDataTable">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -15,7 +19,7 @@
                         </tr>
                 </thead>
                 <tbody>
-                        <tr *ngFor="let message of messages">
+                        <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
@@ -29,7 +33,7 @@
 
 </div>
 <div id="dont-read" class="form-panel">
-        <table class="table table-striped" style="background-color: #DADADA;">
+        <table class="table table-striped" style="background-color: #DADADA;" [mfData]="dontReadMessages" #mf="mfDataTable">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -39,7 +43,7 @@
                         </tr>
                 </thead>
                 <tbody>
-                        <tr *ngFor="let message of dontReadMessages">
+                        <tr *ngFor="let message of mf.data | slice:(page-1)*limit:page*limit">
                                 <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
                                 <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
