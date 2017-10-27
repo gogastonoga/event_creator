@@ -7,11 +7,11 @@
     <mat-icon>account_balance</mat-icon>
     <span>Strona główna</span>
   </button>
-  <button mat-menu-item routerLink="/create-user">
+  <button [hidden]="logoutButton" mat-menu-item routerLink="/create-user">
     <mat-icon>group_add</mat-icon>
     <span>Dodaj użytkownika</span>
   </button>
-  <button mat-menu-item routerLink="/cost-settings">
+  <button [hidden]="logoutButton" mat-menu-item routerLink="/cost-settings">
     <mat-icon>settings</mat-icon>
     <span>Ustawienia kosztów</span>
   </button>
@@ -19,7 +19,7 @@
     <mat-icon>question_answer</mat-icon>
     <span>Kontakt</span>
   </button>
-  <button mat-menu-item routerLink="/messages">
+  <button [hidden]="logoutButton" mat-menu-item routerLink="/messages">
     <mat-icon>question_answer</mat-icon>
     <span>Wiadomości</span>
   </button>

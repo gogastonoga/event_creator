@@ -17,6 +17,7 @@ import { StartComponent } from './start/start.component';
 import { FormComponent } from './form/form.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataTableModule } from 'angular2-datatable';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
@@ -36,10 +37,10 @@ import { AppDataService } from './services/app-data.service';
 import { AuthConfig, AuthHttp } from 'angular2-jwt';
 import { ImageUploadModule } from "angular2-image-upload";
 import { InputMaskModule } from 'ng2-inputmask';
-import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module'; 
+import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
 import { MessageService } from './message/message.service';
-import {ContactService} from './contact/contact.service';
+import { ContactService } from './contact/contact.service';
 import { MessageDetailComponent } from './message-detail/message-detail.component';
 import * as $ from 'jquery';
 
@@ -63,7 +64,7 @@ export function authHttpServiceFactory(http: Http) {
     UserComponent, CreateUserComponent, ContactComponent, MessageComponent, MessageDetailComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule, FormsModule, MatAutocompleteModule, MatNativeDateModule, BrowserAnimationsModule, RouterModule,
+    DataTableModule, BrowserModule, AppRoutingModule, FormsModule, MatAutocompleteModule, MatNativeDateModule, BrowserAnimationsModule, RouterModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule,
     MatExpansionModule, MatFormFieldModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatPaginatorModule,
     MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,

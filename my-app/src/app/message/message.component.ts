@@ -21,6 +21,10 @@ import { DatePipe } from '@angular/common';
 
 export class MessageComponent implements OnInit {
 
+    public sortOrder = 'asc';
+    numberOfItems: number;
+    limit: number;
+    page: number;
     messages;
     dontReadMessages;
     errorString;
