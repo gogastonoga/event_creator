@@ -18,6 +18,7 @@ import com.capgemini.wolimierz.form.FormDto;
 import com.capgemini.wolimierz.form.HomePageSettings;
 import com.capgemini.wolimierz.form.repository.FormRepository;
 import com.capgemini.wolimierz.form.repository.HomePageSettingsRepository;
+import com.capgemini.wolimierz.utils.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,17 +37,19 @@ public class ContentServiceImpl implements ContentService {
     private final SeasonRepository seasonRepository;
     private final EventSizeRepository eventSizeRepository;
     private final EventTypeRepository eventTypeRepository;
+    private final EnvironmentService environmentService;
 
     @Autowired
     public ContentServiceImpl(FormRepository formRepository,
                               HomePageSettingsRepository homePageSettingsRepository,
                               SeasonRepository seasonRepository, EventSizeRepository eventSizeRepository,
-                              EventTypeRepository eventTypeRepository) {
+                              EventTypeRepository eventTypeRepository, EnvironmentService environmentService) {
         this.eventSizeRepository = eventSizeRepository;
         this.formRepository = formRepository;
         this.homePageSettingsRepository = homePageSettingsRepository;
         this.seasonRepository = seasonRepository;
         this.eventTypeRepository = eventTypeRepository;
+        this.environmentService = environmentService;
     }
 
     @PostConstruct
@@ -90,9 +93,10 @@ public class ContentServiceImpl implements ContentService {
 
     @Override
     public ContentDto getContent() {
+        String mediaUrl = environmentService.getMediaBasicUrl();
         return new ContentDto(homePageSettingsRepository.findAll().stream().findAny().orElse(null),
                 formRepository.findAll().stream().findAny().orElse(null), eventTypeRepository.findAll(),
-                eventSizeRepository.findAll(), seasonRepository.findAll());
+                eventSizeRepository.findAll(), seasonRepository.findAll(), mediaUrl);
     }
 
     @Override
@@ -100,7 +104,8 @@ public class ContentServiceImpl implements ContentService {
         HomePageSettings homePageSettings = homePageSettingsRepository.findAll().stream().findAny()
                 .orElseThrow(IllegalStateException::new);
         homePageSettings.setDescription(homePageDto.getDescription());
-        return HomePageDto.from(homePageSettingsRepository.save(homePageSettings));
+        String mediaUrl = environmentService.getMediaBasicUrl();
+        return HomePageDto.from(homePageSettingsRepository.save(homePageSettings), mediaUrl);
     }
 
     @Override
@@ -108,10 +113,12 @@ public class ContentServiceImpl implements ContentService {
         Form form = formRepository.findAll().stream().findAny()
                 .orElseThrow(IllegalStateException::new);
         form.uptateFrom(formDto);
+        String mediaUrl = environmentService.getMediaBasicUrl();
         return FormDto.from(formRepository.save(form),
                 eventTypeRepository.findAll(),
                 eventSizeRepository.findAll(),
-                seasonRepository.findAll());
+                seasonRepository.findAll(),
+                mediaUrl);
     }
 
     @Override
@@ -159,9 +166,11 @@ public class ContentServiceImpl implements ContentService {
                     dto.ifPresent(eventSize::updateFrom);
                 }
         );
+        String mediaUrl = environmentService.getMediaBasicUrl();
         return eventSizeRepository.save(eventSizesToUpdate).stream()
                 .map(eventSize -> new EventSizeDto(eventSize.getDescription(),
-                        eventSize.getGlobalId(), eventSize.getImage() == null ? null : eventSize.getImage().getGlobalId()))
+                        eventSize.getGlobalId(), eventSize.getImage() == null ?
+                        null : mediaUrl + eventSize.getImage().getGlobalId()))
                 .collect(Collectors.toList());
     }
 }

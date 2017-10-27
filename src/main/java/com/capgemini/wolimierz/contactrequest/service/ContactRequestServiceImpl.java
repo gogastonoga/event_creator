@@ -6,6 +6,7 @@ import com.capgemini.wolimierz.contactrequest.model.ContactRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -23,7 +24,9 @@ public class ContactRequestServiceImpl implements ContactRequestService {
     public List<ContactRequestDto> findAll(boolean findOnlyNotRead) {
         List<ContactRequest> contactRequests = findOnlyNotRead ?
                 contactRequestRepository.findAllByWasReadFalse() : contactRequestRepository.findAll();
-        return contactRequests.stream().map(ContactRequestDto::from).collect(Collectors.toList());
+        return contactRequests.stream().map(ContactRequestDto::from)
+                .sorted(Comparator.comparing(ContactRequestDto::getCreationTime).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override

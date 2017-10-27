@@ -4,29 +4,26 @@ import com.capgemini.wolimierz.form.HomePageSettings;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
-import java.util.UUID;
-
 @Getter
 @NoArgsConstructor
 public class HomePageDto extends DescriptionDto {
 
-    private UUID backgroundVideoId;
-    private UUID backgroundImageId;
+    private String backgroundVideoUrl;
+    private String backgroundImageUrl;
     private String contactRequestFormat;
 
-    public HomePageDto(String description, UUID backgroundImageId, UUID backgroundVideoId, String contactRequestFormat) {
+    public HomePageDto(String description, String backgroundImageUrl, String backgroundVideoUrl, String contactRequestFormat) {
         super(description);
-        this.backgroundVideoId = backgroundVideoId;
-        this.backgroundImageId = backgroundImageId;
+        this.backgroundVideoUrl = backgroundVideoUrl;
+        this.backgroundImageUrl = backgroundImageUrl;
         this.contactRequestFormat = contactRequestFormat;
 
     }
 
-    public static HomePageDto from(HomePageSettings homePageSettings) {
+    public static HomePageDto from(HomePageSettings homePageSettings, String mediaGetUrl) {
         return new HomePageDto(homePageSettings.getDescription(),
-                homePageSettings.getImage() == null ? null : homePageSettings.getImage().getGlobalId(),
-                homePageSettings.getVideo() == null ? null : homePageSettings.getVideo().getGlobalId(),
+                homePageSettings.getImage() == null ? null : mediaGetUrl + homePageSettings.getImage().getGlobalId(),
+                homePageSettings.getVideo() == null ? null : mediaGetUrl + homePageSettings.getVideo().getGlobalId(),
                 homePageSettings.getContactRequestFormat());
     }
 

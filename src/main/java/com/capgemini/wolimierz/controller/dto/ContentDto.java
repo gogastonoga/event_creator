@@ -20,8 +20,8 @@ public class ContentDto {
     private FormDto formDto;
 
     public ContentDto(HomePageSettings homePageSettings, Form form, List<EventType> eventTypes,
-                      List<EventSize> eventSizes, List<Season> seasons) {
-        this.mainPage = HomePageDto.from(homePageSettings);
-        this.formDto = FormDto.from(form, eventTypes, eventSizes, seasons);
+                      List<EventSize> eventSizes, List<Season> seasons, String basicMediaGetUrl) {
+        this.mainPage = HomePageDto.from(homePageSettings, basicMediaGetUrl);
+        this.formDto = FormDto.from(form, eventTypes, eventSizes, seasons, basicMediaGetUrl);
     }
 }

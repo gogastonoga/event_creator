@@ -34,13 +34,14 @@ public class FormDto {
     @NotNull
     private String summaryDescription;
 
-    public static FormDto from(Form form, List<EventType> eventTypes, List<EventSize> sizes, List<Season> seasons) {
+    public static FormDto from(Form form, List<EventType> eventTypes, List<EventSize> sizes, List<Season> seasons,
+                               String baseMediaUrl) {
         return new FormDto(
                 eventTypes.stream()
                         .map(EventDto::new)
                         .collect(Collectors.toList()),
                 sizes.stream()
-                        .map(SizeDto::from)
+                        .map(size -> SizeDto.from(size, baseMediaUrl))
                         .collect(Collectors.toList()),
                 seasons.stream()
                         .map(season -> new SeasonDto(season.getFromDate(), season.getToDate(),

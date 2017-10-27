@@ -49,7 +49,7 @@ public class ContactRequest {
         this.name = name;
         this.surname = surname;
         this.topic = topic;
-        creationTime = LocalDateTime.now(ZoneId.of("UTC"));
+        creationTime = LocalDateTime.now(ZoneId.of("Europe/Warsaw"));
     }
 
     public void setWasRead() {

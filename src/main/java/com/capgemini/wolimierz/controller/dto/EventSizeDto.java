@@ -9,12 +9,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class EventSizeDto extends DescriptionDto {
     private UUID globalId;
-    private UUID imageId;
+    private String imageUrl;
 
-    public EventSizeDto(String description, UUID globalId, UUID imageId) {
+    public EventSizeDto(String description, UUID globalId, String imageUrl) {
         super(description);
         this.globalId = globalId;
-        this.imageId = imageId;
+        this.imageUrl = imageUrl;
     }
 
 }
