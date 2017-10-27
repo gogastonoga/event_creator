@@ -45,8 +45,8 @@
 {{content?.mainPage.backgroundVideoUrl}} fddgfgd
 {{createVideoUrl(content?.mainPage.backgroundVideoUrl)}}
 
-<div class="video" *ngIf="newUrl !== undefined">
-  <video controls (click)="toggleVideo()" #videoPlayer >
+<div class="video" *ngIf="newUrl !== undefined" >
+  <video controls (click)="toggleVideo()" #videoPlayer poster="https://img.cda.pl/obr/oryginalne/850ca7d90566b9ed82c60d9d50771230.jpg">
       <source [src]="newUrl" controls type="video/mp4" />
       Browser not supported
   </video>
