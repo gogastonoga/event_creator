@@ -27,6 +27,8 @@ public class Form {
     private String dateFormDescription;
     @Column(name = "SUMMARY_DESCRIPTION", length = 2048)
     private String summaryDescription;
+    @Column(name = "ERROR_DESCRIPTION", length = 2048)
+    private String errorDescription;
 
     public void uptateFrom(FormDto formDto) {
         if (!formDto.getBudgetDescription().isEmpty()) {
@@ -46,6 +48,9 @@ public class Form {
         }
         if (!formDto.getSummaryDescription().isEmpty()) {
             this.summaryDescription = formDto.getSummaryDescription();
+        }
+        if (!formDto.getErrorDescription().isEmpty()) {
+            this.errorDescription = formDto.getErrorDescription();
         }
     }
 

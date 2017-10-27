@@ -33,6 +33,8 @@ public class FormDto {
     private String dateFormDescription;
     @NotNull
     private String summaryDescription;
+    @NotNull
+    private String errorDescription;
 
     public static FormDto from(Form form, List<EventType> eventTypes, List<EventSize> sizes, List<Season> seasons,
                                String baseMediaUrl) {
@@ -52,7 +54,8 @@ public class FormDto {
                 form.getParticipantsDescription(),
                 form.getAccommodationDescription(),
                 form.getDateFormDescription(),
-                form.getSummaryDescription()
+                form.getSummaryDescription(),
+                form.getErrorDescription()
         );
     }
 

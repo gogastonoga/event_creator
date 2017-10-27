@@ -20,10 +20,12 @@ import com.capgemini.wolimierz.form.repository.FormRepository;
 import com.capgemini.wolimierz.form.repository.HomePageSettingsRepository;
 import com.capgemini.wolimierz.utils.EnvironmentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +40,35 @@ public class ContentServiceImpl implements ContentService {
     private final EventSizeRepository eventSizeRepository;
     private final EventTypeRepository eventTypeRepository;
     private final EnvironmentService environmentService;
+
+    @Value("${initial.budget.description}")
+    private String budgetDescription;
+    @Value("${initial.additional.description}")
+    private String additionalDescription;
+    @Value("${initial.participants.description}")
+    private String participantsDescription;
+    @Value("${initial.accommodation.description}")
+    private String accommodationDescription;
+    @Value("${initial.dateform.description}")
+    private String dateFormDescription;
+    @Value("${initial.error.description}")
+    private String errorDescription;
+    @Value("${initial.summary.description}")
+    private String summaryDescription;
+    @Value("${initial.homepage.description}")
+    private String homePageDescription;
+    @Value("${initial.season.summer.name}")
+    private String summerSeasonName;
+    @Value("${initial.season.winter.name}")
+    private String winterSeasonName;
+    @Value("${initial.season.winter.from}")
+    private String winterFrom;
+    @Value("${initial.season.winter.to}")
+    private String winterTo;
+    @Value("${initial.season.summer.from}")
+    private String summerFrom;
+    @Value("${initial.season.summer.to}")
+    private String summerTo;
 
     @Autowired
     public ContentServiceImpl(FormRepository formRepository,
@@ -56,26 +87,27 @@ public class ContentServiceImpl implements ContentService {
     public void initContentSettings() {
         if (formRepository.findAll().isEmpty()) {
             formRepository.save(new Form(null,
-                            "Budget descirption",
-                            "Additional form part description",
-                            "Participants form part description",
-                            "Accommodation form part description",
-                            "Date form description",
-                            "Summary description"
+                            budgetDescription,
+                            additionalDescription,
+                            participantsDescription,
+                            accommodationDescription,
+                            dateFormDescription,
+                            summaryDescription,
+                            errorDescription
                     )
             );
         }
         if (homePageSettingsRepository.findAll().isEmpty()) {
-            homePageSettingsRepository.save(new HomePageSettings(null, "Home page descirption", null, null, null)
+            homePageSettingsRepository.save(new HomePageSettings(null, homePageDescription, null, null, null)
             );
         }
         if (seasonRepository.findAll().isEmpty()) {
             seasonRepository.save(
                     Arrays.asList(
-                            new Season(null, "Letni", LocalDate.of(2017, 7, 1),
-                                    LocalDate.of(2017, 8, 30), UUID.randomUUID(), 20),
-                            new Season(null, "Zimowy", LocalDate.of(2017, 7, 1),
-                                    LocalDate.of(2017, 8, 30), UUID.randomUUID(), 0))
+                            new Season(null, summerSeasonName, getLocalDateFromIsoString(summerFrom),
+                                    getLocalDateFromIsoString(summerTo), UUID.randomUUID(), 20),
+                            new Season(null, winterSeasonName, getLocalDateFromIsoString(winterFrom),
+                                    getLocalDateFromIsoString(winterTo), UUID.randomUUID(), 0))
             );
         }
         if (eventSizeRepository.findAll().isEmpty()) {
@@ -89,6 +121,10 @@ public class ContentServiceImpl implements ContentService {
                     .map(type -> new EventType(type.getTranslation(), type.getDescription(), 1))
                     .collect(Collectors.toList()));
         }
+    }
+
+    private LocalDate getLocalDateFromIsoString(String summerFrom) {
+        return LocalDate.parse(summerFrom, DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     @Override
