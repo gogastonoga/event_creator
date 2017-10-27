@@ -1,9 +1,9 @@
-<div class="video" *ngIf="newUrl != undefined"
-  <video (click)="toggleVideo()" #videoPlayer autoplay >
+
+  <video (click)="toggleVideo()" #videoPlayer autoplay loop muted *ngIf="newUrl != undefined">
       <source [src]="newUrl" controls type="video/mp4" />
       Browser not supported
   </video>
-</div>
+
 
 <h1 style="margin-bottom: 20px;">Wolimierz Application</h1>
 <div class="container">
@@ -51,4 +51,7 @@
   </div>
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
+
+
+
 

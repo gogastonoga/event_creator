@@ -130,12 +130,8 @@ export class StartComponent implements OnInit {
   }
 
   createVideoUrl(url) {
-    //console.log(url);
-    console.log(url);
     console.log(this.newUrl);
     this.newUrl = 'http://' + url;
-    console.log(this.newUrl);
-    //return 'http://' + url;
     }
 
 }

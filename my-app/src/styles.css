@@ -26,9 +26,10 @@ body,
   font-family: RobotoL, sans-serif;
   height: 100%;
   font-size: 16px;
-  background-color: #EEEDED;
-  background: url(../images/Background.jpg) repeat;
+  /* background-color: #EEEDED;
+  background: url(../images/Background.jpg) repeat; */
 }
+
 
 .dark-primary-color {
   background: #616161;
