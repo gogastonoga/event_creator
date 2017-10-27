@@ -22,12 +22,18 @@
     <p id="message" style="background-color: aquamarine">Plik został dodany</p>
     <div style="margin: 0 auto;">
       Dodaj wideo:
-      <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" style="margin: 0 auto;" name="video" (click)="clearQueue(); clearSelectedFile();">
+      <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" style="margin: 0 auto;" name="video" (click)="clearSelectedFile();">
       <tr *ngFor="let item of uploader.queue">
-        <button type="button" mat-raised-button class="accent-color" style="margin-left: 190px;" (click)="item.upload();">Dodaj wideo</button>
+        <br/>
+        <button id="addVideo" type="button" mat-raised-button class="accent-color" style="margin-left: 190px;" (click)="itemUpload();">Prześlij</button>
         <button type="button" mat-raised-button class="accent-color" style="margin-left: 10px;" (click)="clearSelectedFile();">Usuń</button>
       </tr>
     </div>
+    <br />
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+    </div>
+    <p id="message2" style="background-color: aquamarine">Plik wideo został dodany</p>
   </div>
 </div>
 
