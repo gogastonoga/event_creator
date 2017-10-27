@@ -36,7 +36,7 @@
 @import url('http://getbootstrap.com/dist/css/bootstrap.css');
 @font-face {
   font-family: Roboto;
-  src: url('/assets/fonts/Roboto-Light.tff') format('truetype');
+  src: url('/assets/fonts/Roboto-Light.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   line-height: 1.5;
