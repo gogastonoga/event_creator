@@ -14,7 +14,7 @@ export class FileHolder {
   public serverResponse: any;
   public pending: boolean = false;
   constructor(public src: string, public file: File) { }
-} 
+}
 
 @Component({
   selector: 'app-start',
@@ -31,6 +31,9 @@ export class StartComponent implements OnInit {
   editStatus: boolean = false;
   disabledEdit: boolean = true;
   message;
+  @ViewChild('videoPlayer') videoplayer: any;
+  URL = 'http://localhost:8080/wolimierz/media/video';
+  newUrl: string;
 
   constructor(private _contentService: ContentService, private _userService: UserService) {
   }
@@ -73,46 +76,49 @@ export class StartComponent implements OnInit {
     );
   }
 
-  
+
   myHeaders: { [name: string]: any } = {
     'Authorization': 'Bearer' + localStorage.getItem('access_token')
-};
+  };
 
-onUploadFinished(file: FileHolder) {
-  console.log(JSON.stringify(file.serverResponse));
-  $('#message').show();
-}
+  onUploadFinished(file: FileHolder) {
+    console.log(JSON.stringify(file.serverResponse));
+    $('#message').show();
+  }
 
-onRemoved(file: FileHolder) {
-  // do some stuff with the removed file.
-}
+  onRemoved(file: FileHolder) {
+    // do some stuff with the removed file.
+  }
 
-onUploadStateChanged(state: boolean) {
-  console.log(JSON.stringify(state));
-}
+  onUploadStateChanged(state: boolean) {
+    console.log(JSON.stringify(state));
+  }
 
-URL = 'http://localhost:8080/wolimierz/media/video';
+  public uploader: FileUploader = new FileUploader({
+    url: this.URL,
+    authToken: 'Bearer ' + localStorage.getItem('access_token'),
+    itemAlias: 'video'
+  });
+  public hasBaseDropZoneOver: boolean = false;
+  public hasAnotherDropZoneOver: boolean = false;
 
-    public uploader:FileUploader = new FileUploader({
-      url: this.URL,
-      authToken: 'Bearer ' + localStorage.getItem('access_token'),
-      itemAlias: 'video'
-    });
-    public hasBaseDropZoneOver:boolean = false;
-    public hasAnotherDropZoneOver:boolean = false;
-   
-    public fileOverBase(e:any):void {
-      this.hasBaseDropZoneOver = e;
-    }
-   
-    public fileOverAnother(e:any):void {
-      this.hasAnotherDropZoneOver = e;
-    }
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
 
-    @ViewChild('videoPlayer') videoplayer: any;
-    
-    toggleVideo(event: any) {
-        this.videoplayer.nativeElement.play();
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
+  }
+
+
+  toggleVideo(event: any) {
+    this.videoplayer.nativeElement.play();
+  }
+
+  createVideoUrl(url) {
+    console.log(url);
+    this.newUrl = 'http://' + url;
+    console.log(this.newUrl);
     }
 
 }
