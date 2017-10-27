@@ -10,6 +10,7 @@ import 'rxjs/add/operator/map';
 export class MessageService {
 
     private _contactRequestURL = 'http://localhost:8080/wolimierz/contactrequests';
+    private _dontReadMessagesURL = 'http://localhost:8080/wolimierz/contactrequests?read=false';
 
     constructor(private http: AuthHttp) {
     }
@@ -25,6 +26,12 @@ export class MessageService {
         const url = `${this._contactRequestURL}?id=` + id;
         return this.http.get(url)
             .map(res => <Contact[]>res.json())
+            .catch(this.handleError);
+    }
+
+    getDontReadMessages() {
+        return this.http.get(this._dontReadMessagesURL)
+            .map(res => <Object>res.json())
             .catch(this.handleError);
     }
 

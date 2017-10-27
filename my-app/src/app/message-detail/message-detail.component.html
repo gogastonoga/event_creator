@@ -1,1 +1,27 @@
-{{message?.name}}
+<h1>Szczegóły wiadomości</h1>
+<div class="backgr">
+            <br />
+            <div class="grid">
+                <mat-form-field class="text-field" color="primary">
+                    <input matInput type="text" id="name" placeholder="Imię:" readonly>{{message?.name}}
+                </mat-form-field>
+                <mat-form-field class="text-field" color="primary">
+                    <input matInput type="text" id="surname" placeholder="Nazwisko:" readonly>{{message?.surname}}
+                </mat-form-field>
+            </div>
+            <mat-form-field class="text-field" color="primary">
+                <input matInput type="text" id="email" placeholder="E-mail:" readonly>{{message?.creatorMail}}
+            </mat-form-field>
+            <mat-form-field class="text-field" color="primary">
+                <input matInput type="text"  placeholder="Temat:" readonly>{{message?.topic}}
+            </mat-form-field><br />
+            Treść wiadomości:<br />
+            <mat-form-field color="primary" style="width: 50%;">
+                    <textarea matInput readonly style="height: 124px;">{{message?.message}}</textarea>
+                  </mat-form-field><br />
+                  <br />
+                  <button mat-raised-button type="submit" class="accent-color button" (click)="goBack()">Powrót</button>
+                  <br />
+                  <br />
+        </div>
+        

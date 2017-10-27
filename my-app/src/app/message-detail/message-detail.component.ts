@@ -30,14 +30,10 @@ export class MessageDetailComponent implements OnInit {
         this.route.params.subscribe((params: Params) => {
             this.id = params['id'];
         });
-
         this.route.paramMap
             .switchMap((params: ParamMap) => this._messageService.getMessage(this.id))
             .subscribe(message => this.message = message);
-        console.log(this.message);
     }
-
-
 
     goBack(): void {
         this.location.back();

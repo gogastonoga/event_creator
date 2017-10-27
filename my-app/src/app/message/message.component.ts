@@ -1,27 +1,38 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ViewChild } from '@angular/core';
 import { Http } from '@angular/http';
 import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Headers } from '@angular/http';
 import { AuthHttp } from 'angular2-jwt';
 import { MessageService } from './message.service';
+import { Contact } from "../contact/contact";
+import { DatePipe } from '@angular/common';
 
+
+// export class DateString {
+//     dateString: string;
+// }
 @Component({
     selector: 'app-form',
     templateUrl: './message.component.html',
     styleUrls: ['./message.component.css'],
     providers: [MessageService]
 })
+
 export class MessageComponent implements OnInit {
 
     messages;
+    dontReadMessages;
     errorString;
+    dates: string[] = [];
+    i = 0;
 
     constructor(private _messageService: MessageService) { }
 
     ngOnInit() {
         this.addCladdActive();
         this.getContactRequest();
+        this.getDontReadMessages();
     }
 
     all = (): void => {
@@ -54,7 +65,16 @@ export class MessageComponent implements OnInit {
             );
     }
 
-
+    getDontReadMessages = () => {
+        this._messageService.getDontReadMessages()
+            .subscribe(
+            dontReadMessages => { this.dontReadMessages = dontReadMessages; },
+            error => this.errorString = <any>error
+            );
+    }
 
 }
+
+
+
 

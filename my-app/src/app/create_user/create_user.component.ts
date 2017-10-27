@@ -26,7 +26,7 @@ export class CreateUserComponent implements OnInit {
     returnMsg: String;
     @Input() user: User;
     userForm: FormGroup;
-    role = ['ADMIN', 'STAFF'];
+    role = ['ADMIN'];
 
     message: string = 'Snack Bar opened.';
     actionButtonLabel: string = 'Zamknij';

@@ -1,11 +1,11 @@
 <button mat-raised-button class="accent-color button" (click)="all()">WSZYSTKIE</button>
 <button mat-raised-button class="accent-color button" (click)="dontRead()">NIEPRZECZYTANE</button>
 <button mat-raised-button class="accent-color button" (click)="third()">TRZECIE</button>
-
+<br /><br />
 <div id="all" class="form-panel">
 
 
-        <table class="table table-bordered">
+        <table class="table table-striped" style="background-color: #DADADA;">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -16,17 +16,38 @@
                 </thead>
                 <tbody>
                         <tr *ngFor="let message of messages">
-                                <td class="text-left">{{message.name}}</td>
-                                <td class="text-left">{{message.surname}}</td>
-                                <td><button type="button" class="btn btn-info"><a [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a></button></td>
+                                <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
+                                <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
+                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
+                                <td><button mat-raised-button class="accent-color button"><a 
+                                        style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a></button></td>
                         </tr>
                 </tbody>
         </table>
 
 
+
 </div>
 <div id="dont-read" class="form-panel">
-        nieprzeczytane
+        <table class="table table-striped" style="background-color: #DADADA;">
+                <thead>
+                        <tr>
+                                <th class="up">Imię</th>
+                                <th class="up">Nazwisko</th>
+                                <th class="up">Data wysłania</th>
+                                <th class="up">Szczegóły</th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let message of dontReadMessages">
+                                <td class="text-center" style="padding-top: 17px;">{{message.name}}</td>
+                                <td class="text-center" style="padding-top: 17px;">{{message.surname}}</td>
+                                <td class="text-center" style="padding-top: 17px;">{{ message.creationTime | date:'dd/MM/y'}}, godz. {{ message.creationTime | date:'HH:mm:ss'}}   </td>
+                                <td><button mat-raised-button class="accent-color button"><a 
+                                        style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a></button></td>
+                        </tr>
+                </tbody>
+        </table>
 </div>
 <div id="third" class="form-panel">
         third

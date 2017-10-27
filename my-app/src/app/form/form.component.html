@@ -177,7 +177,7 @@
       <mat-toolbar class="toolbar">
         <mat-icon matSuffix style="margin-right: 20px;">shopping_cart</mat-icon> Wydatki</mat-toolbar>
       <div class="form-group">
-        Budżet:<br />
+          <b>Budżet:</b><br />
         <mat-slider formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
           style="width: 30%;" (input)="onInputChange($event)"></mat-slider>
         <br /><br /> Maksymalny budżet organizowanego wydarzenia:
@@ -202,7 +202,7 @@
       <mat-toolbar class="toolbar">Kontakt</mat-toolbar>
       <div class="form-group">
         <div class="col-lg-6">
-          Uwagi:<br />
+            <b>Uwagi:</b><br />
           <mat-form-field color="primary" style="width: 60%;">
             <mat-icon matSuffix>message</mat-icon>
             <textarea matInput placeholder="Twoje uwagi" style="height: 120px;" formControlName="additionalRequirements"></textarea>
@@ -210,7 +210,7 @@
         </div>
         <div formGroupName="organizer">
           <div class="col-lg-6">
-            Dane kontaktowe:<br />
+              <b>Dane kontaktowe:</b><br />
             <mat-form-field color="primary" style="padding-top: 10px;">
               <input matInput placeholder="Imię:" formControlName="name" required>
               <mat-icon matSuffix>account_box</mat-icon>
@@ -247,9 +247,9 @@
     </div>
 
     <div class="form-panel" id="last2">
-      <mat-toolbar class="toolbar">Podsumowanie</mat-toolbar>
+      <mat-toolbar class="toolbar"><b>Podsumowanie</b></mat-toolbar>
       <div class="col-lg-6 backgr">
-        Organizator:<br />
+          <b>Organizator:</b><br />
         <mat-form-field color="primary"><input matInput readonly placeholder="Imię:"> {{eventForm.value.organizer.name}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Nazwisko:"> {{eventForm.value.organizer.surname}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Numer telefonu:"> {{eventForm.value.organizer.phoneNumber}}</mat-form-field>
@@ -259,7 +259,7 @@
         </mat-form-field>
       </div>
       <div class="col-lg-6 backgr">
-        Wybrane typy wydarzenia:<br />
+          <b>Wybrane typy wydarzenia:</b><br />
         <ul *ngFor="let event of contentEventArray" style="text-align: left;">
           <li>{{event}}</li>
         </ul>
@@ -270,8 +270,8 @@
 
       </div>
 
-      <div class="container" style="background-color: #e6ffff;">
-        <mat-form-field [hideRequiredMarker]="true" *ngIf=(!eventForm.valid)>
+      <div class="container" style="background-color: #e6ffff;" *ngIf=(!eventForm.valid)>
+        <mat-form-field [hideRequiredMarker]="true" >
           <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}" matInput
             [(ngModel)]="form.summaryDescription" name="summaryDescription" #summaryDescription="ngModel" [ngModelOptions]="{standalone: true}">
           <mat-hint class="hint1" align="start">Można edytować</mat-hint>
