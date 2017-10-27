@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         user.setSurname(userCreateDto.getSurname());
         user.setEmail(userCreateDto.getEmail());
         user.setPassword(new BCryptPasswordEncoder().encode(userCreateDto.getPassword()));
-        // user.setPassword(new ShaPasswordEncoder(ENCODING_STRENGTH).encodePassword(userCreateDto.getPassword(), user.getEmail()));
+        // user.setPassword(new ShaPasswordEncoder(encodingStrength).encodePassword(userCreateDto.getPassword(), user.getEmail()));
         return userRepository.save(user);
     }
 }

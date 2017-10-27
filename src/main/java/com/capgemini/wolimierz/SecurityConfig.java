@@ -1,6 +1,7 @@
 package com.capgemini.wolimierz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -23,15 +24,18 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    public static final String SIGNING_KEY = "MaYzkSjmkzPC57L";//TODO change to @Value
-    public static final Integer ENCODING_STRENGTH = 256;
-    private static final String SECURITY_REALM = "spring-boot";
 
+    private final String signingKey;
+    private final String securityRealm;
 
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService,
+                          @Value("${app.security.signing.key}") String signingKey,
+                          @Value("${app.security.realm}") String realm) {
+        this.signingKey = signingKey;
+        this.securityRealm = realm;
         this.userDetailsService = userDetailsService;
     }
 
@@ -44,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService)
-                .passwordEncoder(new BCryptPasswordEncoder());//TODO
+                .passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override
@@ -58,7 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/wolimierz/**").authenticated()
                 .and()
                 .httpBasic()
-                .realmName(SECURITY_REALM)
+                .realmName(securityRealm)
                 .and()
                 .csrf()
                 .disable();
@@ -78,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        converter.setSigningKey(SIGNING_KEY);
+        converter.setSigningKey(signingKey);
         return converter;
     }
 

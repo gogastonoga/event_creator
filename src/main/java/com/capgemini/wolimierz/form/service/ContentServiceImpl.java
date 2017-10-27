@@ -28,10 +28,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -224,6 +221,6 @@ public class ContentServiceImpl implements ContentService {
     }
 
     private <T extends EntityDtoWithGlobalId> List<UUID> collectGlobalIds(List<T> dtos) {
-        return dtos.stream().map(T::getGlobalId).collect(Collectors.toList());
+        return dtos == null ? Collections.emptyList() : dtos.stream().map(T::getGlobalId).collect(Collectors.toList());
     }
 }

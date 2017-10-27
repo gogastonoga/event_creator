@@ -1,6 +1,7 @@
 package com.capgemini.wolimierz;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -12,45 +13,54 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import java.util.Arrays;
+import java.util.Collections;
 
-import static com.capgemini.wolimierz.SecurityConfig.SIGNING_KEY;
 
 @Configuration
 @EnableAuthorizationServer
 @EnableResourceServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
-    static final String CLIEN_ID = "testjwtclientid";
-    static final String GRANT_TYPE = "password";
-    static final String SCOPE_READ = "read";
-    static final String SCOPE_WRITE = "write";
-    static final String RESOURCES_IDS = "testjwtresourceid";
+    private static final String GRANT_TYPE = "password";
+    private static final String SCOPE_READ = "read";
+    private static final String SCOPE_WRITE = "write";
+    private final String clienId;
+    private final String resourcesIds;
+    private final String signingKey;
+
+    private final TokenStore tokenStore;
+    private final JwtAccessTokenConverter accessTokenConverter;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    private TokenStore tokenStore;
-
-    @Autowired
-    private JwtAccessTokenConverter accessTokenConverter;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    public AuthorizationServerConfig(@Value("${app.security.signing.key}") String clien_id,
+                                     @Value("${app.security.clientid}") String resources_ids,
+                                     @Value("${app.security.resourcesids}") String signingKey, TokenStore tokenStore,
+                                     JwtAccessTokenConverter accessTokenConverter,
+                                     AuthenticationManager authenticationManager) {
+        this.clienId = clien_id;
+        this.resourcesIds = resources_ids;
+        this.signingKey = signingKey;
+        this.tokenStore = tokenStore;
+        this.accessTokenConverter = accessTokenConverter;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
         configurer
                 .inMemory()
-                .withClient(CLIEN_ID)
-                .secret(SIGNING_KEY)
+                .withClient(clienId)
+                .secret(signingKey)
                 .authorizedGrantTypes(GRANT_TYPE)
                 .scopes(SCOPE_READ, SCOPE_WRITE)
-                .resourceIds(RESOURCES_IDS);
+                .resourceIds(resourcesIds);
     }
 
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
-        enhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
+        enhancerChain.setTokenEnhancers(Collections.singletonList(accessTokenConverter));
         endpoints.tokenStore(tokenStore)
                 .accessTokenConverter(accessTokenConverter)
                 .tokenEnhancer(enhancerChain)
