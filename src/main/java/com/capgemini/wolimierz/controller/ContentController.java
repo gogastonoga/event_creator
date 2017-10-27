@@ -14,7 +14,7 @@ import java.util.List;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 @RequestMapping(path = "/wolimierz/content")
-public class ContentController {
+public class ContentController extends BaseController {
 
     private final ContentService contentService;
 
@@ -28,31 +28,31 @@ public class ContentController {
         return contentService.getContent();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(path = "/home", method = RequestMethod.PUT)
     public HomePageDto updateHomePage(@RequestBody @Valid HomePageDto homePageDto) {
         return contentService.updateHomePage(homePageDto);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(path = "/form", method = RequestMethod.PUT)
     public FormDto updateForm(@RequestBody @Valid FormDto formDto) {
         return contentService.updateForm(formDto);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(path = "/seasons", method = RequestMethod.PUT)
     public List<SeasonDto> updateSeasons(@RequestBody @Valid SeasonsContainer seasonsContainer) {
         return contentService.updateSeasons(seasonsContainer.getSeasons());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(path = "/eventtypes", method = RequestMethod.PUT)
     public List<EventTypeDto> updateEventTypes(@RequestBody @Valid EventTypesContainer eventTypesContainer) {
         return contentService.updateEventTypes(eventTypesContainer.getEventTypes());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(path = "/eventsizes", method = RequestMethod.PUT)
     public List<EventSizeDto> updateEventSizes(@RequestBody @Valid EventSizesContainer eventSizesContainer) {
         return contentService.updateEventSizes(eventSizesContainer.getEventSizes());

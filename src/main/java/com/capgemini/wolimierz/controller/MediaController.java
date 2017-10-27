@@ -17,7 +17,7 @@ import java.util.UUID;
 @RequestMapping(path = "/wolimierz/media")
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
-public class MediaController {
+public class MediaController extends BaseController{
 
     private final MediaService mediaService;
 
@@ -36,14 +36,14 @@ public class MediaController {
         StreamUtils.copy(media.getData(), response.getOutputStream());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/image", method = RequestMethod.POST, params = "parent=home_page")
     public String uploadHomePageImage(@RequestParam(name = "image") MultipartFile media) throws IOException {
         return mediaService.updateHomePageSettings(media, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/image", method = RequestMethod.POST, params = "parent=event_size")
     public String uploadEventSizeImage(@RequestParam(name = "image") MultipartFile media,
@@ -51,7 +51,7 @@ public class MediaController {
         return mediaService.updateEventSizeImage(media, parentId, com.capgemini.wolimierz.media.model.MediaType.IMAGE);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(path = "/video", method = RequestMethod.POST)
     public String uploadHomePageVideo(@RequestParam(name = "video") MultipartFile media) throws IOException {

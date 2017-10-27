@@ -11,7 +11,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RequestMapping(path = "/wolimierz/costsettings")
 @RestController
-public class CostSettingController {
+public class CostSettingController extends BaseController {
     private final CostSettingService costSettingService;
 
     @Autowired
@@ -19,7 +19,7 @@ public class CostSettingController {
         this.costSettingService = costSettingService;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(method = RequestMethod.GET)
     public CostSettingsDto getCostSettings() {
         return costSettingService.getCostSettings();
@@ -30,7 +30,7 @@ public class CostSettingController {
         return costSettingService.getClientCostSettings();
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize(ADMIN)
     @RequestMapping(method = RequestMethod.PUT)
     public CostSettingsDto updateCostSettings(@RequestBody @Valid CostSettingsDto costSettingsDto) {
         return costSettingService.updateCostSettings(costSettingsDto);

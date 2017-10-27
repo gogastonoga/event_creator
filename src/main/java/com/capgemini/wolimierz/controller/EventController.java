@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = {"http://localhost:4200", "10.42.96.238:4200"})
 @RestController
 @RequestMapping("/wolimierz/events")
-public class EventController {
+public class EventController extends BaseController{
 
     private final EventService eventService;
     private final EnvironmentService environmentService;
@@ -37,7 +37,7 @@ public class EventController {
         return new OfferDto(eventService.createEvent(createEventDto), mediaUrl);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
+    @PreAuthorize(ADMIN_OR_STAFF)
     @RequestMapping(method = RequestMethod.GET)
     public List<OfferDto> getEvents() {
         String mediaUrl = environmentService.getMediaBasicUrl();
@@ -46,7 +46,7 @@ public class EventController {
                 .collect(Collectors.toList());
     }
 
-    @PreAuthorize("hasAuthority('ADMIN') or hasAuthority('STAFF')")
+    @PreAuthorize(ADMIN_OR_STAFF)
     @RequestMapping(method = RequestMethod.GET, params = "id")
     public OfferDto findEvent(@RequestParam(name = "id") UUID globalId) {
         Optional<Event> event = Optional.ofNullable(eventService.findEvent(globalId));
