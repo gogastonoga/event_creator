@@ -42,10 +42,11 @@
   </div>
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
+{{content?.mainPage.backgroundVideoUrl}}
 
 <div class="video">
   <video controls (click)="toggleVideo()" #videoPlayer>
-      <source src="http://{{content?.mainPage.backgroundVideoUrl}}" controls type="video/mp4" />
+      <source src="https://{{content?.mainPage.backgroundVideoUrl}}" controls type="video/mp4" />
       Browser not supported
   </video>
 </div>
