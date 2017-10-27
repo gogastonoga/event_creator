@@ -1,3 +1,10 @@
+<div class="video" *ngIf="newUrl != undefined" style="background: fixed;">
+  <video (click)="toggleVideo()" #videoPlayer autoplay >
+      <source [src]="newUrl" controls type="video/mp4" />
+      Browser not supported
+  </video>
+</div>
+
 <h1 style="margin-bottom: 20px;">Wolimierz Application</h1>
 <div class="container">
   <mat-form-field [hideRequiredMarker]="true">
@@ -39,11 +46,3 @@
   <mat-slide-toggle [hidden]="disabledEdit" [(ngModel)]="editStatus" (click)="edit()" matTooltip="Umożliwia edycję treści strony">Edytuj</mat-slide-toggle>
 </mat-toolbar>
 
-{{newUrl}}
-
-<div class="video" *ngIf="newUrl != undefined">
-  <video controls (click)="toggleVideo()" #videoPlayer poster="https://img.cda.pl/obr/oryginalne/850ca7d90566b9ed82c60d9d50771230.jpg">
-      <source [src]="newUrl" controls type="video/mp4" />
-      Browser not supported
-  </video>
-</div>
