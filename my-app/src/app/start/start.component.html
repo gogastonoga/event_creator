@@ -15,31 +15,37 @@
   </mat-form-field>
   <img src="http://{{content?.mainPage.backgroundImageUrl}}" style="width: 200px; height: 200px; margin: 0 auto;">
 
-  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;">
+  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;"><br />
+    Dodaj zdjęcie:
+    <div style="margin-left: 129px;">
     <image-upload
     [url]="'http://localhost:8080/wolimierz/media/image?parent=home_page'"
     [headers]="myHeaders"
-    [buttonCaption]="'Dodaj obrazek'"
+    [buttonCaption]="'Wybierz plik'"
     [fileTooLargeMessage]="'Maksymalny rozmiar obrazka to 10MB!'"
-    [dropBoxMessage]="'Upuść swoje zdjęcie tutaj'"
+    [dropBoxMessage]="''"
     (removed)="onRemoved($event)"
     (uploadFinished)="onUploadFinished($event)"
-    (uploadStateChanged)="onUploadStateChanged($event)">
+    (uploadStateChanged)="onUploadStateChanged($event)"
+    [style]="customStyle"
+    [max]="1">
     </image-upload>
-    <br />
+  </div>
     <p id="message" style="background-color: aquamarine">Plik został dodany</p>
-    <div style="margin: 0 auto;">
+    <div>
       Dodaj wideo:
-      <input #selectedFile type="file" ng2FileSelect [uploader]="uploader" style="margin: 0 auto;" name="video" (click)="clearSelectedFile();">
+      <input accept=".mp4" #selectedFile type="file" ng2FileSelect [uploader]="uploader" style="padding-left: 130px;" name="video" (click)="clearSelectedFile();">
       <tr *ngFor="let item of uploader.queue">
         <br/>
-        <button id="addVideo" type="button" mat-raised-button class="accent-color" style="margin-left: 190px;" (click)="itemUpload();">Prześlij</button>
-        <button type="button" mat-raised-button class="accent-color" style="margin-left: 10px;" (click)="clearSelectedFile();">Usuń</button>
+
+        <button id="addVideo" type="button" mat-raised-button style="margin-left: 160px; background-color: rgba(0, 162, 96, 0.70)" (click)="itemUpload();">Prześlij</button>
+        <button type="button" mat-raised-button  style="margin-left: 10px; background-color: rgba(0, 162, 96, 0.70)" (click)="clearSelectedFile();">Usuń</button>
+
       </tr>
     </div>
     <br />
     <div class="progress">
-      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }" style="background-color:black"></div>
     </div>
     <p id="message2" style="background-color: aquamarine">Plik wideo został dodany</p>
   </div>

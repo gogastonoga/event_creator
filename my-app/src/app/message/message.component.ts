@@ -68,6 +68,7 @@ export class MessageComponent implements OnInit {
         $('#all').fadeIn().show();
         this.read = false;
         this.readMessage();
+        this.page = 1;
     }
 
     dontRead = (): void => {
@@ -75,6 +76,7 @@ export class MessageComponent implements OnInit {
         $('#dont-read').fadeIn().show();
         this.read = true;
         this.readMessage();
+        this.page = 1;
     }
 
     addCladdActive() {

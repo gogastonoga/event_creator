@@ -85,6 +85,7 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit() {
+        $('#message').hide();
         this.getContent();
         this.eventType = new editEventTypes();
         if (localStorage.getItem('DEdit') === 'false') {
@@ -370,6 +371,7 @@ export class FormComponent implements OnInit {
     };
 
     onUploadFinished(file: FileHolder) {
+        $('#message').show();
         console.log(JSON.stringify(file.serverResponse));
       }
       
@@ -380,6 +382,8 @@ export class FormComponent implements OnInit {
       onUploadStateChanged(state: boolean) {
         console.log(JSON.stringify(state));
       }
+
+      
 
    
 }

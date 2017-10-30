@@ -21,5 +21,14 @@ label {
 .table {
   font-size: 14px;
   background-color: #DADADA;
+}
+
+.container {
+  height: 570px; 
+  background-color: #DADADA; 
   box-shadow: 6px 6px 16px -5px rgba(0, 0, 0, 0.75);
+}
+
+.auto {
+  margin: 0 auto;
 }

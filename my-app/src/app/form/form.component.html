@@ -1,4 +1,5 @@
-<h1>Formularz</h1>
+<h1>
+  Formularz</h1>
 
 <div class="main backgr">
   <form [formGroup]="eventForm" (ngSubmit)="createEvent()" validate>
@@ -20,15 +21,14 @@
             <div class="container">
               <mat-form-field [hideRequiredMarker]="true">
                 <input maxlength="40" readonly class="text formDescription" value="{{ev.description}}" matInput (change)="onChange(ev, i)"
-                [(ngModel)]="descriptions[i].value" name="value"
-                #value="ngModel" [ngModelOptions]="{standalone: true}">
+                  [(ngModel)]="descriptions[i].value" name="value" #value="ngModel" [ngModelOptions]="{standalone: true}">
                 <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
-                  <mat-hint class="hint1" align="start">Można edytować</mat-hint>
+                <mat-hint class="hint1" align="start">Można edytować</mat-hint>
                 <mat-hint class="hint2" align="end"> / 40</mat-hint>
               </mat-form-field>
-            </div> 
+            </div>
           </div>
-        </div>  
+        </div>
 
         <div class="container" style="background-color: white;">
           <mat-form-field [hideRequiredMarker]="true">
@@ -94,34 +94,35 @@
         </div>
         <b>Sezon zimowy:</b>
         <mat-form-field class="example-full-width">
-          <input matInput pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;"
-          [(ngModel)]="editSummer.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
-          id="date" />
-         
+          <input matInput pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+            readonly class="formDescription" value="{{content?.formDto.seasons[0].from}}" style="text-align: center;" [(ngModel)]="editSummer.from"
+            name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
+            id="date" />
+
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
           <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[0].to}}" style="text-align: center;"
-          [(ngModel)]="editSummer.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])"
-          >
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+            class="formDescription" value="{{content?.formDto.seasons[0].to}}" style="text-align: center;" [(ngModel)]="editSummer.to"
+            name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonSummer(content?.formDto.seasons[0])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
           <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
-        </mat-form-field><br /> 
+        </mat-form-field><br />
         <b>Sezon letni:</b>
         <mat-form-field class="example-full-width">
-          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[1].from}}" style="text-align: center;"
-          [(ngModel)]="editWinter.from" name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
-          >
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+            class="formDescription" value="{{content?.formDto.seasons[1].from}}" style="text-align: center;" [(ngModel)]="editWinter.from"
+            name="from" #from="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
           <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
         </mat-form-field>
         -
         <mat-form-field class="example-full-width">
-          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))" class="formDescription"  value="{{content?.formDto.seasons[1].to}}" style="text-align: center;"
-          [(ngModel)]="editWinter.to" name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])"
-          >
+          <input matInput readonly pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+            class="formDescription" value="{{content?.formDto.seasons[1].to}}" style="text-align: center;" [(ngModel)]="editWinter.to"
+            name="to" #to="ngModel" [ngModelOptions]="{standalone: true}" (change)="onChangeSeasonWinter(content?.formDto.seasons[1])">
           <mat-hint class="hint1" align="start">Można edytować (RRRR-MM-DD)</mat-hint>
           <mat-error>Wprowadzona data jest niepoprawna.</mat-error>
         </mat-form-field><br /><br />
@@ -146,6 +147,7 @@
           <label>
             <img src="http://{{peop.imageUrl}}"><br />
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
+            <div  [hidden]="disabledEdit">
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
             [headers]="myHeaders"
@@ -154,11 +156,14 @@
             [dropBoxMessage]="'Upuść swoje zdjęcie tutaj'"
             (removed)="onRemoved($event)"
             (uploadFinished)="onUploadFinished($event)"
-            (uploadStateChanged)="onUploadStateChanged($event)">
+            (uploadStateChanged)="onUploadStateChanged($event)"
+            [style]="customStyle">
           </image-upload>
+          <p id="message" style="background-color: aquamarine">Plik został dodany</p>
+        </div>
           </label>
-            
-         
+
+
         </div>
       </div>
       <div class="container" style="background-color: white;">
@@ -176,7 +181,7 @@
       <mat-toolbar class="toolbar">
         <mat-icon matSuffix style="margin-right: 20px;">shopping_cart</mat-icon> Wydatki</mat-toolbar>
       <div class="form-group">
-          <b>Budżet:</b><br />
+        <b>Budżet:</b><br />
         <mat-slider formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
           style="width: 30%;" (input)="onInputChange($event)"></mat-slider>
         <br /><br /> Maksymalny budżet organizowanego wydarzenia:
@@ -201,7 +206,7 @@
       <mat-toolbar class="toolbar">Kontakt</mat-toolbar>
       <div class="form-group">
         <div class="col-lg-6">
-            <b>Uwagi:</b><br />
+          <b>Uwagi:</b><br />
           <mat-form-field color="primary" style="width: 60%;">
             <mat-icon matSuffix>message</mat-icon>
             <textarea matInput placeholder="Twoje uwagi" style="height: 120px;" formControlName="additionalRequirements"></textarea>
@@ -209,7 +214,7 @@
         </div>
         <div formGroupName="organizer">
           <div class="col-lg-6">
-              <b>Dane kontaktowe:</b><br />
+            <b>Dane kontaktowe:</b><br />
             <mat-form-field color="primary" style="padding-top: 10px;">
               <input matInput placeholder="Imię:" formControlName="name" required>
               <mat-icon matSuffix>account_box</mat-icon>
@@ -248,7 +253,7 @@
     <div class="form-panel" id="last2">
       <mat-toolbar class="toolbar"><b>Podsumowanie</b></mat-toolbar>
       <div class="col-lg-6 backgr">
-          <b>Organizator:</b><br />
+        <b>Organizator:</b><br />
         <mat-form-field color="primary"><input matInput readonly placeholder="Imię:"> {{eventForm.value.organizer.name}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Nazwisko:"> {{eventForm.value.organizer.surname}}</mat-form-field>
         <mat-form-field color="primary"><input matInput readonly placeholder="Numer telefonu:"> {{eventForm.value.organizer.phoneNumber}}</mat-form-field>
@@ -258,7 +263,7 @@
         </mat-form-field>
       </div>
       <div class="col-lg-6 backgr">
-          <b>Wybrane typy wydarzenia:</b><br />
+        <b>Wybrane typy wydarzenia:</b><br />
         <ul *ngFor="let event of contentEventArray" style="text-align: left;">
           <li>{{event}}</li>
         </ul>
@@ -270,7 +275,7 @@
       </div>
 
       <div class="container" style="background-color: #e6ffff;" *ngIf=(!eventForm.valid)>
-        <mat-form-field [hideRequiredMarker]="true" >
+        <mat-form-field [hideRequiredMarker]="true">
           <input maxlength="110" #message7 readonly class="text formDescription" value="{{content?.formDto.summaryDescription}}" matInput
             [(ngModel)]="form.summaryDescription" name="summaryDescription" #summaryDescription="ngModel" [ngModelOptions]="{standalone: true}">
           <mat-hint class="hint1" align="start">Można edytować</mat-hint>

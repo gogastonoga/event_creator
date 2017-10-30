@@ -1,6 +1,5 @@
-<form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
-  <div style="width: 50%;  margin: 0 auto;
-  box-shadow: 4px 6px 15px -2px rgba(0, 0, 0, 0.48);">
+<div class="backgrr backgr">
+  <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
     <mat-toolbar class="toolbar">Dodaj użytkownika</mat-toolbar>
     <br />
     <mat-form-field color="primary">
@@ -29,9 +28,10 @@
         <mat-option *ngFor="let r of role" [value]="r">{{r}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-</form>
+  </form>
 
-<br />
-<button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
-<button mat-raised-button class="accent-color button" [disabled]="!userForm.valid" (click)="[createUser(), open()]">Zapisz</button>
+
+  <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+  <button mat-raised-button class="accent-color button" [disabled]="!userForm.valid" (click)="[createUser(), open()]">Zapisz</button>
+  <br /><br />
+</div>

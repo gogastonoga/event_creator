@@ -134,4 +134,28 @@ export class StartComponent implements OnInit {
     this.newUrl = 'http://' + url;
     }
 
+    customStyle = {
+      layout: {
+        "width": "370px",
+        "border": "none",
+        "background-color": "#F5F5F5"
+      },
+      clearButton: {
+        "display": "none"
+      } ,
+      selectButton: {
+        "background-color": "rgba(0, 162, 96, 0.70",
+        "color": "#fff",
+        "height": "35px",
+        "font-size": "12px",
+        "padding-top": "-30px",
+        "margin-left": "53px",
+        "margin-top": "-10px"
+      },
+      previewPanel: {
+        "background-color": "#F5F5F5",
+        "padding-left": "65px"
+      }
+    }
+
 }
