@@ -1,11 +1,12 @@
+
 <h1>
   Formularz</h1>
 
-<div class="main backgr">
+<div class="main backgroundClass">
   <form [formGroup]="eventForm" (ngSubmit)="createEvent()" validate>
     <div class="form-panel active" id="first">
       <mat-toolbar class="toolbar">
-        <mat-icon matSuffix style="margin-right: 20px;">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
+        <mat-icon matSuffix class="marginRightClass">extension</mat-icon>Rodzaj wydarzenia</mat-toolbar>
       <div class="form-group">
         <div class="col-sm-4" *ngFor="let ev of content?.formDto.events; let i = index" [attr.data-index]="i">
           <span class="tile title"><mat-checkbox value="ev.name" (click)="select(ev)"></mat-checkbox> <b>{{ev.translation}}</b></span>
@@ -17,20 +18,17 @@
               <input type="number" min="0" matInput placeholder="Na ilu uczestników?" name="details" formControlName="guestsNumber">
             </mat-form-field>
           </p>
-          <div class="desc">
-            <div class="container">
+            <div class="container desc">
               <mat-form-field [hideRequiredMarker]="true">
                 <input maxlength="40" readonly class="text formDescription" value="{{ev.description}}" matInput (change)="onChange(ev, i)"
                   [(ngModel)]="descriptions[i].value" name="value" #value="ngModel" [ngModelOptions]="{standalone: true}">
-                <!-- (ng-blur)="editEventType(ev)" [(ngModel)]="editEventTypes.description" name="description" #description="ngModel" [ngModelOptions]="{standalone: true}" -->
                 <mat-hint class="hint1" align="start">Można edytować</mat-hint>
                 <mat-hint class="hint2" align="end"> / 40</mat-hint>
               </mat-form-field>
             </div>
-          </div>
         </div>
 
-        <div class="container" style="background-color: white;">
+        <div class="container desc">
           <mat-form-field [hideRequiredMarker]="true">
             <input maxlength="110" #message8 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
               matInput id="name" [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel"
@@ -44,7 +42,7 @@
 
     <div class="form-panel">
       <mat-toolbar class="toolbar">
-        <mat-icon matSuffix style="margin-right: 20px;">home</mat-icon>Nocleg</mat-toolbar>
+        <mat-icon matSuffix class="marginRightClass">home</mat-icon>Nocleg</mat-toolbar>
       <div class="form-group">
         <b>Liczba noclegów</b><br />
         <mat-form-field class="accommodation" color="primary">
@@ -67,16 +65,16 @@
 
     <div class="form-panel">
       <mat-toolbar class="toolbar">
-        <mat-icon matSuffix style="margin-right: 20px;">today</mat-icon>Termin </mat-toolbar>
+        <mat-icon matSuffix class="marginRightClass">today</mat-icon>Termin </mat-toolbar>
       <div class="form-group">
-        <div class="col-lg-6 backgr"><br /><b> Data wydarzenia:</b><br />
+        <div class="col-lg-6"><br /><b> Data wydarzenia:</b><br />
           <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Wybierz datę" formControlName="eventTime" [disabled]="isNotEmptyTermin()">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker touchUi="true" #picker></mat-datepicker>
           </mat-form-field>
         </div>
-        <div class="col-lg-6 backgr"><br /> <b>Orientacyjny termin wydarzenia:</b><br />
+        <div class="col-lg-6"><br /> <b>Orientacyjny termin wydarzenia:</b><br />
           <mat-form-field>
             <mat-select matInput placeholder="Sezon..." ng-hide="!date" formControlName="seasonId" [disabled]="isNotEmptyDate()">
               <mat-option></mat-option>
@@ -141,32 +139,28 @@
 
     <div class="form-panel">
       <mat-toolbar class="toolbar">
-        <mat-icon matSuffix style="margin-right: 20px;">supervisor_account</mat-icon>Ilość uczestników</mat-toolbar>
+        <mat-icon matSuffix class="marginRightClass">supervisor_account</mat-icon>Ilość uczestników</mat-toolbar>
       <div class="form-group">
         <div class="col-lg-4" *ngFor="let peop of content?.formDto.sizes">
           <label>
             <img src="http://{{peop.imageUrl}}"><br />
             <input type="radio" ng-control="options" formControlName="eventSizeId" [value]="peop.globalId" ngDefaultControl (click)="addBound(peop)"><a> {{peop.bounds}}</a>
-            <div  [hidden]="disabledEdit">
+            <div [hidden]="disabledEdit">
             <image-upload 
             [url]="'http://localhost:8080/wolimierz/media/image?parent=event_size&parentId=' + peop.globalId"
             [headers]="myHeaders"
             [buttonCaption]="'Dodaj obrazek'"
             [fileTooLargeMessage]="'Maksymalny rozmiar obrazka to 10MB!'"
-            [dropBoxMessage]="'Upuść swoje zdjęcie tutaj'"
-            (removed)="onRemoved($event)"
+            [dropBoxMessage]="''"
             (uploadFinished)="onUploadFinished($event)"
-            (uploadStateChanged)="onUploadStateChanged($event)"
-            [style]="customStyle">
+            [style]="customStyle"
+            [max]="1">
           </image-upload>
-          <p id="message" style="background-color: aquamarine">Plik został dodany</p>
         </div>
-          </label>
-
-
+      </label>
         </div>
       </div>
-      <div class="container" style="background-color: white;">
+      <div class="container desc">
         <mat-form-field [hideRequiredMarker]="true">
           <input maxlength="110" #message4 readonly class="text formDescription" value="{{content?.formDto.participantsDescription}}"
             matInput [(ngModel)]="form.participantsDescription" name="participantsDescription" #participantsDescription="ngModel"
@@ -179,7 +173,7 @@
 
     <div class="form-panel">
       <mat-toolbar class="toolbar">
-        <mat-icon matSuffix style="margin-right: 20px;">shopping_cart</mat-icon> Wydatki</mat-toolbar>
+        <mat-icon matSuffix class="marginRightClass">shopping_cart</mat-icon> Wydatki</mat-toolbar>
       <div class="form-group">
         <b>Budżet:</b><br />
         <mat-slider formControlName="maxCost" min="0" max="10000" #slider color="primary" thumbLabel aria-label="Primary color slider"
@@ -239,7 +233,7 @@
           </div>
         </div>
       </div>
-      <div class="container" style="background-color: white;">
+      <div class="container desc">
         <mat-form-field [hideRequiredMarker]="true">
           <input maxlength="110" #message6 readonly class="text formDescription" value="{{content?.formDto.additionalDescription}}"
             matInput [(ngModel)]="form.additionalDescription" name="additionalDescription" #additionalDescription="ngModel"
@@ -284,8 +278,6 @@
       </div>
     </div>
   </form>
-
-  <!-- heroForm value: {{ eventForm.value | json}} -->
 
 </div>
 

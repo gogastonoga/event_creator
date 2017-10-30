@@ -34,5 +34,16 @@ video {
     transform: translateX(-50%) translateY(-50%);
  background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
   background-size: cover;
-  transition: 1s opacity;
+  transition: 1s opac
+  
 }
+  .editPanel {
+    margin: 0 auto; 
+    background-color: #F5F5F5; 
+    padding-bottom: 20px;
+  }
+
+  .img {
+    height: 200px; 
+    margin: 0 auto;
+  }

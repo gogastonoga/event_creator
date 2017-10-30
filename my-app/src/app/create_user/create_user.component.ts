@@ -28,7 +28,7 @@ export class CreateUserComponent implements OnInit {
     userForm: FormGroup;
     role = ['ADMIN'];
 
-    message: string = 'Snack Bar opened.';
+    message: string = 'Użytkownik został dodany.';
     actionButtonLabel: string = 'Zamknij';
     action: boolean = true;
     setAutoHide: boolean = true;

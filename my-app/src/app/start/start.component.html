@@ -13,9 +13,9 @@
     <mat-hint id="hint1" align="start">Można edytować</mat-hint>
     <mat-hint id="hint2" align="end">{{message.value.length}} / 90</mat-hint>
   </mat-form-field>
-  <img src="http://{{content?.mainPage.backgroundImageUrl}}" style="width: 200px; height: 200px; margin: 0 auto;">
+  <img src="http://{{content?.mainPage.backgroundImageUrl}}" class="img" style="width: 200px;">
 
-  <div [hidden]="disabledEdit" style="width: 500px; margin: 0 auto; background-color: #F5F5F5; padding-bottom: 20px;"><br />
+  <div [hidden]="disabledEdit" class="editPanel" style="width: 500px;"><br />
     Dodaj zdjęcie:
     <div style="margin-left: 129px;">
     <image-upload
@@ -24,9 +24,7 @@
     [buttonCaption]="'Wybierz plik'"
     [fileTooLargeMessage]="'Maksymalny rozmiar obrazka to 10MB!'"
     [dropBoxMessage]="''"
-    (removed)="onRemoved($event)"
     (uploadFinished)="onUploadFinished($event)"
-    (uploadStateChanged)="onUploadStateChanged($event)"
     [style]="customStyle"
     [max]="1">
     </image-upload>
@@ -39,7 +37,7 @@
         <br/>
 
         <button id="addVideo" type="button" mat-raised-button style="margin-left: 160px; background-color: rgba(0, 162, 96, 0.70)" (click)="itemUpload();">Prześlij</button>
-        <button type="button" mat-raised-button  style="margin-left: 10px; background-color: rgba(0, 162, 96, 0.70)" (click)="clearSelectedFile();">Usuń</button>
+        <button type="button" mat-raised-button style="margin-left: 10px; background-color: rgba(0, 162, 96, 0.70)" (click)="clearSelectedFile();">Usuń</button>
 
       </tr>
     </div>

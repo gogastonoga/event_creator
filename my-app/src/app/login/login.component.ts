@@ -36,13 +36,13 @@ export class LoginComponent implements OnInit {
           this.userService.login(result);
           this.navigateAfterSuccess();
         } else {
-          this.error = 'Username or password is incorrect';
+          this.error = 'Wprowadzony login lub hasło są nieprawidłowe.';
         }
         localStorage.setItem('DEdit', 'false');
         localStorage.setItem('ULoged', 'true');
       },
       error => {
-        this.error = 'Username or password is incorrect';
+        this.error = 'Wprowadzony login lub hasło są nieprawidłowe.';
         this.loading = false;
         localStorage.setItem('DEdit', 'true');
         localStorage.setItem('ULoged', 'false');

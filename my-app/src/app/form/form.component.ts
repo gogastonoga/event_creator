@@ -44,7 +44,7 @@ export class FormComponent implements OnInit {
     responseStatus: Object = [];
     eventForm: FormGroup;
     eventArray = [];
-    returnMsg;
+    returnMsg: string;
     contentEventArray = [];
     summing: Summing = { season: '', bounds: '', days: '', date: '' };
     progressBar = 0;
@@ -85,7 +85,6 @@ export class FormComponent implements OnInit {
     }
 
     ngOnInit() {
-        $('#message').hide();
         this.getContent();
         this.eventType = new editEventTypes();
         if (localStorage.getItem('DEdit') === 'false') {
@@ -337,7 +336,6 @@ export class FormComponent implements OnInit {
     }
 
     createUrl(peop) {
-        console.log(peop + 'aaaaaaaaaaaaaaaaaaaaaa');
         this.apiEndPoint = this.apiEndPoint + peop.globalId;
     }
 
@@ -371,20 +369,33 @@ export class FormComponent implements OnInit {
     };
 
     onUploadFinished(file: FileHolder) {
-        $('#message').show();
         console.log(JSON.stringify(file.serverResponse));
       }
       
-      onRemoved(file: FileHolder) {
-        // do some stuff with the removed file.
+      customStyle = {
+        layout: {
+          "width": "370px",
+          "border": "none",
+          "background-color": "transparent"
+        },
+        clearButton: {
+          "display": "none"
+        },
+        selectButton: {
+          "background-color": "rgba(0, 162, 96, 0.70",
+          "color": "#fff",
+          "height": "35px",
+          "font-size": "12px",
+          "padding-top": "-30px",
+          "margin-left": "90px",
+          "margin-top": "-10px"
+        },
+        previewPanel: {
+          "background-color": "transparent",
+          "padding-left": "120px"
+        }
       }
-      
-      onUploadStateChanged(state: boolean) {
-        console.log(JSON.stringify(state));
-      }
-
-      
-
+    
    
 }
 

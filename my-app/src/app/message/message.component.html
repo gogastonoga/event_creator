@@ -5,7 +5,7 @@
 </a><br /><br />
 <div class="container">
 <div id="all" class="form-panel">
-        <table class="table table-striped" style="background-color: #DADADA;">
+        <table class="table table-striped">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -22,7 +22,7 @@
                                 </td>
                                 <td>
                                         <button mat-raised-button class="accent-color button" (click)="readMessage()">
-                                                <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
+                                                <a [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
                                         </button>
                                 </td>
                         </tr>
@@ -30,7 +30,7 @@
         </table>
 </div>
 <div id="dont-read" class="form-panel" style="height: 600px">
-        <table class="table table-striped" style="background-color: #DADADA;">
+        <table class="table table-striped">
                 <thead>
                         <tr>
                                 <th class="up">Imię</th>
@@ -47,7 +47,7 @@
                                 </td>
                                 <td>
                                         <button mat-raised-button class="accent-color button" (click)="readMessage()">
-                                                <a style="color:black;" [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
+                                                <a [routerLink]="['/detail', message.globalId]" class="col-1-4">Przeczytaj</a>
                                         </button>
                                 </td>
                         </tr>

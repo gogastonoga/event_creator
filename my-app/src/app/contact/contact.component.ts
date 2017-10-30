@@ -18,6 +18,7 @@ export class ContactComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    $('#sendMessage').hide();
     this.contact = new Contact();
   }
 
@@ -25,7 +26,7 @@ export class ContactComponent implements OnInit {
     this._contactService.create(this.contact).subscribe(
       data => console.log(this.responseStatus = data),
       err => console.log(err),
-      () => this.returnMsg = 'Item is added!'
+      () => $('#sendMessage').slideDown()
     );
   }
 }

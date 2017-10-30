@@ -79,10 +79,24 @@ body,
   border-bottom: double;
 }
 
-.backgr {
+.backgroundShadowClass {
   background: url(../images/opac50.png) repeat;
+  box-shadow: 4px 6px 15px -2px rgba(0, 0, 0, 0.48);
 }
 
 #menuAdmin {
   padding-top: 10px;
+}
+
+.width50 {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.backgroundClass {
+  background: url(../images/opac50.png) repeat;
+}
+
+.marginRightClass {
+  margin-right: 20px;
 }

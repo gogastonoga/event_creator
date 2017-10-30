@@ -1,5 +1,5 @@
 <h1 style="margin-bottom: 20px;">Zaloguj</h1>
-<div class="backgr">
+<div class="backgroundShadowClass width50">
   <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
       <br />

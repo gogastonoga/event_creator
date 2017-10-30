@@ -1,4 +1,4 @@
-<div class="backgrr backgr">
+<div class="backgroundShadowClass width50">
   <form [formGroup]="userForm" (ngSubmit)="createUser()" validate>
     <mat-toolbar class="toolbar">Dodaj użytkownika</mat-toolbar>
     <br />
@@ -29,7 +29,7 @@
       </mat-select>
     </mat-form-field>
   </form>
-
+<br />
 
   <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
   <button mat-raised-button class="accent-color button" [disabled]="!userForm.valid" (click)="[createUser(), open()]">Zapisz</button>

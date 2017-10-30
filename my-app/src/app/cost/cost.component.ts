@@ -12,30 +12,18 @@ import { ReactiveFormsModule, FormsModule, FormBuilder, Validators, FormGroup, F
 })
 export class CostComponent implements OnInit {
 
-  message;
   costSettings: Cost;
   errorString: string;
   responseStatus: Object = [];
   editStatus: boolean = false;
-  // costForm: FormGroup;
 
   constructor(private _costService: CostService, private fb: FormBuilder) {
   }
 
-  // createForm() {
-  //   this.costForm = this.fb.group({
-  //     accommodationPrice: null,
-  //     mealPrice: null,
-  //     trainingPrice: null,
-  //     discount: null,
-  //     margin: null,
-  //   });
-  // }
-
   ngOnInit() {
     this.getCostSettings();
     this.costSettings = new Cost();
-    //this.createForm();
+    $('#editCost').hide();
   }
 
   getCostSettings = () => {
@@ -47,16 +35,10 @@ export class CostComponent implements OnInit {
   }
 
   editCostSettings() {
-    // for (let i in this.costForm.value) {
-    //   if (this.costForm.value[i] === '') {
-    //     console.log(this.costForm.value[i]);
-    //     // delete 
-    //     //console.log(i);
-    //   }
-    // }
-    // const formModel = this.costForm.value;
     this._costService.editCostSettings(this.costSettings).subscribe(
-      data => console.log(this.responseStatus = data)
+      data => console.log(this.responseStatus = data),
+      err => console.log(err),
+      () => $('#editCost').slideDown()
     );
   }
 }

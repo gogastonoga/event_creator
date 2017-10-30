@@ -1,5 +1,5 @@
 
-<div class="backgr">
+<div class="backgroundShadowClass width50">
     <mat-toolbar class="toolbar">Edycja kosztów wydarzenia</mat-toolbar>
     <br />
 <form (ngSubmit)="editCostSettings()" #costForm="ngForm">
@@ -21,6 +21,7 @@
         <input matInput type="number" class="budget" type="number" placeholder="Obniżka" [(ngModel)]="costSettings.discount" name="discount">          
     </mat-form-field><br /><br />
 </form>
+<p id="editCost"><b>Zmiany zostały zapisane.</b></p>
 <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
 <button mat-raised-button class="accent-color button" [disabled]="!costForm.form.valid" (click)="editCostSettings()">Zapisz</button><br /><br />
 </div>

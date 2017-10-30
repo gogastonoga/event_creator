@@ -57,6 +57,7 @@ export class StartComponent implements OnInit {
   }
 
   itemUpload(): void {
+    $('#message2').delay(1000).fadeIn();
     this.uploader.queue[0].upload();
     $('#addVideo').prop('disabled', true);
   }
@@ -96,18 +97,9 @@ export class StartComponent implements OnInit {
   };
 
   onUploadFinished(file: FileHolder) {
-    console.log(JSON.stringify(file.serverResponse));
-    $('#message').show();
+    $('#message').fadeIn();
   }
 
-  onRemoved(file: FileHolder) {
-    // do some stuff with the removed file.
-  }
-
-  onUploadStateChanged(state: boolean) {
-    console.log(JSON.stringify(state));
-  }
-  
   public uploader: FileUploader = new FileUploader({
     url: this.URL,
     authToken: 'Bearer ' + localStorage.getItem('access_token'),
@@ -124,38 +116,36 @@ export class StartComponent implements OnInit {
     this.hasAnotherDropZoneOver = e;
   }
 
-
   toggleVideo(event: any) {
     this.videoplayer.nativeElement.play();
   }
 
   createVideoUrl(url) {
-    console.log(this.newUrl);
     this.newUrl = 'http://' + url;
-    }
+  }
 
-    customStyle = {
-      layout: {
-        "width": "370px",
-        "border": "none",
-        "background-color": "#F5F5F5"
-      },
-      clearButton: {
-        "display": "none"
-      } ,
-      selectButton: {
-        "background-color": "rgba(0, 162, 96, 0.70",
-        "color": "#fff",
-        "height": "35px",
-        "font-size": "12px",
-        "padding-top": "-30px",
-        "margin-left": "53px",
-        "margin-top": "-10px"
-      },
-      previewPanel: {
-        "background-color": "#F5F5F5",
-        "padding-left": "65px"
-      }
+  customStyle = {
+    layout: {
+      "width": "370px",
+      "border": "none",
+      "background-color": "#F5F5F5"
+    },
+    clearButton: {
+      "display": "none"
+    },
+    selectButton: {
+      "background-color": "rgba(0, 162, 96, 0.70",
+      "color": "#fff",
+      "height": "35px",
+      "font-size": "12px",
+      "padding-top": "-30px",
+      "margin-left": "53px",
+      "margin-top": "-10px"
+    },
+    previewPanel: {
+      "background-color": "#F5F5F5",
+      "padding-left": "65px"
     }
+  }
 
 }

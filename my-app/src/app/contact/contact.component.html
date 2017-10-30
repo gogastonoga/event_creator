@@ -1,6 +1,6 @@
 <h1>Kontakt</h1>
-<div class="backgr">
-    <form (ngSubmit)="createContact()" #itemForm="ngForm">
+<div class="backgroundShadowClass width50">
+    <form (ngSubmit)="createContact()" #contactForm="ngForm">
         {{diagnostic}}
         <div class="form-group">
             <br />
@@ -29,8 +29,9 @@
                 <mat-icon matSuffix>assignment</mat-icon>
             </mat-form-field>
         </div>
-        <button mat-raised-button type="submit" class="accent-color button" [disabled]="!itemForm.form.valid">Wyślij</button>
+        <p id="sendMessage" ><b>Wiadomość została wysłana.</b></p>
         <button routerLink="/start" routerLinkActive="active" mat-raised-button class="accent-color button">Anuluj</button>
+        <button mat-raised-button type="submit" class="accent-color button" [disabled]="!contactForm.form.valid">Wyślij</button>
         <br />
         <br />
     </form>
