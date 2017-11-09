@@ -8,7 +8,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-@PropertySource("classpath:initial_values.properties")
+@PropertySource(value = "file:initial_values.properties")
 @Configuration
 public class AdditionalWebConfig {
     @Bean
