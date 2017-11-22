@@ -1,5 +1,6 @@
 package com.capgemini.wolimierz.userregistry.service;
 
+import com.capgemini.wolimierz.form.service.ContentService;
 import com.capgemini.wolimierz.userregistry.UserCreateDto;
 import com.capgemini.wolimierz.userregistry.model.Role;
 import com.capgemini.wolimierz.userregistry.model.User;
@@ -16,16 +17,22 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final ContentService contentService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, ContentService contentService) {
         this.userRepository = userRepository;
+        this.contentService = contentService;
     }
 
     @PostConstruct
     public void init() {
         if (userRepository.findAll().isEmpty()) {
-            create(new UserCreateDto("Maciej", "Chrzan", "macchrz", "maciej.chrzan@capgemini.com", Role.ADMIN));
+            create(new UserCreateDto(contentService.getAdminName(),
+                    contentService.getAdminSurname(),
+                    contentService.getAdminPassword(),
+                    contentService.getAdminEmail(),
+                    Role.ADMIN));
         }
     }
 

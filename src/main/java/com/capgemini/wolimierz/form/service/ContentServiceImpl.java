@@ -21,6 +21,7 @@ import com.capgemini.wolimierz.form.HomePageSettings;
 import com.capgemini.wolimierz.form.repository.FormRepository;
 import com.capgemini.wolimierz.form.repository.HomePageSettingsRepository;
 import com.capgemini.wolimierz.utils.EnvironmentService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,19 @@ public class ContentServiceImpl implements ContentService {
     private String summerFrom;
     @Value("${initial.season.summer.to}")
     private String summerTo;
+
+    @Getter
+    @Value("${initial.admin.mail}")
+    private String adminEmail;
+    @Getter
+    @Value("${initial.admin.password}")
+    private String adminPassword;
+    @Getter
+    @Value("${initial.admin.name}")
+    private String adminName;
+    @Getter
+    @Value("${initial.admin.surname}")
+    private String adminSurname;
 
     @Autowired
     public ContentServiceImpl(FormRepository formRepository,

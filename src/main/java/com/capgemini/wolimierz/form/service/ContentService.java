@@ -22,4 +22,11 @@ public interface ContentService {
 
     List<EventSizeDto> updateEventSizes(List<EventSizeDto> eventSizes);
 
+    String getAdminName();
+
+    String getAdminSurname();
+
+    String getAdminPassword();
+
+    String getAdminEmail();
 }
